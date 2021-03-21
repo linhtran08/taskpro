@@ -1,0 +1,86 @@
+.h-task-item {
+  border-color: deepskyblue;
+}
+
+.h-task-item:hover {
+  border: 1px solid deepskyblue;
+  moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.tv-bg-light-gray1 {
+  background-color: #f9f9f9;
+}
+
+.tv-bg-light-gray2 {
+  background-color: #eeeeee;
+}
+
+.tv-table-th {
+  background-color: #17a2b8;
+}
+
+.table-striped tbody tr:nth-of-type(2n+1) .tv-progress {
+  background-color: #fff;
+}
+
+.tv-task-col {
+  max-height: 800px;
+}
+
+.tv-task-col::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.tv-task-col::-webkit-scrollbar-button:start:decrement,
+.tv-task-col::-webkit-scrollbar-button:end:increment {
+  display: block;
+  height: 0;
+  background-color: transparent;
+}
+
+.tv-task-col::-webkit-scrollbar-track-piece {
+  background-color: rgba(0, 0, 0, 0.02);
+  opacity: 0.2;
+  /* Here */
+  -webkit-border-radius: 0;
+  -webkit-border-bottom-right-radius: 14px;
+  -webkit-border-bottom-left-radius: 14px;
+}
+
+.tv-task-col::-webkit-scrollbar-thumb:vertical {
+  height: 50px;
+  background-color: #717171;
+  -webkit-border-radius: 8px;
+}
+
+.u-pt-12 {
+  padding-top: 12px;
+}
+
+.z-99999 {
+  z-index: 99999;
+}
+
+.tv-btn-create {
+  right: 50px;
+  top: 70%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #333;
+  z-index: 1234;
+}
+
+.select2-container--open {
+  z-index: 99999;
+}
+
+.datepickers-container {
+  z-index: 99999;
+}
+
