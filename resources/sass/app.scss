@@ -1,4 +1,11 @@
-//
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+
 @import "hover";
 @import "color";
 @import "dashboard";
@@ -6,8 +13,8 @@
 @import "btn";
 
 .select2-container--open {
-    z-index: 99999;
+  z-index: 99999;
 }
 .datepickers-container{
-    z-index: 99999;
+  z-index: 99999;
 }
