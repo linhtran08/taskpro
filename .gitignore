@@ -19,9 +19,10 @@ public_html/hot
 
 storage/*.key
 .env
+.idea
+/node_modules
 Homestead.yaml
 Homestead.json
-.idea
 /.vagrant
 .phpunit.result.cache
 
