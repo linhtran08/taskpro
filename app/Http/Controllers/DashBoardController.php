@@ -17,10 +17,9 @@ class DashBoardController extends Controller
         //dd(implode(',',$openTicketCountPerMonth), implode(',', $twelveRecentMonths));
 
         $chart = (new LarapexChart)->lineChart()
-            ->setTitle('Sales during 2021.')
-            ->setSubtitle('Physical sales vs Digital sales.')
             ->addData('Physical sales', $openTicketCountPerMonth)
-            ->setXAxis($twelveRecentMonths);
+            ->setXAxis($twelveRecentMonths)
+            ->setHeight(300);
 
         //dd($chart);
         $open_tasks = DB::table('task_phase_history')
@@ -68,8 +67,7 @@ class DashBoardController extends Controller
         //dd($user);
 
 
-        return view('welcome3')->with([
-            compact('chart'),
+        return view('dashboard',compact('chart'))->with([
             'open_tasks' => $open_tasks,
             'processing_tasks' => $processing_tasks,
             'finished_tasks' => $finished_tasks,
