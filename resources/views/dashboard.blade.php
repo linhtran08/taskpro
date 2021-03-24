@@ -22,9 +22,12 @@
                                 <div class="d-flex flex-wrap align-items-center">
                                     <div class="progress-data">
 
+                                        <div id="chart2">
+                                            <h4>{{ $avgScore[0]->average_scrore }}</h4>
+                                        </div>
                                     </div>
                                     <div class="widget-data">
-                                        <div class="weight-600 font-14">EFFORT</div>
+                                        <div class="weight-600 font-14">SCORE</div>
                                     </div>
                                 </div>
                             </div>
@@ -33,10 +36,12 @@
                             <div class="card-box height-100-p widget-style1">
                                 <div class="d-flex flex-wrap align-items-center">
                                     <div class="progress-data">
-                                        <div id="chart2"></div>
+                                        <div id="chart2">
+                                            <h4>{{ $totalEffort[0]->effort }}</h4>
+                                        </div>
                                     </div>
                                     <div class="widget-data">
-                                        <div class="weight-600 font-14">TASK</div>
+                                        <div class="weight-600 font-14">EFFORT</div>
                                     </div>
                                 </div>
                             </div>
@@ -46,14 +51,16 @@
                         <div class="col-11 bg-white card-box mb-30 ml-auto mr-auto">
                             <h4 class="h4 text-blue pt-10">EFFORT</h4>
                             <div id="chart5">
-                                {!! $chart->container() !!}
+                                {!! $effortChart->container() !!}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-11 bg-white card-box mb-30 ml-auto mr-auto">
                             <h4 class="h4 text-blue pt-10">TASK</h4>
-                            <div id="chart55"></div>
+                            <div id="chart55">
+                                {!! $ticketChart->container() !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -126,5 +133,7 @@
 @section('script')
     <x-script-common/>
     <script src="{{ \ArielMejiaDev\LarapexCharts\LarapexChart::cdn() }}"></script>
-    {{ $chart->script() }}
+    {{ $ticketChart->script() }}
+    {{ $effortChart->script() }}
+
 @endsection
