@@ -15,33 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('{all}',function (){
-//    return view('login.login');
-//})->where('all','.*');
+Route::middleware(\App\Http\Middleware\CheckAccountLogin::class)->group(function (){
 
+    Route::get('/','HomeController@index');
 
-Route::get('/', function () {
+    Route::get('dashboard','DashBoardController@index')->name('dashboard');
 
+    Route::get('requirement','RequirementController@index');
 
-    $chart = (new LarapexChart)->lineChart()
-        ->setTitle('Sales during 2021.')
-        ->setSubtitle('Physical sales vs Digital sales.')
-        ->addData('Physical sales', [40, 93, 35, 42, 18, 82,0,0,0,0,0,0])
-        ->setXAxis(['Jan', 'Feb', 'Mar', 'Apr','May', 'Jun', 'Jul', 'Aug', 'Sep','Oct', 'Nov', 'Dec']);
-    return view('welcome', compact('chart'));
+    Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
 });
 
-//Route::get('requirement',function (){
-//    return view('test');
-//});
+Route::get('login',[\App\Http\Controllers\Auth\Login\AccountController::class,'index'])->name('login');
+Route::post('login',[\App\Http\Controllers\Auth\Login\AccountController::class,'login']);
+Route::post('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
 
-Route::get('requirement','RequirementController@index');
 
-Route::get('login',function(){
-    return view('login.login');
-});
 
-Route::get('dashboard','DashBoardController@index');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
