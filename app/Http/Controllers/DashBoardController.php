@@ -11,6 +11,15 @@ class DashBoardController extends Controller
 {
     public function index()
     {
+
+        $avgScore = DB::select('
+            select avg(satisfaction) as `average_scrore`
+            from task
+            where finish_date is not null;
+        ');
+
+        //dd($avgScore);
+
         $openTicketCountPerMonth = $this->getOpenTicketCountPerMonth();
         $twelveRecentMonths = $this->getTwelveRecentMonths();
 
@@ -72,6 +81,7 @@ class DashBoardController extends Controller
             'processing_tasks' => $processing_tasks,
             'finished_tasks' => $finished_tasks,
             'user' => $user,
+            'avgScore' => $avgScore,
         ]);
     }
 
