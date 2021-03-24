@@ -20,17 +20,33 @@ class DashBoardController extends Controller
 
         //dd($avgScore);
 
+        $totalEffort = DB::select('
+            select sum(effort) as effort
+            from task
+            where finish_date is not null;
+        ');
+
+        //dd($totalEffort);
+
         $openTicketCountPerMonth = $this->getOpenTicketCountPerMonth();
+        $totalEffortPerMonth = $this->getTotalEffortPerMonth();
         $twelveRecentMonths = $this->getTwelveRecentMonths();
 
         //dd(implode(',',$openTicketCountPerMonth), implode(',', $twelveRecentMonths));
 
-        $chart = (new LarapexChart)->lineChart()
+
+        //Chart of new ticket count per month for the last 12 months
+        $ticketChart = (new LarapexChart)->lineChart()
             ->addData('Physical sales', $openTicketCountPerMonth)
             ->setXAxis($twelveRecentMonths)
             ->setHeight(300);
 
-        //dd($chart);
+        //Chart of total effort per each month for the last 12 months
+        $effortChart = (new LarapexChart)->lineChart()
+        ->addData('Physical sales', $totalEffortPerMonth)
+        ->setXAxis($twelveRecentMonths)
+        ->setHeight(300);
+
         $open_tasks = DB::table('task_phase_history')
             ->join('task',function ($join){
                 $join->on('task_phase_history.task_id','=','task.task_id')
@@ -76,12 +92,13 @@ class DashBoardController extends Controller
         //dd($user);
 
 
-        return view('dashboard',compact('chart'))->with([
-            'open_tasks' => $open_tasks,
-            'processing_tasks' => $processing_tasks,
-            'finished_tasks' => $finished_tasks,
-            'user' => $user,
+        return view('dashboard',compact('ticketChart','effortChart'))->with([
+            'open_tasks' => $open_tasks, // Panel 1: open tasks
+            'processing_tasks' => $processing_tasks, //Panel 1: processing tasks
+            'finished_tasks' => $finished_tasks, //Panel 3: finished tasks
+            'user' => $user, //user information, use on the top right
             'avgScore' => $avgScore,
+            'totalEffort' => $totalEffort
         ]);
     }
 
@@ -94,6 +111,24 @@ class DashBoardController extends Controller
         return $last_12_months;
     }
 
+    public function getTotalEffortPerMonth(): array
+    {
+        $eft_per_month = DB::table('task')
+            ->groupBy('monthname(finish_date)')
+            ->selectRaw('monthname(finish_date), sum(effort) as effort')
+            ->whereNotNull('finish_date')
+            ->orderBy('monthname(finish_date)')
+            ->get();
+
+        $tmpEffortPerMonth = array();
+
+        foreach ($eft_per_month as $epm){
+            array_unshift($tmpEffortPerMonth, $epm->effort);
+        }
+
+        return array_pad($tmpEffortPerMonth,-12,0);
+    }
+
     public function getOpenTicketCountPerMonth(): array
     {
         $ticket_count = DB::table('task')
@@ -104,7 +139,7 @@ class DashBoardController extends Controller
 
         $tmpTicketPerMonth = array();
         foreach ($ticket_count as $tc){
-            array_push($tmpTicketPerMonth,$tc->tickets);
+            array_unshift($tmpTicketPerMonth, $tc->tickets);
         }
 
         return array_pad($tmpTicketPerMonth, -12, 0);
