@@ -251,9 +251,9 @@
                         <thead class="tv-table-th">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Job</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Project</th>
+                            <th scope="col">State</th>
+                            <th scope="col">Job type</th>
                             <th scope="col">Title</th>
                             <th scope="col" class="d-none d-sm-table-cell">Process</th>
                             <th scope="col" class="d-none d-xl-table-cell">Assignee</th>
@@ -263,26 +263,29 @@
                             <th scope="col" class="d-none d-xl-table-cell">Effort</th>
                         </tr>
                         </thead>
+{{--                        {{ dd( $tasks) }}--}}
                         <tbody>
-                            <tr>
-                            <th>5861</th>
-                            <td><span class="badge-info rounded p-2 ">New</span></td>
-                            <td>In Process</td>
-                            <td>On Lab</td>
-                            <td>Lorem ipsum dolor sit amet.</td>
-                            <td class="d-none d-sm-table-cell">
-                                <div class="progress tv-progress ">
-                                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
-                                         style="width: 30%" aria-valuenow="10" aria-valuemin="0"
-                                         aria-valuemax="100"></div>
-                                </div>
-                            </td>
-                            <td class="d-none d-xl-table-cell">Duc le</td>
-                            <td class="d-none d-xl-table-cell">Truong Do</td>
-                            <td class="d-none d-xl-table-cell">Mar 03,2021</td>
-                            <td class="d-none d-xl-table-cell">Mar 09,2021</td>
-                            <td class="d-none d-xl-table-cell">30</td>
-                        </tr>
+                            @foreach($tasks as $task)
+                                <tr>
+                                    <th>{{ $task->task_id }}</th>
+                                    <td><span class="badge-info rounded p-2 "> {{ $task->project_name }}</span></td>
+                                    <td> {{ $task->task_state }}</td>
+                                    <td> {{ $task->task_job_type }}</td>
+                                    <td> {{ $task->task_title }}</td>
+                                    <td class="d-none d-sm-table-cell">
+                                        <div class="progress tv-progress ">
+                                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+                                                 style="width: 30%" aria-valuenow="10" aria-valuemin="0"
+                                                 aria-valuemax="100"></div>
+                                        </div>
+                                    </td>
+                                    <td class="d-none d-xl-table-cell">{{ $task->assignee_fname }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $task->created_by_fname }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $task->start_date }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $task->due_date }}</td>
+                                    <td class="d-none d-xl-table-cell">{{ $task->effort }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

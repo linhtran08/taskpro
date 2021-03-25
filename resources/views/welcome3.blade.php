@@ -83,7 +83,8 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $pt->task_id }}</span>
                                                     <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i>{{ $pt->due_date }}</span>
-                                                </div>
+                                                </div>ls
+
                                                 <h4 class="h5">{{ $pt->task_title }}</h4>
                                             </a>
                                         </div>
