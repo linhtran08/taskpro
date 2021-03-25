@@ -1,4 +1,4 @@
-@extends('layout.common')
+@extends('layouts.common')
 @section('title','Management')
 @section('style')
     <x-style-common/>
