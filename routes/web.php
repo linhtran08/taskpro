@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(\App\Http\Middleware\CheckAccountLogin::class)->group(function (){
+Route::middleware('checkLogin')->group(function (){
 
     Route::get('/','HomeController@index');
 
@@ -24,7 +24,17 @@ Route::middleware(\App\Http\Middleware\CheckAccountLogin::class)->group(function
     Route::get('requirement','RequirementController@index');
 
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
+
 });
+
+Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
+
+    Route::get('admin',[\App\Http\Controllers\Admin\AdminController::class,'index'])->name('admin');
+
+    Route::get('admin/view/{id}',[\App\Http\Controllers\Admin\AdminController::class,'view'])->name('adminView');
+
+});
+
 
 Route::get('login',[\App\Http\Controllers\Auth\Login\AccountController::class,'index'])->name('login');
 Route::post('login',[\App\Http\Controllers\Auth\Login\AccountController::class,'login']);
