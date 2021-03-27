@@ -20,7 +20,7 @@ $(document).ready(function (){
     $(window).on('load', function() {
         aos_init();
     });
-})
+});
 
 // Init AOS
 function aos_init() {
