@@ -45,7 +45,7 @@ class RequirementController extends Controller
             order by task_id desc',[$project_id]
         );
 
-        return view('test',[
+        return view('requirement',[
             'tasks' => $tasks
         ]);
     }

@@ -19,19 +19,34 @@ class AccountController extends Controller
     public function login(Request $request){
         $emp_id = $request->input('emp_id');
         $password= $request->input('password');
-        $account = DB::table('account_info')->where('emp_id',$emp_id)->where('password',$password)->first();
+        $account = DB::table('account_info')
+            ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+            ->where('psn_infor.email',$emp_id)
+            ->where('account_info.password',$password)
+            ->first();
         if(!empty($account)){
             $request->session()->put('login',true);
-            $request->session()->put('role',$account->role);
-            $request->session()->put('emp_id',$account->emp_id);
-            return redirect()->route('dashboard');
+            $request->session()->put(
+                'account',
+                [
+                    'id'=>$account->user_id,
+                    'emp_id'=>$account->emp_id,
+                    'role'=>$account->role,
+                    'name'=>$account->full_name,
+                ]
+            );
+            if($account->role == 1){
+                return redirect()->route('admin');
+            }else{
+                return redirect()->route('dashboard');
+            }
         }else{
             return $this->index($request);
         }
     }
 
     public function logout(Request $request){
-        $request->session()->forget(['login', 'role','emp_id']);
-        return $this->index($request);
+        $request->session()->forget(['login','account']);
+        return redirect()->route('login');
     }
 }

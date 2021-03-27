@@ -1,11 +1,14 @@
 @extends('layouts.common')
 @section('title','Management')
 @section('style')
-    <x-style-common/>
+    <x-style-common />
 @endsection
 
 @section('pre-loader')
-    <x-pre-loader/>
+    <x-pre-loader />
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.0.2/css/dataTables.dateTime.min.css">
 @endsection
 
 @section('main-container')
@@ -107,8 +110,8 @@
     </div>
     <div class="main-container">
         <div class="pd-ltr-20">
-            <!-- Select-2 Start -->
-            <div class="pd-5 mb-30">
+            <!-- Select-2 Start tam thoi xoa -->
+            <!-- <div class="pd-5 mb-30">
                 <form>
                     <div class="row">
                         <div class="col-xl-2">
@@ -197,7 +200,7 @@
                                     </optgroup>
                                 </select>
                             </div>
-                        </div>
+                        </div><script src="{{ asset('') }}"></script>
                         <div class="col-xl-2">
                             <div class="form-group">
                                 <label for="sl4"></label>
@@ -241,64 +244,107 @@
                         </div>
                     </div>
                 </form>
+            </div> -->
+           <!-- Select-2 end -->
+            <div class="pd-5">
+                <div class="card-box">
+
+                </div>
             </div>
-            <!-- Select-2 end -->
             {{-- Table data --}}
             <div class="pd-5">
-                <!-- Striped table start -->
-                <div class="p-md-2 card-box mb-30">
-                    <table class="table table-striped m-0">
-                        <thead class="tv-table-th">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Project</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Job type</th>
-                            <th scope="col">Title</th>
-                            <th scope="col" class="d-none d-sm-table-cell">Process</th>
-                            <th scope="col" class="d-none d-xl-table-cell">Assignee</th>
-                            <th scope="col" class="d-none d-xl-table-cell">Registered User</th>
-                            <th scope="col" class="d-none d-xl-table-cell">Registered Date</th>
-                            <th scope="col" class="d-none d-xl-table-cell">Due Date</th>
-                            <th scope="col" class="d-none d-xl-table-cell">Effort</th>
-                        </tr>
-                        </thead>
-{{--                        {{ dd( $tasks) }}--}}
-                        <tbody>
+                <div class="card-box mb-30">
+                    <div class="pd-10">
+                        <div class="row pd-20">
+                            <div class="mr-3">
+                            <input type="text" id="min" name="min" placeholder="Registered Date" style="width: 150px">
+                            </div>
+                            <div class="">
+                            <input type="text" id="max" name="max" placeholder="To" style="width: 150px">
+                            </div>
+                        </div>
+                        <table class="data-table display" width="100%">
+                            <thead>
+                            <tr>
+                                <th class="datatable-nosort">#</th>
+                                <th>Project</th>
+                                <th>State</th>
+                                <th>Job type</th>
+                                <th>Process</th>
+                                <th>Assignee</th>
+                                <th>Registered User</th>
+                                <th>Registered Date</th>
+                                <th>Due Date</th>
+                                <th>Effort</th>
+                                <th>Title</th>
+                                <th class="datatable-nosort">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
                             @foreach($tasks as $task)
                                 <tr>
-                                    <th>{{ $task->task_id }}</th>
-                                    <td><span class="badge-info rounded p-2 "> {{ $task->project_name }}</span></td>
-                                    <td> {{ $task->task_state }}</td>
-                                    <td> {{ $task->task_job_type }}</td>
-                                    <td> {{ $task->task_title }}</td>
-                                    <td class="d-none d-sm-table-cell">
-                                        <div class="progress tv-progress ">
-                                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
-                                                 style="width: 30%" aria-valuenow="10" aria-valuemin="0"
-                                                 aria-valuemax="100"></div>
+                                <td>{{ $task->task_id }}</td>
+                                <td>{{ $task->project_name }}</td>
+                                <td>{{ $task->task_state }}</td>
+                                <td>{{ $task->task_job_type }}</td>
+                                <td>abc</td>
+                                <td>{{ $task->assignee_fname }}</td>
+                                <td>{{ $task->created_by_fname }}</td>
+                                <td>{{ $task->start_date }}</td>
+                                <td>{{ $task->due_date }}</td>
+                                <td>{{ $task->effort }}</td>
+                                <td>{{ $task->task_title }}</td>
+                                <td>
+                                    <div class="dropdown">
+                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                            <i class="dw dw-more"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                            <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                            <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
+                                            <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
                                         </div>
-                                    </td>
-                                    <td class="d-none d-xl-table-cell">{{ $task->assignee_fname }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $task->created_by_fname }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $task->start_date }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $task->due_date }}</td>
-                                    <td class="d-none d-xl-table-cell">{{ $task->effort }}</td>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                            <tfoot class="mt-4">
+                            <tr>
+                                <th class="datatable-nosort"></th>
+                                <th>Project</th>
+                                <th>State</th>
+                                <th>Job type</th>
+                                <th></th>
+                                <th>Assignee</th>
+                                <th>Registered User</th>
+                                <th>Registered Date</th>
+                                <th>Due Date</th>
+                                <th>Effort</th>
+                                <th></th>
+                                <th class="datatable-nosort"></th>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
-                <!-- Striped table End -->
             </div>
             {{-- End Table data --}}
             <div class="footer-wrap pd-20 mb-20 card-box">
                 DeskApp
             </div>
+            <div id="data-table"></div>
         </div>
     </div>
 @endsection
 
 @section('script')
-    <x-script-common/>
+    <x-script-common />
+    <script src="{{ asset('js/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
+    <script src="{{asset('js/vendors/scripts/datatable-setting.js')}}"></script>
 @endsection
