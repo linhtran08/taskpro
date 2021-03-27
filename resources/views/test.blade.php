@@ -263,8 +263,7 @@
                             <th scope="col" class="d-none d-xl-table-cell">Effort</th>
                         </tr>
                         </thead>
-{{--                        {{ dd( $tasks) }}--}}
-                        <tbody>
+s                        <tbody>
                             @foreach($tasks as $task)
                                 <tr>
                                     <th>{{ $task->task_id }}</th>
