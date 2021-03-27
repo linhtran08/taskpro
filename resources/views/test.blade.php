@@ -1,5 +1,5 @@
 @extends('layouts.common')
-@section('title','Management')
+@section('title','Dash Board')
 @section('style')
     <x-style-common/>
 @endsection
@@ -9,104 +9,9 @@
 @endsection
 
 @section('main-container')
-    <a href="#" class="btn-block position-fixed rounded-circle p-2 tv-btn-create" data-toggle="modal" data-target="#Medium-modal" type="button">
-        <i class="icon-copy fi-plus"></i>
-    </a>
-    <div class="modal fade z-99999" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">Create task</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="row">
-                            <div class="col-xl-2">
-                                <div class="form-group">
-                                    <label >JOB TYPE</label>
-                                    <select class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">IMPORTANT</label>
-                                    <select class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">ITERATION</label>
-                                    <select class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Process</label>
-                                    <select class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Default Datedpicker</label>
-                                    <input class="form-control date-picker" placeholder="Select Date" type="text">
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Phase</label>
-                                    <select class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="html-editor pd-20 mb-30 w-100">
-                                <div class="form-group">
-                                    <label for="">Title</label>
-                                    <input class="form-control" type="text" placeholder="Task title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Content</label>
-                                    <textarea class="textarea_editor form-control border-radius-0" placeholder="Enter text ..."></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="main-container">
         <div class="pd-ltr-20">
+<<<<<<< HEAD
             <!-- Select-2 Start -->
             <div class="pd-5 mb-30">
                 <form>
@@ -291,9 +196,8 @@ s                        <tbody>
                 <!-- Striped table End -->
             </div>
             {{-- End Table data --}}
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                DeskApp
-            </div>
+
+            <x-footer />
         </div>
     </div>
 @endsection

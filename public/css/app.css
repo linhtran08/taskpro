@@ -64,7 +64,7 @@
 }
 
 .tv-btn-create {
-  right: 50px;
+  right: 10px;
   top: 70%;
   height: 50px;
   width: 50px;
@@ -82,5 +82,10 @@
 
 .datepickers-container {
   z-index: 99999;
+}
+
+.data-table td {
+  word-break: break-word;
+  word-break: break-all;
 }
 

@@ -3,7 +3,7 @@
 <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8">
-    <title>Task Pro - Bootstrap Admin Dashboard HTML Template</title>
+    <title>Task Pro</title>
 
     <!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('js/vendors/images/apple-touch-icon.png') }}">
@@ -109,10 +109,6 @@
                                         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
 {{--                                        <a class="btn btn-primary btn-lg btn-block" href="index.html">Sign In</a>--}}
                                     </div>
-                                    <div class="font-16 weight-600 pt-10 pb-10 text-center" data-color="#707373">OR</div>
-                                    <div class="input-group mb-0">
-                                        <a class="btn btn-outline-primary btn-lg btn-block" href="register.html">Register To Create Account</a>
-                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -125,8 +121,8 @@
     <!-- ======= Hero Section ======= -->
     <section id="hero">
         <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
-            <h1>Welcome to Regna</h1>
-            <h2>We are team of talented designers making websites with Bootstrap</h2>
+            <h1>Welcome to TaskPro</h1>
+            <h2>We are team of talented designers making Task Management Application</h2>
             <a href="#about" class="btn-get-started">Get Started</a>
         </div>
     </section><!-- End Hero Section -->
@@ -195,8 +191,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
                         <div class="pic"><img src="{{ asset('images/login/team-1.jpg') }}" alt=""></div>
-                        <h4>Walter White</h4>
-                        <span>Chief Executive Officer</span>
+                        <h4>Linh Tran</h4>
+                        <span>FontEnd Develoment</span>
                         <div class="social">
                             <a href=""><i class="fa fa-twitter"></i></a>
                             <a href=""><i class="fa fa-facebook"></i></a>
@@ -262,8 +258,7 @@
         </div>
 
         <!-- Uncomment below if you wan to use dynamic maps -->
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d22864.11283411948!2d-73.96468908098944!3d40.630720240038435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sbg!4v1540447494452" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
-
+        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1385.6873264808733!2d106.6664137272078!3d10.787120946489539!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd2ecb62e0d050fe9!2sFPT-Aptech%20Computer%20Education%20HCM!5e0!3m2!1svi!2s!4v1616612789196!5m2!1svi!2s" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
         <div class="container mt-5">
             <div class="row justify-content-center">
 
@@ -272,16 +267,16 @@
                     <div class="info">
                         <div>
                             <i class="fa fa-map-marker"></i>
-                            <p>A108 Adam Street<br>New York, NY 535022</p>
+                            <p>CMT8 Street<br>HO CHI MINH</p>
                         </div>
                         <div>
                             <i class="fa fa-envelope"></i>
-                            <p>info@example.com</p>
+                            <p>taskpro@pro.vn</p>
                         </div>
 
                         <div>
                             <i class="fa fa-phone"></i>
-                            <p>+1 5589 55488 55s</p>
+                            <p>0909999999</p>
                         </div>
                     </div>
 
