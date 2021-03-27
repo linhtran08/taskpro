@@ -10,9 +10,18 @@
     </div>
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
-            <ul id="accordion-menu">
+            @if(session()->get('account.role') == 1)
+                <ul id="accordion-menu">
+                    <li class="dropdown">
+                        <a href="{{url('admin/')}}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'admin'])">
+                            <span class="micon dw dw-name"></span><span class="mtext">User Management</span>
+                        </a>
+                    </li>
+                </ul>
+            @else
+                <ul id="accordion-menu">
                 <li class="dropdown">
-                    <a href="/" class="dropdown-toggle no-arrow">
+                    <a href="{{url('/')}}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'dashboard'])">
                         <span class="micon dw dw-house-1"></span><span class="mtext">Dash Board</span>
                     </a>
                 </li>
@@ -22,9 +31,7 @@
                     </a>
                     <ul class="submenu">
                         <li><a href="{{ url('requirement') }}"
-                            @if (request()->route()->uri == 'requirement')
-                                class="active"
-                            @endif
+                            class="@include('mixin.naviActive',['url'=>'requirement'])"
                             >Requirement</a></li>
                         <li><a href="advanced-components.html">Advanced Components</a></li>
                         <li><a href="form-wizard.html">Form Wizard</a></li>
@@ -194,6 +201,7 @@
                     </a>
                 </li>
             </ul>
+            @endif
         </div>
     </div>
 </div>
