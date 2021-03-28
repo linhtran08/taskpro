@@ -14,7 +14,6 @@
 @section('main-container')
     <div class="main-container">
         <!-- code start -->
-
         <div class="pd-ltr-20">
             <div class="card-box pd-10 mb-10"><h3 class="text-info">Users List</h3></div>
             <div class="card-box pd-10 mb-10">

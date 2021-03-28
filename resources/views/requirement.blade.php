@@ -2,13 +2,13 @@
 @section('title','Management')
 @section('style')
     <x-style-common />
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.0.2/css/dataTables.dateTime.min.css">
 @endsection
 
 @section('pre-loader')
     <x-pre-loader />
-    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.0.2/css/dataTables.dateTime.min.css">
 @endsection
 
 @section('main-container')
@@ -263,7 +263,7 @@
                             <input type="text" id="max" name="max" placeholder="To" style="width: 150px">
                             </div>
                         </div>
-                        <table class="data-table display" width="100%">
+                        <table class="data-table display" width="100%" cellpadding="5" cellspacing="5">
                             <thead>
                             <tr>
                                 <th class="datatable-nosort">#</th>
@@ -276,7 +276,7 @@
                                 <th>Registered Date</th>
                                 <th>Due Date</th>
                                 <th>Effort</th>
-                                <th>Title</th>
+                                <th class="col-md-2">Title</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                             </thead>
@@ -309,7 +309,7 @@
                             </tr>
                             @endforeach
                             </tbody>
-                            <tfoot class="mt-4">
+                            <tfoot class="border-top">
                             <tr>
                                 <th class="datatable-nosort"></th>
                                 <th>Project</th>
@@ -318,9 +318,9 @@
                                 <th></th>
                                 <th>Assignee</th>
                                 <th>Registered User</th>
-                                <th>Registered Date</th>
-                                <th>Due Date</th>
-                                <th>Effort</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th class="datatable-nosort"></th>
                             </tr>
@@ -345,4 +345,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
     <script src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
     <script src="{{asset('js/vendors/scripts/datatable-setting.js')}}"></script>
+    <script>
+        let taskType = {!! json_encode($taskType->toArray()) !!};
+        let taskState = {!! json_encode($taskState->toArray()) !!};
+        let project = {!! json_encode($project->toArray()) !!};
+        let assignee = {!! json_encode($assignee->toArray()) !!};
+        function replace(array,Class,atr){
+            $(Class).children().remove();
+            $(Class).append('<option value="">Show All</option>');
+            array.map((item)=>{
+                if(item[atr] !== ''){
+                    $(Class).append('<option value="'+item[atr]+'">'+item[atr]+'</option>')
+                }
+            });
+        }
+        $(document).ready(function (){
+            replace(taskType,'.sl3','desc');
+            replace(taskState,'.sl2','desc');
+            replace(project,'.sl1','project_name');
+            replace(assignee,'.sl5','full_name');
+        });
+    </script>
 @endsection
