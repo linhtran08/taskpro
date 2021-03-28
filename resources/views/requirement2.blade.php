@@ -82,10 +82,16 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="">Phase</label>
-                                    <select name="phase_id" class="custom-select col-12">
-                                        <option value="1" selected="">Open</option>
-                                    </select>
+                                    <label for="">Effort</label>
+{{--                                    <select name="phase_id" class="custom-select col-12">--}}
+{{--                                        <option value="1" selected=""></option>--}}
+{{--                                    </select>--}}
+                                    <input class="form-control" name="effort" type="text" placeholder="Ex: 200">
+                                    @error('effort')
+                                        <div class="text-danger">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
