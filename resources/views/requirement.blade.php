@@ -281,7 +281,7 @@
                                 <th>Project</th>
                                 <th>State</th>
                                 <th>Job type</th>
-                                <th>Process</th>
+                                <th>Phase</th>
                                 <th>Assignee</th>
                                 <th>Registered User</th>
                                 <th>Registered Date</th>
@@ -301,7 +301,7 @@
                                 <td>{{ $task->phase }}</td>
                                 <td>{{ $task->assignee_fname }}</td>
                                 <td>{{ $task->created_by_fname }}</td>
-                                <td>{{ $task->start_date }}</td>
+                                <td>{{ substr($task->created_at,0,10) }}</td>
                                 <td>{{ $task->due_date }}</td>
                                 <td>{{ $task->effort }}</td>
                                 <td>{{ $task->task_title }}</td>
