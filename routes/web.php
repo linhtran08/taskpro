@@ -38,6 +38,8 @@ Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
         Route::get('view/{id}',[\App\Http\Controllers\Admin\AdminController::class,'view'])->name('adminView');
         Route::view('create','admin.create')->name('adminCreate');
         Route::post('create',[AdminController::class,'create']);
+        Route::get('update/{id}',[\App\Http\Controllers\Admin\AdminController::class,'update'])->name('adminUpdate');
+        Route::post('update/{id}',[\App\Http\Controllers\Admin\AdminController::class,'updatePost'])->name('updatePost');
     });
 
 
