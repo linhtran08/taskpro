@@ -23,7 +23,7 @@
                                     <div class="progress-data">
 
                                         <div id="chart2">
-                                            <h4>{{ $avgScore[0]->average_scrore }}</h4>
+                                            <h4>{{ round($avgScore[0]->average_score, 2) }}</h4>
                                         </div>
                                     </div>
                                     <div class="widget-data">
