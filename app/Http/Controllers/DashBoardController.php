@@ -11,23 +11,12 @@ class DashBoardController extends Controller
 {
     public function index()
     {
-
-        $avgScore = DB::select('
-            select avg(satisfaction) as `average_scrore`
-            from task
-            where finish_date is not null;
-        ');
-
+        //get employee id of the current signed in user
+        $emp_id = session()->get('account.emp_id');
+        $avgScore = $this->getAvgScore();
         //dd($avgScore);
-
-        $totalEffort = DB::select('
-            select sum(effort) as effort
-            from task
-            where finish_date is not null;
-        ');
-
+        $totalEffort = $this->getTotalEffort();
         //dd($totalEffort);
-
         $openTicketCountPerMonth = $this->getOpenTicketCountPerMonth();
         $totalEffortPerMonth = $this->getTotalEffortPerMonth();
         $twelveRecentMonths = $this->getTwelveRecentMonths();
@@ -47,6 +36,7 @@ class DashBoardController extends Controller
         ->setXAxis($twelveRecentMonths)
         ->setHeight(300);
 
+        //For open tasks, project managers and staff are the same, sort by timeline
         $open_tasks = DB::table('task_phase_history')
             ->join('task',function ($join){
                 $join->on('task_phase_history.task_id','=','task.task_id')
@@ -59,38 +49,71 @@ class DashBoardController extends Controller
             ->get();
         //dd($open_tasks);
 
-        $processing_tasks = DB::table('task_phase_history')
-            ->join('task',function ($join){
-                $join->on('task_phase_history.task_id','=','task.task_id')
-                    ->where('task.task_state_id','=',2);
-            })
-            ->groupBy('task.task_id')
-            ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date')
-            ->orderBy('his_id','desc')
-            ->limit(20)
-            ->get();
-
+        //For processing tasks, pm and staff differ.
+        if (session()->get('account.role_id') === 2){
+            $processing_tasks = DB::table('task_phase_history')
+                ->join('task',function ($join){
+                    $join->on('task_phase_history.task_id','=','task.task_id')
+                        ->where('task.task_state_id','=',2);
+                })
+                ->groupBy('task.task_id')
+                ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date')
+                ->orderBy('his_id','desc')
+                ->limit(20)
+                ->get();
+        }else{
+            $processing_tasks = DB::select('
+                select max(t1.task_phase_history_id), t1.task_id, t2.due_date, t2.task_title
+                from task_phase_history t1
+                         join task t2
+                              on t1.task_id = t2.task_id
+                where t2.task_state_id = 2
+                  and t2.task_id in (
+                    select distinct(task_phase_history.task_id)
+                    from task_phase_history
+                             join task on task_phase_history.task_id = task.task_id
+                    where (task_phase_history.assignee_id = ? or task_phase_history.changed_by_id = ?)
+                )
+                group by t1.task_id
+                order by max(t1.task_phase_history_id) desc
+                limit 20', [$emp_id, $emp_id]
+            );
+        }
         //dd($processing_tasks);
 
-        $finished_tasks = DB::table('task')
-            ->where('task_state_id',5)
-            ->orderBy('finish_date','desc')
-            ->limit(20)
-            ->get();
+        //For finished task, pm and staff differ
+        if (session()->get('account.role_id') === 2){
+            $finished_tasks = DB::table('task')
+                ->where('task_state_id',5)
+                ->orderBy('finish_date','desc')
+                ->limit(20)
+                ->get();
+        }else{
 
+            $finished_tasks = DB::select('
+                select *
+                from task
+                where task_state_id = 5
+                  and task_id in (
+                    select distinct(task_phase_history.task_id)
+                    from task_phase_history
+                             join task on task_phase_history.task_id = task.task_id
+                    where (task_phase_history.assignee_id = ? or task_phase_history.changed_by_id = ?)
+                )
+                order by finish_date desc
+                limit 20', ['9', '9']
+            );
+        }
         //($finished_tasks);
-
         $user = DB::table('account_info')
             ->join('psn_infor', function($join){
                 $join->on('account_info.emp_id','=','psn_infor.emp_id')
-                    ->where('account_info.emp_id','=',1);
+                    ->where('account_info.emp_id','=', session()->get('account.emp_id'));
             })
             ->selectRaw('psn_infor.full_name,account_info.emp_id,psn_infor.email, psn_infor.user_id, psn_infor.sex, psn_infor.address,
                 psn_infor.phone, psn_infor.birthday')
             ->get();
-
         //dd($user);
-
 
         return view('dashboard',compact('ticketChart','effortChart'))->with([
             'open_tasks' => $open_tasks, // Panel 1: open tasks
@@ -144,4 +167,58 @@ class DashBoardController extends Controller
 
         return array_pad($tmpTicketPerMonth, -12, 0);
     }
+
+    public function getAvgScore(): array
+    {
+        if (session()->get('account.role') === 2){
+            $avgScore = DB::select('
+                select avg(satisfaction) as `average_scrore`
+                from task
+                where finish_date is not null;
+            ');
+        }else{
+            $emp_id = session()->get('account.emp_id');
+            $avgScore = DB::select('
+                select avg(satisfaction) as `average_scrore`
+                from task
+                where finish_date is not null;
+            ');
+        }
+        return $avgScore;
+    }
+
+    public function getTotalEffort(): array
+    {
+        if(session()->get('account.role') === 2){
+            $totalEffort = DB::select('
+                select sum(effort) as effort
+                from task
+                where finish_date is not null;
+            ');
+        }else{
+            $emp_id = session()->get('account.emp_id');
+            $totalEffort = DB::select('
+                select sum(effort) as effort
+                from task
+                where finish_date is not null;
+            ');
+        }
+
+        return $totalEffort;
+    }
+
+    public function getOpenTaskList(){
+        $open_tasks = DB::table('task_phase_history')
+            ->join('task',function ($join){
+                $join->on('task_phase_history.task_id','=','task.task_id')
+                    ->where('task.task_state_id','=',1);
+            })
+            ->groupBy('task.task_id')
+            ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date')
+            ->orderBy('his_id','desc')
+            ->limit(20)
+            ->get();
+        return $open_tasks;
+    }
+
 }
