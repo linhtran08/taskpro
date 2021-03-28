@@ -32,21 +32,28 @@ table.data-table{
   }
 }
 
+.page-link{
+  color: $primary;
+  &:hover{
+    color: $primary;
+  }
+}
+
 .page-item.active .page-link {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: $primary;
+  border-color: $primary;
 }
 
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: #17a2b8;
+  background-color: $primary;
 }
 
 .bootstrap-select .dropdown-menu li .dropdown-item.active:hover, .select2-container--default .select2-results__option[aria-selected=true] {
-  background-color: #17a2b8;
+  background-color: $primary;
   color: #fff;
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-  background-color: #17a2b8;
+  background-color: $primary;
   color: white;
 }

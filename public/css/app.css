@@ -84,6 +84,10 @@
   z-index: 1234;
 }
 
+.btn-link {
+  color: #17a2b8;
+}
+
 .select2-container--open {
   z-index: 99999;
 }
@@ -103,6 +107,14 @@ table.data-table tfoot:before {
   display: block;
   line-height: 10px;
   text-indent: -99999px;
+}
+
+.page-link {
+  color: #17a2b8;
+}
+
+.page-link:hover {
+  color: #17a2b8;
 }
 
 .page-item.active .page-link {
