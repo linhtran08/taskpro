@@ -15,7 +15,7 @@
     <a href="#" class="btn-block position-fixed rounded-circle p-2 tv-btn-create" data-toggle="modal" data-target="#Medium-modal" type="button">
         <i class="icon-copy fi-plus"></i>
     </a>
-    <div class="modal fade z-99999" id="Medium-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal fade z-99999" id="Medium-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -23,87 +23,103 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="{{ url('tasks') }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-xl-2">
                                 <div class="form-group">
-                                    <label >JOB TYPE</label>
-                                    <select class="custom-select col-12">
+                                    <label >Job Type</label>
+                                    <select name="task_job_type_id" class="custom-select col-12">
                                         <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach($job_types ?? '' as $jb_tp)
+                                            <option value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="">IMPORTANT</label>
-                                    <select class="custom-select col-12">
+                                    <label for="">Project</label>
+                                    <select name="project_id" class="custom-select col-12">
                                         <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach($projects as $pj)
+                                            <option value="{{ $pj->project_id }}">{{$pj->project_name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="">ITERATION</label>
-                                    <select class="custom-select col-12">
+                                    <label for="">Priority</label>
+                                    <select name="priority_id" class="custom-select col-12">
                                         <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach($priorities as $p)
+                                            <option value="{{ $p->priority_id }}">{{ $p->desc }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="">Process</label>
-                                    <select class="custom-select col-12">
+                                    <label for="">Assignee</label>
+                                    <select name="assignee_id" class="custom-select2" style="width: 100%">
                                         <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach($assignees as $as)
+                                            <option value="{{ $as->emp_id }}">{{ $as->full_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label>Default Datedpicker</label>
-                                    <input class="form-control date-picker" placeholder="Select Date" type="text">
+                                    <label>Due Date</label>
+                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="due_date">
+                                    @error('due_date')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
-                                    <label for="">Phase</label>
-                                    <select class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
+                                    <label for="">Effort</label>
+                                    <input class="form-control" name="effort" type="text" placeholder="Ex: 200">
+                                    @error('effort')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="html-editor pd-20 mb-30 w-100">
+                            <div class="html-editor pd-20 w-100">
                                 <div class="form-group">
                                     <label for="">Title</label>
-                                    <input class="form-control" type="text" placeholder="Task title">
+                                    <input class="form-control" name="task_title" type="text" placeholder="Task title">
+                                    @error('task_title')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Content</label>
-                                    <textarea class="textarea_editor form-control border-radius-0" placeholder="Enter text ..."></textarea>
+                                    <label for="">Description</label>
+                                    <textarea name="task_detail" class="textarea_editor form-control border-radius-0" placeholder="Enter task description ..."></textarea>
+                                    @error('task_detail')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-info">Create</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create</button>
                 </div>
             </div>
         </div>
@@ -246,27 +262,22 @@
                 </form>
             </div> -->
            <!-- Select-2 end -->
-            <div class="pd-5">
-                <div class="card-box">
-
-                </div>
-            </div>
             {{-- Table data --}}
             <div class="pd-5">
                 <div class="card-box mb-30">
                     <div class="pd-10">
                         <div class="row pd-20">
-                            <div class="mr-3">
-                            <input type="text" id="min" name="min" placeholder="Registered Date" style="width: 150px">
+                            <div class="form-group mr-3">
+                                <input type="text" class="form-control"  id="min" name="min" placeholder="Registered Date">
                             </div>
-                            <div class="">
-                            <input type="text" id="max" name="max" placeholder="To" style="width: 150px">
+                            <div class="form-group">
+                                <input type="text" class="form-control"   id="max" name="max" placeholder="To">
                             </div>
                         </div>
-                        <table class="data-table display" width="100%" cellpadding="5" cellspacing="5">
+                        <table class="data-table display">
                             <thead>
                             <tr>
-                                <th class="datatable-nosort">#</th>
+                                <th class="datatable-nosort w-4">#</th>
                                 <th>Project</th>
                                 <th>State</th>
                                 <th>Job type</th>
@@ -276,7 +287,7 @@
                                 <th>Registered Date</th>
                                 <th>Due Date</th>
                                 <th>Effort</th>
-                                <th class="col-md-2">Title</th>
+                                <th class="w-20">Title</th>
                                 <th class="datatable-nosort">Action</th>
                             </tr>
                             </thead>
@@ -346,10 +357,10 @@
     <script src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
     <script src="{{asset('js/vendors/scripts/datatable-setting.js')}}"></script>
     <script>
-        let taskType = {!! json_encode($taskType->toArray()) !!};
-        let taskState = {!! json_encode($taskState->toArray()) !!};
-        let project = {!! json_encode($project->toArray()) !!};
-        let assignee = {!! json_encode($assignee->toArray()) !!};
+        let taskType = {!! json_encode($job_types->toArray()) !!};
+        let taskState = {!! json_encode($task_state->toArray()) !!};
+        let project = {!! json_encode($projects->toArray()) !!};
+        let assignee = {!! json_encode($assignees->toArray()) !!};
         function replace(array,Class,atr){
             $(Class).children().remove();
             $(Class).append('<option value="">Show All</option>');
