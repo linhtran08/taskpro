@@ -16,6 +16,7 @@ class RequirementController extends Controller
                    ts.`desc` as task_state,
                    tjt.`desc` as task_job_type,
                    p2.`desc` as priority,
+                   tp.`desc` as phase,
                    task_title,
                    task.created_at,
                    task_detail,
@@ -31,6 +32,7 @@ class RequirementController extends Controller
                      join task_state ts on task.task_state_id = ts.task_state_id
                      join task_job_type tjt on task.task_job_type_id = tjt.task_job_type_id
                      join priority p2 on task.priority = p2.priority_id
+                     join task_phase tp on tp.task_phase_id = task.phase
                      left outer join account_info ai on ai.emp_id = task.assignee_id
                      left outer join psn_infor pi on ai.emp_id = pi.emp_id
                      join account_info a on a.emp_id = task.created_by_id
@@ -63,7 +65,8 @@ class RequirementController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    {
         //dd($request);
         $this->validate($request,[
             'task_job_type_id'=>'required',

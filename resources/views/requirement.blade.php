@@ -298,7 +298,7 @@
                                 <td>{{ $task->project_name }}</td>
                                 <td>{{ $task->task_state }}</td>
                                 <td>{{ $task->task_job_type }}</td>
-                                <td>abc</td>
+                                <td>{{ $task->phase }}</td>
                                 <td>{{ $task->assignee_fname }}</td>
                                 <td>{{ $task->created_by_fname }}</td>
                                 <td>{{ $task->start_date }}</td>
