@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Admin\\AdminController' => $baseDir . '/app/Http/Controllers/Admin/AdminController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -22,6 +23,7 @@ return array(
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckAccountLogin' => $baseDir . '/app/Http/Middleware/CheckAccountLogin.php',
+    'App\\Http\\Middleware\\CheckAdminlogin' => $baseDir . '/app/Http/Middleware/CheckAdminlogin.php',
     'App\\Http\\Middleware\\CheckForMaintenanceMode' => $baseDir . '/app/Http/Middleware/CheckForMaintenanceMode.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -37,6 +39,7 @@ return array(
     'App\\Task' => $baseDir . '/app/Task.php',
     'App\\TaskPhaseHistory' => $baseDir . '/app/TaskPhaseHistory.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\View\\Components\\Footer' => $baseDir . '/app/View/Components/Footer.php',
     'App\\View\\Components\\Header' => $baseDir . '/app/View/Components/Header.php',
     'App\\View\\Components\\LeftSideBar' => $baseDir . '/app/View/Components/LeftSideBar.php',
     'App\\View\\Components\\PreLoader' => $baseDir . '/app/View/Components/PreLoader.php',
