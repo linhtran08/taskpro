@@ -20,8 +20,12 @@ class AdminController extends Controller
         return view('admin.admin',compact('account'));
     }
 
-    public function view(Request $request){
-        return view('admin.view');
+    public function view(Request $request , $id){
+
+        $account = DB::table('account_info')
+            ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+            ->where('psn_infor.emp_id','=',$id)->first();
+        return view('admin.view',compact('account'));
     }
 
     public function create(Request $request){

@@ -50,16 +50,18 @@ class RequirementController extends Controller
 
         $projects = DB::table('project')->get();
         $job_types = DB::table('task_job_type')->get();
-
         $priorities = DB::table('priority')->get();
+        $task_state = DB::table('task_state')->get();
         $assignees = DB::table('account_info')
             ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
             ->select('account_info.emp_id','psn_infor.full_name','account_info.role')
+            ->distinct()
             ->get();
 
         //dd($assignees);
         //dd($job_types);
         return view('requirement',[
+            'task_state'=> $task_state,
             'tasks' => $tasks,
             'job_types'=> $job_types,
             'priorities' => $priorities,

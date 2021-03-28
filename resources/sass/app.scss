@@ -18,7 +18,12 @@
   z-index: 99999;
 }
 
-.data-table{
+table.data-table{
+  .custom-select{
+    font-size: 12px !important;
+    height: unset !important;
+    width: 99% !important;
+  }
   tfoot:before {
     content:"@";
     display:block;
@@ -27,3 +32,21 @@
   }
 }
 
+.page-item.active .page-link {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #17a2b8;
+}
+
+.bootstrap-select .dropdown-menu li .dropdown-item.active:hover, .select2-container--default .select2-results__option[aria-selected=true] {
+  background-color: #17a2b8;
+  color: #fff;
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #17a2b8;
+  color: white;
+}
