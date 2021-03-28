@@ -20,6 +20,10 @@ class AdminController extends Controller
         return view('admin.admin',compact('account'));
     }
 
+    public function view(Request $request){
+        return view('admin.view');
+    }
+
     public function create(Request $request){
         $password = $request->input('password');
         $role = $request->input('role');
