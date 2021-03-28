@@ -298,7 +298,7 @@
                                 <td>{{ $task->project_name }}</td>
                                 <td>{{ $task->task_state }}</td>
                                 <td>{{ $task->task_job_type }}</td>
-                                <td>abc</td>
+                                <td>{{ $task->phase }}</td>
                                 <td>{{ $task->assignee_fname }}</td>
                                 <td>{{ $task->created_by_fname }}</td>
                                 <td>{{ $task->start_date }}</td>
@@ -376,5 +376,10 @@
             replace(project,'.sl1','project_name');
             replace(assignee,'.sl5','full_name');
         });
+    </script>
+    <script type="text/javascript">
+        @if (count($errors) > 0)
+        $('#Medium-modal').modal('show');
+        @endif
     </script>
 @endsection
