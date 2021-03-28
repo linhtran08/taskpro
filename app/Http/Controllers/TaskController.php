@@ -59,7 +59,7 @@ class RequirementController extends Controller
 
         //dd($assignees);
         //dd($job_types);
-        return view('requirement',[
+        return view('requirement2',[
             'tasks' => $tasks,
             'job_types'=> $job_types,
             'priorities' => $priorities,
