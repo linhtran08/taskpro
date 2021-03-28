@@ -55,4 +55,46 @@ class AdminController extends Controller
             return redirect('admin/create')->with('insertErr','Create User was wrong');
         }
     }
+
+    public function update(Request $request,$id){
+        $account = DB::table('account_info')
+            ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+            ->where('psn_infor.emp_id','=',$id)->first();
+        return view('admin.view',compact('account'));
+    }
+
+    public function updatePost(Request $request,$id){
+        $password = $request->input('password');
+        $role = $request->input('role');
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $full_name = $first_name.' '.$last_name;
+        $sex = $request->input('sex');
+        $address = $request->input('address');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $birthday = $request->input('birthday');
+        DB::beginTransaction();
+        try {
+            DB::table('account_info')->where('emp_id',$id)->update([
+                'password'=>$password,
+                'role'=>$role
+            ]);
+            DB::table('psn_infor')->where('emp_id',$id)->update([
+               'first_name'=>$first_name,
+               'last_name'=>$last_name,
+               'full_name'=>$full_name,
+               'sex'=>$sex,
+               'address'=>$address,
+               'email'=>$email,
+               'phone'=>$phone,
+               'birthday'=>$birthday
+            ]);
+            DB::commit();
+            return redirect()->route('adminUpdate',$id)->with('updateSuccess','Update User Success');
+        }catch (\Exception $e ){
+            DB::rollBack();
+            return redirect()->route('adminUpdate',$id)->with('updateErr','Update User was wrong');
+        }
+    }
 }

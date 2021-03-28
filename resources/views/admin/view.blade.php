@@ -15,87 +15,138 @@
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
                     <div class="pd-20 card-box height-100-p">
                         <div class="profile-photo">
-                            <a href="modal" data-toggle="modal" data-target="#modal" class="edit-avatar"><i class="fa fa-pencil"></i></a>
-                            <img src="vendors/images/photo1.jpg" alt="" class="avatar-photo">
-                            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-body pd-5">
-                                            <div class="img-container">
-                                                <img id="image" src="vendors/images/photo2.jpg" alt="Picture">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <input type="submit" value="Update" class="btn btn-primary">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <img src="{{asset('images/photo1.jpg')}}" alt="" class="avatar-photo">
                         </div>
-                        <h5 class="text-center h5 mb-0">Ross C. Lopez</h5>
-                        <p class="text-center text-muted font-14">Lorem ipsum dolor sit amet</p>
+                        <h5 class="text-center h5 mb-0">{{ $account->full_name }}</h5>
+                        <div class="profile-info">
+                            <h5 class="mb-20 h5 text-blue">Profile Information</h5>
+                            <ul>
+                                <li class="row">
+                                    <span class="col-md-3">Sex:</span>
+                                    {{ ($account->sex == 'M') ? 'Male' : 'Female' }}
+                                </li>
+                                <li class="row">
+                                    <span class="col-md-3">BirthDay:</span>
+                                    {{ $account->birthday }}
+                                </li>
+                                <li class="row">
+                                    <span class="col-md-3">Role:</span>
+                                    @switch($account->role)
+                                        @case(1)
+                                            Admin
+                                        @break
+                                        @case(2)
+                                            Manager
+                                        @break
+                                        @case(3)
+                                            Staff
+                                        @break
+                                    @endswitch
+                                </li>
+                                <li class="row">
+                                    <span class="col-md-3">Status:</span>
+                                    {{ ($account->active == 1) ? 'Active' : 'Deactivated'  }}
+                                </li>
+                            </ul>
+                        </div>
                         <div class="profile-info">
                             <h5 class="mb-20 h5 text-blue">Contact Information</h5>
                             <ul>
                                 <li>
                                     <span>Email Address:</span>
-                                    FerdinandMChilds@test.com
+                                    {{ $account->email }}
                                 </li>
                                 <li>
                                     <span>Phone Number:</span>
-                                    619-229-0054
-                                </li>
-                                <li>
-                                    <span>Country:</span>
-                                    America
+                                    {{ $account->phone }}
                                 </li>
                                 <li>
                                     <span>Address:</span>
-                                    1807 Holden Street<br>
-                                    San Diego, CA 92115
+                                    {{ $account->address }}
                                 </li>
                             </ul>
-                        </div>
-                        <div class="profile-social">
-                            <h5 class="mb-20 h5 text-blue">Social Links</h5>
-                            <ul class="clearfix">
-                                <li><a href="#" class="btn" data-bgcolor="#3b5998" data-color="#ffffff"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#1da1f2" data-color="#ffffff"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#007bb5" data-color="#ffffff"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#f46f30" data-color="#ffffff"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#c32361" data-color="#ffffff"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#3d464d" data-color="#ffffff"><i class="fa fa-dropbox"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#db4437" data-color="#ffffff"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#bd081c" data-color="#ffffff"><i class="fa fa-pinterest-p"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#00aff0" data-color="#ffffff"><i class="fa fa-skype"></i></a></li>
-                                <li><a href="#" class="btn" data-bgcolor="#00b489" data-color="#ffffff"><i class="fa fa-vine"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="profile-skills">
-                            <h5 class="mb-20 h5 text-blue">Key Skills</h5>
-                            <h6 class="mb-5 font-14">HTML</h6>
-                            <div class="progress mb-20" style="height: 6px;">
-                                <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6 class="mb-5 font-14">Css</h6>
-                            <div class="progress mb-20" style="height: 6px;">
-                                <div class="progress-bar" role="progressbar" style="width: 70%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6 class="mb-5 font-14">jQuery</h6>
-                            <div class="progress mb-20" style="height: 6px;">
-                                <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <h6 class="mb-5 font-14">Bootstrap</h6>
-                            <div class="progress mb-20" style="height: 6px;">
-                                <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 mb-30">
                     <div class="card-box height-100-p overflow-hidden">
                         <div class="profile-tab height-100-p">
+                            @if(request()->route()->getName() == 'adminUpdate')
+                                <!-- Setting Tab start -->
+                                <div>
+                                    <div class="profile-setting pt-4">
+                                        <form action="{{ route('updatePost',$account->emp_id) }}" method="post">
+                                            @csrf
+                                            <h4 class="text-info h2 ml-2 pd-10">Edit Account</h4>
+                                            <ul class="profile-edit-list row p-0">
+                                                <li class="weight-500 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="first_name">First Name</label>
+                                                        <input id="first_name" name="first_name" class="form-control form-control-lg" type="text" value="{{$account->first_name}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="last_name">Last Name</label>
+                                                        <input id="last_name" name="last_name" class="form-control form-control-lg" type="text" value="{{$account->last_name}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="email">Email</label>
+                                                        <input id="email" name="email" class="form-control form-control-lg" type="email" value="{{$account->email}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="datepicker1">Date of birth</label>
+                                                        <input name="birthday" id="datepicker1"
+                                                               class="form-control form-control-lg datepicker-here"
+                                                               type="text" data-date-format="yyyy-mm-dd">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Gender</label>
+                                                        <div class="d-flex">
+                                                            <div class="custom-control custom-radio mb-5 mr-20">
+                                                                <input type="radio" id="customRadio4" name="sex"
+                                                                       class="custom-control-input"
+                                                                       value="M" {{ $account->sex == 'M' ? 'checked' : '' }}>
+                                                                <label class="custom-control-label weight-400" for="customRadio4">Male</label>
+                                                            </div>
+                                                            <div class="custom-control custom-radio mb-5">
+                                                                <input type="radio" id="customRadio5" name="sex"
+                                                                       class="custom-control-input"
+                                                                       value="F" {{ $account->sex == 'F' ? 'checked' : '' }}>
+                                                                <label class="custom-control-label weight-400" for="customRadio5">Female</label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="address">Address</label>
+                                                            <input id="address" name="address" class="form-control form-control-lg" type="text" value="{{$account->address}}">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="phone">phone</label>
+                                                            <input id="phone" name="phone" class="form-control form-control-lg" type="text" value="{{$account->phone}}">
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="weight-500 col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="role">Role</label>
+                                                        <select id="role" class="custom-select" name="role">
+                                                            <option {{ $account->role == 1 ? 'selected=selected' : '' }} value="1">Admin</option>
+                                                            <option {{ $account->role == 2 ? 'selected=selected' : '' }} value="2">Manager</option>
+                                                            <option {{ $account->role == 3 ? 'selected=selected' : '' }} value="3">staff</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="password">Password</label>
+                                                        <input id="password" name="password" class="form-control form-control-lg" type="text" value="{{$account->password}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-info">Save</button>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- Setting Tab End -->
+                            @else
                             <div class="tab height-100-p">
                                 <ul class="nav nav-tabs customtab" role="tablist">
                                     <li class="nav-item">
@@ -526,6 +577,7 @@
                                     <!-- Setting Tab End -->
                                 </div>
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -533,8 +585,63 @@
             <x-footer />
         </div>
     </div>
+    <!-- Success modal -->
+    @if(session('updateSuccess'))
+        <button id="btn_success" class="btn-block d-none" data-toggle="modal" data-target="#success-modal" type="button"></button>
+        <div class="modal fade" id="success-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center font-18">
+                        <h3 class="mb-20">Form Submitted!</h3>
+                        <div class="mb-30 text-center"><img src="{{asset('images/success.png')}}" alt="Successes"></div>
+                        {{ session('updateSuccess') }}
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Warning modal -->
+    @if(session('updateErr'))
+        <button id="btn_warning" class="btn-block d-none" data-toggle="modal" data-target="#warning-modal" type="button"></button>
+        <div class="modal fade" id="warning-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content bg-warning">
+                    <div class="modal-body text-center">
+                        <h3 class="mb-15"><i class="fa fa-exclamation-triangle"></i> Warning</h3>
+                        <p>{{ session('updateErr') }}</p>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 @endsection
 
 @section('script')
     <x-script-common/>
+    <script>
+        $(document).ready(function() {
+
+            setTimeout(function (){
+                $('#btn_success').trigger('click');
+                $('#btn_warning').trigger('click');
+            },1000)
+
+            // Date Object
+            let maxDate = new Date();
+            maxDate.setDate(maxDate.getMonth() - 7645);
+            let minDate = new Date();
+            minDate.setDate(minDate.getMonth() - 14645);
+            $('#datepicker1').datepicker({
+                language: 'en',
+                autoClose: 'true',
+                maxDate: maxDate,
+                minDate : minDate
+            })
+        });
+    </script>
 @endsection
