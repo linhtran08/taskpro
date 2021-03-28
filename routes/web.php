@@ -24,9 +24,10 @@ Route::middleware('checkLogin')->group(function (){
     Route::get('dashboard','DashBoardController@index')->name('dashboard');
 
     Route::get('requirement','RequirementController@index');
+    Route::get('requirement2','RequirementController@index');
 
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
-
+    Route::post('tasks',[\App\Http\Controllers\RequirementController::class,'store']);
 });
 
 Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
@@ -41,6 +42,7 @@ Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
 
 
 });
+
 
 
 Route::get('login',[\App\Http\Controllers\Auth\Login\AccountController::class,'index'])->name('login');
