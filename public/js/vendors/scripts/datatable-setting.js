@@ -45,10 +45,11 @@ $('document').ready(function(){
 				previous: '<i class="ion-chevron-left"></i>'
 			}
 		},
+
 		initComplete: function () {
-			this.api().columns([1,2,3,5,6,7,8,9]).every( function () {
+			this.api().columns([1,2,3,5,6]).every( function () {
 				var column = this;
-				var select = $('<select style="width: 100%;"><option value="">Show All</option></select>')
+				var select = $('<select class="sl'+column.index()+'"><option value="">Show All</option></select>')
 					.appendTo( $(column.footer()).empty() )
 					.on( 'change', function () {
 						var val = $.fn.dataTable.util.escapeRegex(
@@ -59,7 +60,6 @@ $('document').ready(function(){
 							.search( val ? '^'+val+'$' : '', true, false )
 							.draw();
 					} );
-
 				column.data().unique().sort().each( function ( d , j) {
 					select.append( '<option value="'+d+'">'+d+'</option>' );
 				} );

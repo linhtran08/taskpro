@@ -17,6 +17,11 @@
                             <span class="micon dw dw-name"></span><span class="mtext">User Management</span>
                         </a>
                     </li>
+                    <li class="dropdown">
+                        <a href="{{url('admin/create')}}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'admin/create'])">
+                            <span class="micon dw dw-add-user"></span><span class="mtext">Create User</span>
+                        </a>
+                    </li>
                 </ul>
             @else
                 <ul id="accordion-menu">
