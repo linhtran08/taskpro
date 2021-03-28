@@ -42,11 +42,23 @@ class RequirementController extends Controller
             where
                 task.project_id = ?
             
-            order by task_id desc',[$project_id]
+            order by task_id desc', [$project_id]
         );
-
-        return view('requirement',[
-            'tasks' => $tasks
+        $taskType = DB::table('task_job_type')->get();
+        $taskState = DB::table('task_state')->get();
+        $project = DB::table('project')->get();
+        $assignee = DB::table('task')
+            ->join('account_info', 'task.assignee_id', '=', 'account_info.emp_id')
+            ->join('psn_infor', 'task.assignee_id', '=', 'psn_infor.emp_id')
+            ->select('full_name')
+            ->distinct()
+            ->get();
+        return view('requirement', [
+            'tasks' => $tasks,
+            'taskType' => $taskType,
+            'taskState' => $taskState,
+            'project' => $project,
+            'assignee' => $assignee
         ]);
     }
 }
