@@ -19,9 +19,11 @@
 }
 
 .data-table{
-  td{
-    word-break: break-word;
-    word-break: break-all;
+  tfoot:before {
+    content:"@";
+    display:block;
+    line-height:10px;
+    text-indent:-99999px;
   }
 }
 
