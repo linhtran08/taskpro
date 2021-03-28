@@ -377,4 +377,9 @@
             replace(assignee,'.sl5','full_name');
         });
     </script>
+    <script type="text/javascript">
+        @if (count($errors) > 0)
+        $('#Medium-modal').modal('show');
+        @endif
+    </script>
 @endsection

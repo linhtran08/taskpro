@@ -10,11 +10,6 @@ class RequirementController extends Controller
 {
     public function index()
     {
-        //default values
-
-        $where_querry = '';
-
-        $project_id = 1;
         $tasks = DB::select('        
             select task_id,
                    p.project_name as project_name,
@@ -40,10 +35,8 @@ class RequirementController extends Controller
                      left outer join psn_infor pi on ai.emp_id = pi.emp_id
                      join account_info a on a.emp_id = task.created_by_id
                      join psn_infor pi2 on a.emp_id = pi2.emp_id
-            where
-                task.project_id = ?
             
-            order by task_id desc',[$project_id]
+            order by task_id desc'
         );
 
         //$date = DateTime::createFromFormat('d M Y','31 March 2021')->format("Y-m-d");
