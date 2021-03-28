@@ -57,8 +57,6 @@ class TaskController extends Controller
             ->select('account_info.emp_id','psn_infor.full_name','account_info.role')
             ->get();
 
-        //dd($assignees);
-        //dd($job_types);
         return view('requirement2',[
             'tasks' => $tasks,
             'job_types'=> $job_types,
@@ -76,6 +74,7 @@ class TaskController extends Controller
             'priority_id' => 'required',
             //'assignee_id' => 'required', no need to assign right away
             'due_date' => 'required|after:today',
+            'effort' => 'required|integer',
             'task_title' => 'required',
             'task_detail' => 'required'
         ]);
@@ -89,10 +88,10 @@ class TaskController extends Controller
         $task_detail = $request->input('task_detail');
         $created_at = date(now());
         $assignee_id = $request->input('assignee_id');
-        $created_by_id = 2; //temp value for testing
+        $created_by_id = session()->get('account.emp_id');
         $due_date_src = $request->input('due_date');
         $due_date = DateTime::createFromFormat('d M Y',$due_date_src)->format("Y-m-d");
-        $effort = 200;
+        $effort = $request->input('effort');
 
         DB::table('task')->insert([
             'project_id' => $project_id,
@@ -117,15 +116,6 @@ class TaskController extends Controller
             'assignee_id' => $assignee_id,
             'changed_by_id' => $created_by_id
         ]);
-        $taskType = DB::table('task_job_type')->get();
-        $taskState = DB::table('task_state')->get();
-        $project = DB::table('project')->get();
-        $assignee = DB::table('task')
-            ->join('account_info', 'task.assignee_id', '=', 'account_info.emp_id')
-            ->join('psn_infor', 'task.assignee_id', '=', 'psn_infor.emp_id')
-            ->select('full_name')
-            ->distinct()
-            ->get();
 
         return back();
     }
