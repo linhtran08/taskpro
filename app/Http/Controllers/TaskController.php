@@ -6,7 +6,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class RequirementController extends Controller
+class TaskController extends Controller
 {
     public function index()
     {
