@@ -17,12 +17,18 @@ class AccountController extends Controller
     }
 
     public function login(Request $request){
+        $this->validate($request,[
+            'emp_id' => 'required',
+            'password' => 'required',
+        ]);
+
         $emp_id = $request->input('emp_id');
         $password= $request->input('password');
         $account = DB::table('account_info')
             ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
             ->where('psn_infor.email',$emp_id)
             ->where('account_info.password',$password)
+            ->where('account_info.active',1)
             ->first();
         if(!empty($account)){
             $request->session()->put('login',true);
@@ -41,7 +47,7 @@ class AccountController extends Controller
                 return redirect()->route('dashboard');
             }
         }else{
-            return $this->index($request);
+            return back()->with('status','Invalid login details or deactivated id');
         }
     }
 

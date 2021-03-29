@@ -70,23 +70,28 @@
 {{--                                    </label>--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
+
                             <div class="input-group custom">
                                 <input type="text" name="emp_id" class="form-control form-control-lg" placeholder="Username">
-                                @error('emp_id')
-                                {{ $message }}
-                                @enderror
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
                             </div>
-                            <div class="input-group custom">
-                                <input type="password" name="password" class="form-control form-control-lg" placeholder="**********">
-                                @error('password')
+                            <div class="input-group custom text-danger">
+                                @error('emp_id')
                                 {{ $message }}
                                 @enderror
+                            </div>
+                            <div class="input-group custom">
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="**********">
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="dw dw-padlock1"></i></span>
                                 </div>
+                            </div>
+                            <div class="input-group custom text-danger">
+                                @error('password')
+                                {{ $message }}
+                                @enderror
                             </div>
 {{--                            <div class="row pb-30">--}}
 {{--                                <div class="col-6">--}}
@@ -99,6 +104,11 @@
 {{--                                    <div class="forgot-password"><a href="forgot-password.html">Forgot Password</a></div>--}}
 {{--                                </div>--}}
 {{--                            </div>--}}
+                            <div class="input-group custom text-danger">
+                                @if(session('status'))
+                                    {{ session('status') }}
+                                @endif
+                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="input-group mb-0">
