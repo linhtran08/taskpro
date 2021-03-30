@@ -40,6 +40,8 @@ Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
         Route::post('create',[AdminController::class,'create']);
         Route::get('update/{id}',[\App\Http\Controllers\Admin\AdminController::class,'update'])->name('adminUpdate');
         Route::post('update/{id}',[\App\Http\Controllers\Admin\AdminController::class,'updatePost'])->name('updatePost');
+        Route::get('changestatus/{id}',[\App\Http\Controllers\Admin\AdminController::class,'changeActiveStatus'])->name('changestatus');
+
     });
 
 
