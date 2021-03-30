@@ -92,11 +92,13 @@
                                                         <label for="email">Email</label>
                                                         <input id="email" name="email" class="form-control form-control-lg" type="email" value="{{$account->email}}">
                                                     </div>
+
                                                     <div class="form-group">
                                                         <label for="datepicker1">Date of birth</label>
-                                                        <input name="birthday" id="datepicker1"
+                                                        <input name="birthday"
                                                                class="form-control form-control-lg datepicker-here"
-                                                               type="text" data-date-format="yyyy-mm-dd">
+                                                               value = "{{$account->birthday}}"
+                                                               type="date" data-date-format="yyyy-mm-dd">
                                                     </div>
                                                     <div class="form-group">
                                                         <label>Gender</label>
