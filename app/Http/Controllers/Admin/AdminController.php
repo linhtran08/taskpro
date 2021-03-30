@@ -97,4 +97,25 @@ class AdminController extends Controller
             return redirect()->route('adminUpdate',$id)->with('updateErr','Update User was wrong');
         }
     }
+
+    public function changeActiveStatus($id){
+        $currentStatus = DB::table('account_info')
+            ->select('active')
+            ->where('emp_id',intval($id))
+            ->get();
+
+        if ($currentStatus[0]->active === 1){
+            $newStatus = 0;
+
+        }else{
+            $newStatus = 1;
+        }
+
+        DB::table('account_info')
+            ->where('emp_id',intval($id))
+            ->update([
+                'active' => $newStatus
+            ]);
+        return back();
+    }
 }
