@@ -110,7 +110,7 @@
                                         <div class="card-box p-2 m-2 h-task-item">
                                             <a href="">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $ft->task_id }}</span>
+                                                    <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded"> </span>
                                                     <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i> {{ $ft->finish_date }}</span>
                                                 </div>
                                                 <h4 class="h5">{{ $ft->task_title }}</h4>
