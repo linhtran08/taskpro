@@ -116,7 +116,7 @@
             </div>
             <div class="card-box mb-20">
                 <div class="chat-detail">
-                    <div class="chat-profile-header clearfix">
+                    <div class="chat-profile-header clearfix">dsfsdfsdfasf
                         <div class="left">
                             <div class="clearfix">
                                 <div class="chat-profile-photo">
