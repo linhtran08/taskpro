@@ -12,107 +12,124 @@
     <div class="main-container">
         <div class="pd-ltr-20">
             <div class="card-box pd-20 mb-20">
-                <form action="{{ url('tasks') }}" method="post">
-                    @csrf
-                    <div class="row">
-                        <div class="col-xl-2">
-                            <div class="form-group">
-                                <label >Job Type</label>
-                                <select name="task_job_type_id" class="custom-select col-12">
-                                    @foreach($job_types ?? '' as $jb_tp)
-                                        <option {{ $jb_tp->task_job_type_id == $tasks[0]->task_job_type_id ? 'selected=selected' : '' }} value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="">Project</label>
-                                <select name="project_id" class="custom-select col-12">
-                                    @foreach($projects as $pj)
-                                        <option
-                                            {{ $pj->project_id  == $tasks[0]->project_id ? 'selected=selected' : '' }}
-                                            value="{{ $pj->project_id }}">{{$pj->project_name}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="">Priority</label>
-                                <select name="priority_id" class="custom-select col-12">
-                                    @foreach($priorities as $p)
-                                        <option
-                                                {{ $p->desc  == $tasks[0]->priority ? 'selected=selected' : ''}}
-                                                value="{{ $p->priority_id }}">{{ $p->desc }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="">Assignee</label>
-                                <select id="assginee_id" name="assignee_id" class="custom-select2" style="width: 100%">
-                                    @foreach($assignees as $as)
-                                        <option
-                                                value="{{ $as->emp_id }}">{{ $as->full_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Due Date</label>
-                                <input class="form-control date-picker" placeholder="{{ $tasks[0]->due_date }}" type="text" name="due_date">
-                                @error('due_date')
-                                <div class="text-danger">
-                                    {{ $message }}
+                <fieldset {{$tasks[0]->task_state_id == 5 ? 'disabled="disabled"' : ''}}>
+{{--                <fieldset>--}}
+                    <form action="{{ url('#') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label >Job Type</label>
+                                    <select  name="task_job_type_id" class="custom-select col-12">
+                                        @foreach($job_types ?? '' as $jb_tp)
+                                            <option {{ $jb_tp->task_job_type_id == $tasks[0]->task_job_type_id ? 'selected=selected' : '' }} value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                @enderror
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Project</label>
+                                    <select name="project_id" class="custom-select col-12">
+                                        @foreach($projects as $pj)
+                                            <option
+                                                    {{ $pj->project_id  == $tasks[0]->project_id ? 'selected=selected' : '' }}
+                                                    value="{{ $pj->project_id }}">{{$pj->project_name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">State</label>
+                                    <select  name="task_state_id" class="custom-select col-12">
+                                        @foreach($task_state as $ts)
+                                            <option
+                                                    {{ $ts->task_state_id  == $tasks[0]->task_state_id ? 'selected=selected' : '' }}
+                                                    value="{{ $ts->task_state_id  }}">{{$ts->desc}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Priority</label>
+                                    <select name="priority_id" class="custom-select col-12">
+                                        @foreach($priorities as $p)
+                                            <option
+                                                    {{ $p->desc  == $tasks[0]->priority ? 'selected=selected' : ''}}
+                                                    value="{{ $p->priority_id }}">{{ $p->desc }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="">Assignee</label>
+                                    <select id="assginee_id" name="assignee_id" class="custom-select">
+                                        @foreach($assignees as $as)
+                                            <option
+                                                {{ $as->emp_id == $tasks[0]->assignee_id ? 'selected=selected' : '' }}
+                                                value="{{ $as->emp_id }}">{{ $tasks[0]->assignee_fname }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Due Date</label>
+                                    <input class="form-control date-picker" value="{{ $tasks[0]->due_date }}"  type="text" name="due_date">
+                                    @error('due_date')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Effort</label>
+                                    <input class="form-control" name="effort" type="text" value="{{ $tasks[0]->effort }}">
+                                    @error('effort')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label for="">Effort</label>
-                                <input class="form-control" name="effort" type="text" value="{{ $tasks[0]->effort }}">
-                                @error('effort')
-                                <div class="text-danger">
-                                    {{ $message }}
+                        <div class="row">
+                            <div class="html-editor pd-20 w-100">
+                                <div class="form-group">
+                                    <label for="">Title</label>
+                                    <input class="form-control" name="task_title" type="text" value="{{ $tasks[0]->task_title }}">
+                                    @error('task_title')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
-                                @enderror
+                                <div class="form-group">
+                                    <label for="">Description</label>
+                                    <textarea name="task_detail" class="textarea_editor form-control border-radius-0">{{ $tasks[0]->task_detail }}</textarea>
+                                    @error('task_detail')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="html-editor pd-20 w-100">
-                            <div class="form-group">
-                                <label for="">Title</label>
-                                <input class="form-control" name="task_title" type="text" value="{{ $tasks[0]->task_title }}">
-                                @error('task_title')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Description</label>
-                                <textarea name="task_detail" class="textarea_editor form-control border-radius-0">{{ $tasks[0]->task_detail }}</textarea>
-                                @error('task_detail')
-                                <div class="text-danger">
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
+                        <div class="modal-footer border-0">
+                            <a href="{{ route('dashboard') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
+                            <button type="submit" class="btn btn-info">Save</button>
                         </div>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <a href="{{ route('dashboard') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
-                        <button type="submit" class="btn btn-info">Save</button>
-                    </div>
-                </form>
+                    </form>
+                </fieldset>
             </div>
             <div class="card-box mb-20">
                 <div class="chat-detail">
@@ -130,19 +147,22 @@
                         </div>
                     </div>
                     <div class="chat-box">
-                        <div class="chat-desc customscroll">
-                            <ul>
-                                <li class="clearfix admin_chat">
-                                    <div class="text-right mb-2">
-                                        <span class="badge-info p-1">{{ session()->get('account.name') }}</span>
-                                    </div>
-                                    <div class="chat-body clearfix mr-0">
-                                        <p>Maybe you already have additional info?</p>
-                                        <div class="chat_time">09:40PM</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+
+                            <div class="chat-desc customscroll">
+                                <ul>
+                                    @foreach($comments as $cm)
+                                    <li class="clearfix admin_chat">
+                                        <div class="text-right mb-2">
+                                            <span class="badge-info p-1">{{ $cm->full_name }}</span>
+                                        </div>
+                                        <div class="chat-body clearfix mr-0">
+                                            <p>{{ $cm->body }}</p>
+                                            <div class="chat_time">{{ $cm->created_at }}</div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         <div class="chat-footer">
                             <div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
                             <div class="chat_text_area">
