@@ -4,7 +4,10 @@ use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\TaskController;
+
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\RequirementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +29,11 @@ Route::middleware('checkLogin')->group(function (){
     Route::get('requirement','RequirementController@index');
     Route::get('requirement2','TaskController@index');
 
+    Route::get('tasks/{id}',[RequirementController::class,'task_detail'])->name('task_detail');
+
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
+    Route::post('project',[\App\Http\Controllers\TaskController::class,'store']);
 });
 
 Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
