@@ -18,108 +18,145 @@
     <div class="modal fade z-99999" id="Medium-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">Create task</h4>
+                <div class="pd-20 card-box">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('tasks') }}" method="post">
-                        @csrf
-                        <div class="row">
-                            <div class="col-xl-2">
-                                <div class="form-group">
-                                    <label >Job Type</label>
-                                    <select name="task_job_type_id" class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        @foreach($job_types ?? '' as $jb_tp)
-                                            <option value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                    <div class="tab pt-20">
+                        <ul class="nav nav-tabs customtab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#home2" role="tab" aria-selected="true">Create Task</a>
+                            </li>
+                            @if(session('account.role') == 2)
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#profile2" role="tab" aria-selected="false">Create Project</a>
+                            </li>
+                            @endif
+                        </ul>
+                        <div class="tab-content modal-body mt-15">
+                            <div class="tab-pane fade show active" id="home2" role="tabpanel">
+                                <form action="{{ url('tasks') }}" method="post">
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-xl-2">
+                                                <div class="form-group">
+                                                    <label >Job Type</label>
+                                                    <select name="task_job_type_id" class="custom-select col-12">
+                                                        <option selected="">Choose...</option>
+                                                        @foreach($job_types ?? '' as $jb_tp)
+                                                            <option value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="">Project</label>
+                                                    <select name="project_id" class="custom-select col-12">
+                                                        <option selected="">Choose...</option>
+                                                        @foreach($projects as $pj)
+                                                            <option value="{{ $pj->project_id }}">{{$pj->project_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="">Priority</label>
+                                                    <select name="priority_id" class="custom-select col-12">
+                                                        <option selected="">Choose...</option>
+                                                        @foreach($priorities as $p)
+                                                            <option value="{{ $p->priority_id }}">{{ $p->desc }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="">Assignee</label>
+                                                    <select name="assignee_id" class="custom-select2" style="width: 100%">
+                                                        <option selected="">Choose...</option>
+                                                        @foreach($assignees as $as)
+                                                            <option value="{{ $as->emp_id }}">{{ $as->full_name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>Due Date</label>
+                                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="due_date">
+                                                    @error('due_date')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label for="">Effort</label>
+                                                    <input class="form-control" name="effort" type="text" placeholder="Ex: 200">
+                                                    @error('effort')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="html-editor pd-20 w-100">
+                                                <div class="form-group">
+                                                    <label for="">Title</label>
+                                                    <input class="form-control" name="task_title" type="text" placeholder="Task title">
+                                                    @error('task_title')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="">Description</label>
+                                                    <textarea name="task_detail" class="textarea_editor form-control border-radius-0" placeholder="Enter task description ..."></textarea>
+                                                    @error('task_detail')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer border-0">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-info">Create</button>
+                                        </div>
+                                    </form>
                             </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Project</label>
-                                    <select name="project_id" class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        @foreach($projects as $pj)
-                                            <option value="{{ $pj->project_id }}">{{$pj->project_name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Priority</label>
-                                    <select name="priority_id" class="custom-select col-12">
-                                        <option selected="">Choose...</option>
-                                        @foreach($priorities as $p)
-                                            <option value="{{ $p->priority_id }}">{{ $p->desc }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Assignee</label>
-                                    <select name="assignee_id" class="custom-select2" style="width: 100%">
-                                        <option selected="">Choose...</option>
-                                        @foreach($assignees as $as)
-                                            <option value="{{ $as->emp_id }}">{{ $as->full_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label>Due Date</label>
-                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="due_date">
-                                    @error('due_date')
-                                    <div class="text-danger">
-                                        {{ $message }}
+                            @if(session('account.role') == 2)
+                            <div class="tab-pane fade h-100" id="profile2" role="tabpanel">
+                                <form action="{{url('project')}}" method="post">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="html-editor pd-20 w-100">
+                                            <div class="form-group">
+                                                <label for="">Title</label>
+                                                <input class="form-control" name="project_title" type="text" placeholder="project title">
+                                                @error('task_title')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                                 @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label for="">Effort</label>
-                                    <input class="form-control" name="effort" type="text" placeholder="Ex: 200">
-                                    @error('effort')
-                                    <div class="text-danger">
-                                        {{ $message }}
+                                    <div class="modal-footer border-0">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-info">Create</button>
                                     </div>
-                                    @enderror
-                                </div>
+                                </form>
                             </div>
+                            @endif
                         </div>
-                        <div class="row">
-                            <div class="html-editor pd-20 w-100">
-                                <div class="form-group">
-                                    <label for="">Title</label>
-                                    <input class="form-control" name="task_title" type="text" placeholder="Task title">
-                                    @error('task_title')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Description</label>
-                                    <textarea name="task_detail" class="textarea_editor form-control border-radius-0" placeholder="Enter task description ..."></textarea>
-                                    @error('task_detail')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer border-0">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-info">Create</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -311,7 +348,7 @@
                                             <i class="dw dw-more"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                            <a class="dropdown-item" href="{{ route('task_detail',$task->task_id) }}"><i class="dw dw-eye"></i> View</a>
                                             <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
                                             <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
                                         </div>
@@ -342,7 +379,6 @@
             </div>
             {{-- End Table data --}}
             <x-footer />
-            <div id="data-table"></div>
         </div>
     </div>
 @endsection
