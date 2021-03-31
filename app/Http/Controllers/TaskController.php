@@ -9,17 +9,23 @@ use Illuminate\Support\Facades\DB;
 class TaskController extends Controller
 {
 
-    public function index($id){
-        $task = DB::select('        
+    public function index($id)
+    {
+
+        $tasks = DB::select('        
             select task_id,
                    p.project_name as project_name,
+                   task.task_state_id,
                    ts.`desc` as task_state,
+                   task.task_job_type_id,
+                    p.project_id,
                    tjt.`desc` as task_job_type,
                    p2.`desc` as priority,
                    tp.`desc` as phase,
                    task_title,
                    task.created_at,
                    task_detail,
+                   task.assignee_id,
                    coalesce(pi.full_name, "") as assignee_fname,
                    pi2.full_name as created_by_fname,
                    start_date,
@@ -37,22 +43,45 @@ class TaskController extends Controller
                      left outer join psn_infor pi on ai.emp_id = pi.emp_id
                      join account_info a on a.emp_id = task.created_by_id
                      join psn_infor pi2 on a.emp_id = pi2.emp_id
-            
-            where
-                task_id = ?
-            order by task_id desc',[$id]
+            where task_id =? ', [$id]
         );
+        $comments = DB::select('
+            select pi.full_name, body, created_at
+            from comment t1
+            inner join account_info ai on t1.created_by_id = ai.emp_id
+            inner join psn_infor pi on ai.emp_id = pi.emp_id
+            where task_id = ?
+        ', [$id]);
+
+        //dd($comments);
+
+        $projects = DB::table('project')->get();
+        $job_types = DB::table('task_job_type')->get();
+        $priorities = DB::table('priority')->get();
+        $task_state = DB::table('task_state')->get();
+        $assignees = DB::table('account_info')
+            ->join('psn_infor', 'account_info.emp_id', '=', 'psn_infor.emp_id')
+            ->select('account_info.emp_id', 'psn_infor.full_name', 'account_info.role')
+            ->distinct()
+            ->get();
+
+//        dd($tasks);
+        return view('task_detail', [
+            'task_state' => $task_state,
+            'tasks' => $tasks,
+            'job_types' => $job_types,
+            'priorities' => $priorities,
+            'assignees' => $assignees,
+            'projects' => $projects,
+            'comments' => $comments,
+        ]);
     }
 
-    public function postUpdate(){
-
-    }
-
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function postUpdate(Request $request, $id)
     {
         //dd($request);
-        $this->validate($request,[
-            'task_job_type_id'=>'required',
+        $this->validate($request, [
+            'task_job_type_id' => 'required',
             'project_id' => 'required',
             'priority_id' => 'required',
             //'assignee_id' => 'required', no need to assign right away
@@ -72,7 +101,7 @@ class TaskController extends Controller
         $assignee_id = $request->input('assignee_id');
         $created_by_id = 2; //temp value for testing
         $due_date_src = $request->input('due_date');
-        $due_date = DateTime::createFromFormat('d M Y',$due_date_src)->format("Y-m-d");
+        $due_date = DateTime::createFromFormat('d M Y', $due_date_src)->format("Y-m-d");
         $effort = 200;
 
         DB::table('task')->insert([
@@ -94,7 +123,70 @@ class TaskController extends Controller
 
         DB::table('task_phase_history')->insert([
             'task_id' => $task_id,
-            'task_phase_id'=> $phase_id,
+            'task_phase_id' => $phase_id,
+            'assignee_id' => $assignee_id,
+            'changed_by_id' => $created_by_id
+        ]);
+        $taskType = DB::table('task_job_type')->get();
+        $taskState = DB::table('task_state')->get();
+        $project = DB::table('project')->get();
+        $assignee = DB::table('task')
+            ->join('account_info', 'task.assignee_id', '=', 'account_info.emp_id')
+            ->join('psn_infor', 'task.assignee_id', '=', 'psn_infor.emp_id')
+            ->select('full_name')
+            ->distinct()
+            ->get();
+
+        return back();
+    }
+
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        //dd($request);
+        $this->validate($request, [
+            'task_job_type_id' => 'required',
+            'project_id' => 'required',
+            'priority_id' => 'required',
+            //'assignee_id' => 'required', no need to assign right away
+            'due_date' => 'required|after:today',
+            'task_title' => 'required',
+            'task_detail' => 'required'
+        ]);
+        //dd(auth()->$account->role);
+        $project_id = $request->input('project_id');
+        $task_state_id = 1;
+        $task_job_type_id = $request->input('task_job_type_id');
+        $priority_id = $request->input('priority_id');
+        $phase_id = 1;
+        $task_title = $request->input('task_title');
+        $task_detail = $request->input('task_detail');
+        $created_at = date(now());
+        $assignee_id = $request->input('assignee_id');
+        $created_by_id = 2; //temp value for testing
+        $due_date_src = $request->input('due_date');
+        $due_date = DateTime::createFromFormat('d M Y', $due_date_src)->format("Y-m-d");
+        $effort = 200;
+
+        DB::table('task')->insert([
+            'project_id' => $project_id,
+            'task_state_id' => $task_state_id,
+            'task_job_type_id' => $task_job_type_id,
+            'priority' => $priority_id,
+            'phase' => $phase_id,
+            'task_title' => $task_title,
+            'task_detail' => $task_detail,
+            'created_at' => $created_at,
+            'assignee_id' => $assignee_id,
+            'created_by_id' => $created_by_id,
+            'due_date' => $due_date,
+            'effort' => $effort
+        ]);
+
+        $task_id = DB::table('task')->max('task_id');
+
+        DB::table('task_phase_history')->insert([
+            'task_id' => $task_id,
+            'task_phase_id' => $phase_id,
             'assignee_id' => $assignee_id,
             'changed_by_id' => $created_by_id
         ]);
