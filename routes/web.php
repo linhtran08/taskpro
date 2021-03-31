@@ -16,7 +16,7 @@ use App\Http\Controllers\RequirementController;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware viewgroup. Now create something great!
+| contains the "web" middleware view group. Now create something great!
 |
 */
 
@@ -29,7 +29,9 @@ Route::middleware('checkLogin')->group(function (){
     Route::get('requirement','RequirementController@index');
     Route::get('requirement2','TaskController@index');
 
-    Route::get('tasks/{id}',[RequirementController::class,'task_detail'])->name('task_detail');
+    Route::get('tasks/{id}',[TaskController::class,'index'])->name('task_detail');
+    //Route::post('tasksupdate/{id}',[TaskController::class,'postUpdate'])->name('task_update');
+
 
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
