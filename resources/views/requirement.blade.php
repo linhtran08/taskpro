@@ -4,7 +4,7 @@
     <x-style-common />
     <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.0.2/css/dataTables.dateTime.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables.net-datetime/dist/dataTables.dateTime.css') }}">
 @endsection
 
 @section('pre-loader')
@@ -389,8 +389,8 @@
     <script src="{{ asset('js/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/datetime/1.0.2/js/dataTables.dateTime.min.js"></script>
+    <script src="{{ asset('js/plugins/moment/moment.js') }}"></script>
+    <script src="{{ asset('js/plugins/datatables.net-datetime/dist/dataTables.dateTime.js') }}"></script>
     <script src="{{asset('js/vendors/scripts/datatable-setting.js')}}"></script>
     <script>
         let taskType = {!! json_encode($job_types->toArray()) !!};

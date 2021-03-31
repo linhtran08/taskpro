@@ -2,9 +2,10 @@
 var minDate, maxDate, col;
 $.fn.dataTable.ext.search.push(
 	function( settings, data, dataIndex ) {
-		var min = minDate.val();
-		var max = maxDate.val();
 		var date = new Date( data[7] );
+
+		var min = ($('#min').val() == '') ? null : minDate.val();
+		var max = ($('#max').val() == '') ? null : maxDate.val();
 
 		if (
 			( min === null && max === null ) ||
