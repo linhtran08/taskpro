@@ -53,7 +53,7 @@ class DashBoardController extends Controller
         //dd($open_tasks);
 
         //For processing tasks, pm and staff differ.
-        if (session()->get('account.role_id') === 2) {
+        if (session()->get('account.role') === 2) {
             $processing_tasks = DB::table('task_phase_history')
                 ->join('task', function ($join) {
                     $join->on('task_phase_history.task_id', '=', 'task.task_id')
@@ -85,7 +85,7 @@ class DashBoardController extends Controller
         //dd($processing_tasks);
 
         //For finished task, pm and staff differ
-        if (session()->get('account.role_id') === 2) {
+        if (session()->get('account.role') === 2) {
             $finished_tasks = DB::table('task')
                 ->where('task_state_id', 5)
                 ->orderBy('finish_date', 'desc')
