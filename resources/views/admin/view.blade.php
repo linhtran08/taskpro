@@ -643,6 +643,7 @@
                 autoClose: 'true',
                 maxDate: maxDate,
                 minDate : minDate
+                
             })
         });
     </script>
