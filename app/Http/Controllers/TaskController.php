@@ -59,6 +59,7 @@ class TaskController extends Controller
         $job_types = DB::table('task_job_type')->get();
         $priorities = DB::table('priority')->get();
         $task_state = DB::table('task_state')->get();
+        $phases = DB::table('task_phase')->get();
         $assignees = DB::table('account_info')
             ->join('psn_infor', 'account_info.emp_id', '=', 'psn_infor.emp_id')
             ->select('account_info.emp_id', 'psn_infor.full_name', 'account_info.role')
@@ -74,6 +75,7 @@ class TaskController extends Controller
             'assignees' => $assignees,
             'projects' => $projects,
             'comments' => $comments,
+            'phases' => $phases
         ]);
     }
 
@@ -84,8 +86,10 @@ class TaskController extends Controller
             'task_job_type_id' => 'required',
             'project_id' => 'required',
             'priority_id' => 'required',
+            'task_state_id' => 'required',
+            'state_id' => 'required',
             //'assignee_id' => 'required', no need to assign right away
-            'due_date' => 'required|after:today',
+            'due_date' => 'required|', //need more validation
             'task_title' => 'required',
             'task_detail' => 'required'
         ]);
