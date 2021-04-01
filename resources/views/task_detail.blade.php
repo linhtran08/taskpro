@@ -13,14 +13,14 @@
         <div class="pd-ltr-20">
             <div class="card-box pd-20 mb-20">
                 <fieldset {{$tasks[0]->task_state_id == 5 ? 'disabled="disabled"' : ''}}>
-{{--                <fieldset>--}}
+                    {{--                <fieldset>--}}
                     <form action="{{ url('#') }}" method="post">
                         @csrf
                         <div class="row">
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <label >Job Type</label>
-                                    <select  name="task_job_type_id" class="custom-select col-12">
+                                    <label>Job Type</label>
+                                    <select name="task_job_type_id" class="custom-select col-12">
                                         @foreach($job_types ?? '' as $jb_tp)
                                             <option {{ $jb_tp->task_job_type_id == $tasks[0]->task_job_type_id ? 'selected=selected' : '' }} value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
                                         @endforeach
@@ -43,7 +43,7 @@
                             <div class="col-md-1">
                                 <div class="form-group">
                                     <label for="">State</label>
-                                    <select  name="task_state_id" class="custom-select col-12">
+                                    <select name="task_state_id" class="custom-select col-12">
                                         @foreach($task_state as $ts)
                                             <option
                                                     {{ $ts->task_state_id  == $tasks[0]->task_state_id ? 'selected=selected' : '' }}
@@ -68,12 +68,29 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
+                                    <label for="">Phase</label>
+                                    <select name="phase_id" class="custom-select col-12">
+                                        @foreach($phases as $phase)
+                                            <option
+                                                    {{ $phase->desc  == $tasks[0]->phase ? 'selected=selected' : ''}}
+                                                    value="{{ $phase->task_phase_id}}">{{ $phase->desc }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+{{--                                {{ dd($tasks[0]) }}--}}
+                                <div class="form-group">
                                     <label for="">Assignee</label>
-                                    <select id="assginee_id" name="assignee_id" class="custom-select">
+                                    <select id="assginee_id" name="assignee_id" class="custom-select col-12">
+                                        @if(empty($tasks[0]->assignee_id))
+                                            <option selected="selected" value=""> - Empty -</option>
+                                        @endif
                                         @foreach($assignees as $as)
                                             <option
-                                                {{ $as->emp_id == $tasks[0]->assignee_id ? 'selected=selected' : '' }}
-                                                value="{{ $as->emp_id }}">{{ $tasks[0]->assignee_fname }}
+                                                    {{ $as->emp_id == $tasks[0]->assignee_id ? 'selected=selected' : '' }}
+                                                    value="{{ $as->emp_id }}">{{ $as->full_name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -82,7 +99,8 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Due Date</label>
-                                    <input class="form-control date-picker" value="{{ $tasks[0]->due_date }}"  type="text" name="due_date">
+                                    <input class="form-control date-picker" value="{{ $tasks[0]->due_date }}"
+                                           type="text" name="due_date">
                                     @error('due_date')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -93,7 +111,8 @@
                             <div class="col-md-1">
                                 <div class="form-group">
                                     <label for="">Effort</label>
-                                    <input class="form-control" name="effort" type="text" value="{{ $tasks[0]->effort }}">
+                                    <input class="form-control" name="effort" type="text"
+                                           value="{{ $tasks[0]->effort }}">
                                     @error('effort')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -106,7 +125,8 @@
                             <div class="html-editor pd-20 w-100">
                                 <div class="form-group">
                                     <label for="">Title</label>
-                                    <input class="form-control" name="task_title" type="text" value="{{ $tasks[0]->task_title }}">
+                                    <input class="form-control" name="task_title" type="text"
+                                           value="{{ $tasks[0]->task_title }}">
                                     @error('task_title')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -115,7 +135,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Description</label>
-                                    <textarea name="task_detail" class="textarea_editor form-control border-radius-0">{{ $tasks[0]->task_detail }}</textarea>
+                                    <textarea name="task_detail"
+                                              class="textarea_editor form-control border-radius-0">{{ $tasks[0]->task_detail }}</textarea>
                                     @error('task_detail')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -148,9 +169,9 @@
                     </div>
                     <div class="chat-box">
 
-                            <div class="chat-desc customscroll">
-                                <ul>
-                                    @foreach($comments as $cm)
+                        <div class="chat-desc customscroll">
+                            <ul>
+                                @foreach($comments as $cm)
                                     <li class="clearfix admin_chat">
                                         <div class="text-right mb-2">
                                             <span class="badge-info p-1">{{ $cm->full_name }}</span>
@@ -160,22 +181,23 @@
                                             <div class="chat_time">{{ $cm->created_at }}</div>
                                         </div>
                                     </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                                @endforeach
+                            </ul>
+                        </div>
                         <div class="chat-footer">
                             <div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
                             <div class="chat_text_area">
                                 <textarea placeholder="Type your message…"></textarea>
                             </div>
                             <div class="chat_send">
-                                <button class="btn btn-link" type="submit"><i class="icon-copy ion-paper-airplane"></i></button>
+                                <button class="btn btn-link" type="submit"><i class="icon-copy ion-paper-airplane"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <x-footer />
+            <x-footer/>
         </div>
     </div>
 @endsection
@@ -183,6 +205,6 @@
 @section('script')
     <x-script-common/>
     <script>
-        $('#assginee_id').val(<?php echo session()->get('account.emp_id'); ?>).trigger("change");
+        {{--$('#assginee_id').val(<?php echo session()->get('account.emp_id'); ?>).trigger("change");--}}
     </script>
 @endsection
