@@ -12,9 +12,9 @@
     <div class="main-container">
         <div class="pd-ltr-20">
             <div class="card-box pd-20 mb-20">
-                <fieldset {{$tasks[0]->task_state_id == 5 ? 'disabled="disabled"' : ''}}>
-                    {{--                <fieldset>--}}
-                    <form action="{{ url('#') }}" method="post">
+{{--            <form action="{{ url("tasksupdate/{$tasks[0]->task_id}") }}" method="post">--}}
+                <form action="{{ route('task_update', $tasks[0]->task_id) }}" method="post">
+                    <fieldset {{$tasks[0]->task_state_id == 5 ? 'disabled="disabled"' : ''}}>
                         @csrf
                         <div class="row">
                             <div class="col-md-2">
@@ -69,7 +69,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="">Phase</label>
-                                    <select name="phase_id" class="custom-select col-12">
+                                    <select name="task_phase_id" class="custom-select col-12">
                                         @foreach($phases as $phase)
                                             <option
                                                     {{ $phase->desc  == $tasks[0]->phase ? 'selected=selected' : ''}}
@@ -80,12 +80,12 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-{{--                                {{ dd($tasks[0]) }}--}}
+                                {{--                                {{ dd($tasks[0]) }}--}}
                                 <div class="form-group">
                                     <label for="">Assignee</label>
                                     <select id="assginee_id" name="assignee_id" class="custom-select col-12">
                                         @if(empty($tasks[0]->assignee_id))
-                                            <option selected="selected" value=""> - Empty -</option>
+                                            <option readonly selected="selected" value=""> - Empty -</option>
                                         @endif
                                         @foreach($assignees as $as)
                                             <option
@@ -99,8 +99,9 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Due Date</label>
-                                    <input class="form-control date-picker" value="{{ $tasks[0]->due_date }}"
-                                           type="text" name="due_date">
+                                    <input class="form-control date-picker"
+                                           value="{{ $tasks[0]->due_date }}"
+                                           type="date" name="due_date">
                                     @error('due_date')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -149,8 +150,9 @@
                             <a href="{{ route('dashboard') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
                             <button type="submit" class="btn btn-info">Save</button>
                         </div>
-                    </form>
-                </fieldset>
+                    </fieldset>
+                </form>
+
             </div>
             <div class="card-box mb-20">
                 <div class="chat-detail">

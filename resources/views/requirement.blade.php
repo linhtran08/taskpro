@@ -72,7 +72,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label for="">Assignee</label>
-                                                    <select name="assignee_id" class="custom-select2" style="width: 100%">
+                                                    <select name="assignee_id" class="custom-select">
                                                         <option selected="">Choose...</option>
                                                         @foreach($assignees as $as)
                                                             <option value="{{ $as->emp_id }}">{{ $as->full_name }}</option>
@@ -83,7 +83,7 @@
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Due Date</label>
-                                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="due_date">
+                                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="due_date" autocomplete="off">
                                                     @error('due_date')
                                                     <div class="text-danger">
                                                         {{ $message }}
