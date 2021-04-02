@@ -30,8 +30,7 @@ Route::middleware('checkLogin')->group(function (){
     Route::get('requirement2','TaskController@index');
 
     Route::get('tasks/{id}',[TaskController::class,'index'])->name('task_detail');
-    //Route::post('tasksupdate/{id}',[TaskController::class,'postUpdate'])->name('task_update');
-
+    Route::post('tasksupdate/{id}',[TaskController::class,'postUpdate'])->name('task_update');
 
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
