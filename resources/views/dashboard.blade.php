@@ -72,7 +72,7 @@
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($open_tasks as $op)
                                         <div class="card-box p-2 m-2 h-task-item">
-                                            <a href="">
+                                            <a href="{{ route('task_detail', $op->task_id) }}" target="_blank">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $op->task_id }}</span>
                                                     <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i> {{ $op->due_date }}</span>
@@ -90,7 +90,7 @@
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($processing_tasks as $pt)
                                         <div class="card-box p-2 m-2 h-task-item">
-                                            <a href="">
+                                            <a href="{{ route('task_detail', $pt->task_id) }}" target="_blank">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $pt->task_id }}</span>
                                                     <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i>{{ $pt->due_date }}</span>
@@ -108,9 +108,9 @@
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($finished_tasks as $ft)
                                         <div class="card-box p-2 m-2 h-task-item">
-                                            <a href="">
+                                            <a href="{{ route('task_detail', $ft->task_id) }}" target="_blank">
                                                 <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded"> </span>
+                                                    <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $ft->task_id }} </span>
                                                     <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i> {{ $ft->finish_date }}</span>
                                                 </div>
                                                 <h4 class="h5">{{ $ft->task_title }}</h4>
