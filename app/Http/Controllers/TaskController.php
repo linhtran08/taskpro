@@ -83,54 +83,62 @@ class TaskController extends Controller
     {
         //Do not allow to update ProjectId or Job Type
         $this->validate($request, [
-            'task_job_type_id' => 'required',
-            'project_id' => 'required',
+//            'task_job_type_id' => 'required',
+//            'project_id' => 'required',
             'task_state_id' => 'required',
             'priority_id' => 'required',
             'task_phase_id' => 'required',
-            //'assignee_id' => 'required', no need to assign right away
             'due_date' => 'required', //need more validation
             'task_title' => 'required',
             'task_detail' => 'required',
+            'effort' => 'required|integer'
         ]);
-        //dd();
 
-        $project_id = $request->input('project_id');
-        $task_state_id = $request->input('task_state_id');
-        $task_job_type_id = $request->input('task_job_type_id');
-        $priority_id = $request->input('priority_id');
-        $phase_id = $request->input('task_phase_id');
-        $task_title = $request->input('task_title');
-        $task_detail = $request->input('task_detail');
-        //$created_at = date(now());
-        $assignee_id = $request->input('assignee_id');
+//        $project_id = $request->input('project_id');
+//        $task_job_type_id = $request->input('task_job_type_id');
+//        $created_at = date(now());
 //        $due_date_src = $request->input('due_date');
 //        $due_date = DateTime::createFromFormat('d M Y', $due_date_src)->format("Y-m-d");
-        $due_date = $request->input('due_date');
-        //dd($phase_id);
-        $effort = 200;
 
+        $task_state_id = $request->input('task_state_id');
+        $prev_state_id = $request->input('prev_state_id');
+        $priority_id = $request->input('priority_id');
+        $phase_id = $request->input('task_phase_id');
+        $prev_phase_id = $request->input('prev_phase_id');
+        $task_title = $request->input('task_title');
+        $task_detail = $request->input('task_detail');
+        $assignee_id = $request->input('assignee_id');
+        $due_date = $request->input('due_date');
+        $effort = $request->input('effort');
+
+
+//        if($phase_id == 1){
+//            DB::table('task')
+//                ->where('task_id', $id)
+//                ->update([
+//                    'task_state_id' => 1,
+//                ]);
+//        }
+        if($prev_state_id != $task_state_id){
+            DB::table('task')
+                ->where('task_id', $id)
+                ->update([
+                   'task_state_id' => $task_state_id,
+                ]);
+        }else{
+            $this->handlePhaseState($phase_id, $id);
+        }
 
         DB::table('task')
             ->where('task_id', $id)
             ->update([
-                'task_job_type_id' => $task_job_type_id,
-                'project_id' => $project_id,
-                'task_state_id' => $task_state_id,
                 'priority' => $priority_id,
-                'phase' => $phase_id,
                 'task_title' => $task_title,
                 'task_detail' => $task_detail,
-//            'created_at' => $created_at,
                 'assignee_id' => $assignee_id,
-//            'created_by_id' => $created_by_id,
                 'due_date' => $due_date,
                 'effort' => $effort
             ]);
-
-        $this->getStartDate($phase_id, $id);
-        //pending: xu ly conflict
-        $this->getFinishDate($phase_id, $id); //do not move this function up, or it will be overridden by insert statement
 
         $created_by_id = session()->get('account.emp_id');
 
@@ -151,12 +159,11 @@ class TaskController extends Controller
             'task_job_type_id' => 'required',
             'project_id' => 'required',
             'priority_id' => 'required',
-            //'assignee_id' => 'required', no need to assign right away
             'due_date' => 'required|after:today',
             'task_title' => 'required',
             'task_detail' => 'required'
         ]);
-        //dd(auth()->$account->role);
+
         $project_id = $request->input('project_id');
         $task_state_id = 1;
         $task_job_type_id = $request->input('task_job_type_id');
@@ -166,11 +173,10 @@ class TaskController extends Controller
         $task_detail = $request->input('task_detail');
         $created_at = date(now());
         $assignee_id = $request->input('assignee_id');
-        $created_by_id = 2; //temp value for testing
+        $created_by_id = session()->get('account.emp_id');
         $due_date_src = $request->input('due_date');
         $due_date = DateTime::createFromFormat('d M Y', $due_date_src)->format("Y-m-d");
-        //$due_date = $request->input('due_date');
-        $effort = 200;
+        $effort = $request->input('effort');
 
         DB::table('task')->insert([
             'project_id' => $project_id,
@@ -198,43 +204,48 @@ class TaskController extends Controller
         return back();
     }
 
-    public function getStartDate($phase_id, $task_id){
+    public function handlePhaseState($phase_id, $task_id){
         if ($phase_id != 1 & $phase_id != 6){
             $start_date = DB::table('task')
                 ->where('task_id', $task_id)
                 ->select('start_date')
                 ->get();
-            //dd($start_date);
             if(empty($start_date[0]->start_date)){
                 $start_date = date(now());
                 DB::table('task')
                     ->where('task_id', $task_id)
                     ->update([
                         'start_date' => $start_date,
-                        'task_state_id' => 2
+                        'task_state_id' => 2,
+                        'phase' => $phase_id,
+                    ]);
+            }else{
+                DB::table('task')
+                    ->where('task_id', $task_id)
+                    ->update([
+                       'phase' => $phase_id,
+                       'task_state_id' => 2
                     ]);
             }
         }
-        else if($phase_id == 1){
+        if($phase_id == 1){
             DB::table('task')
                 ->where('task_id', $task_id)
                 ->update([
-                    'task_state_id' => 1
+                    'task_state_id' => 1,
+                    'phase' => 1
                 ]);
         }
-    }
-
-    public function getFinishDate($phase_id, $task_id){
-        if ($phase_id == 6){
+        if($phase_id == 6){
             $finished_date = date(now());
-
             DB::table('task')
                 ->where('task_id', $task_id)
                 ->update([
                     'finish_date' => $finished_date,
                     'task_state_id' => 5
                 ]);
-
         }
+
     }
+
 }
