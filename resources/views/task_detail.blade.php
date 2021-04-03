@@ -14,20 +14,21 @@
             <div class="card-box pd-20 mb-20">
 {{--            <form action="{{ url("tasksupdate/{$tasks[0]->task_id}") }}" method="post">--}}
                 <form action="{{ route('task_update', $tasks[0]->task_id) }}" method="post">
-                    <fieldset {{$tasks[0]->task_state_id == 5 ? 'disabled="disabled"' : ''}}>
+                    <fieldset {{$tasks[0]->task_state_id == 5 | $tasks[0]->task_state_id == 4 ? 'disabled="disabled"' : ''}}>
                         @csrf
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Job Type</label>
                                     <select name="task_job_type_id" class="custom-select col-12">
                                         @foreach($job_types ?? '' as $jb_tp)
-                                            <option {{ $jb_tp->task_job_type_id == $tasks[0]->task_job_type_id ? 'selected=selected' : '' }} value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
+                                            <option {{ $jb_tp->task_job_type_id == $tasks[0]->task_job_type_id ? 'selected=selected' : '' }}
+                                                    value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Project</label>
                                     <select name="project_id" class="custom-select col-12">
@@ -40,8 +41,39 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-3">
                                 <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input disabled class="form-control date-picker"
+                                           @if(!empty($tasks[0]->start_date))
+                                           type="date"
+                                           value="{{ $tasks[0]->start_date }}"
+                                           @else
+                                           type="text"
+                                           value = "Not started"
+                                            @endif
+                                    >
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Finish Date</label>
+                                    <input readonly class="form-control date-picker"
+                                           @if(!empty($tasks[0]->finish_date))
+                                           type="date"
+                                           value="{{ $tasks[0]->finish_date }}"
+                                           @else
+                                           type="text"
+                                           value = "Not finished yet"
+                                            @endif
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+{{--                                    {{ dd($tasks[0]->task_state_id) }}--}}
                                     <label for="">State</label>
                                     <select name="task_state_id" class="custom-select col-12">
                                         @foreach($task_state as $ts)
@@ -53,7 +85,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="">Priority</label>
                                     <select name="priority_id" class="custom-select col-12">
@@ -111,7 +143,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label for="">Effort</label>
                                     <input class="form-control" name="effort" type="text"
@@ -154,11 +186,10 @@
                         </div>
                     </fieldset>
                 </form>
-
             </div>
             <div class="card-box mb-20">
                 <div class="chat-detail">
-                    <div class="chat-profile-header clearfix">dsfsdfsdfasf
+                    <div class="chat-profile-header clearfix">
                         <div class="left">
                             <div class="clearfix">
                                 <div class="chat-profile-photo">
@@ -172,7 +203,6 @@
                         </div>
                     </div>
                     <div class="chat-box">
-
                         <div class="chat-desc customscroll">
                             <ul>
                                 @foreach($comments as $cm)
