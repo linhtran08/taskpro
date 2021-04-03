@@ -20,7 +20,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Job Type</label>
-                                    <select name="task_job_type_id" class="custom-select col-12">
+                                    <input readonly class="form-control" type="text"
+                                           value="{{ $tasks[0]->task_job_type }}">
+                                    <select hidden name="task_job_type_id" class="custom-select col-12">
                                         @foreach($job_types ?? '' as $jb_tp)
                                             <option {{ $jb_tp->task_job_type_id == $tasks[0]->task_job_type_id ? 'selected=selected' : '' }}
                                                     value="{{ $jb_tp->task_job_type_id }}"> {{ $jb_tp->desc }}</option>
@@ -31,7 +33,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="">Project</label>
-                                    <select name="project_id" class="custom-select col-12">
+                                    <input readonly class="form-control" type="text"
+                                           value="{{ $tasks[0]->project_name }}">
+                                    <select hidden name="project_id" class="custom-select col-12">
                                         @foreach($projects as $pj)
                                             <option
                                                     {{ $pj->project_id  == $tasks[0]->project_id ? 'selected=selected' : '' }}
@@ -83,6 +87,7 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    <input hidden type="text" name="prev_state_id" value="{{ $tasks[0]->task_state_id }}">
                                 </div>
                             </div>
                             <div class="col-md-2">
