@@ -86,6 +86,8 @@
                                     <select id="assginee_id" name="assignee_id" class="custom-select col-12">
                                         @if(empty($tasks[0]->assignee_id))
                                             <option readonly selected="selected" value=""> - Empty -</option>
+                                        @else
+                                            <option value=""> - Empty -</option>
                                         @endif
                                         @foreach($assignees as $as)
                                             <option
@@ -186,16 +188,20 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="chat-footer">
-                            <div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
-                            <div class="chat_text_area">
-                                <textarea placeholder="Type your message…"></textarea>
+                        <form action="{{ url('comment') }}" method="post">
+                            @csrf
+                            <div class="chat-footer">
+                                <input type="text" hidden name="comment_task_id" value="{{ $tasks[0]->task_id }}">
+                                <div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
+                                <div class="chat_text_area">
+                                    <textarea name="body" placeholder="Type your message…"></textarea>
+                                </div>
+                                <div class="chat_send">
+                                    <button class="btn btn-link" type="submit"><i class="icon-copy ion-paper-airplane"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <div class="chat_send">
-                                <button class="btn btn-link" type="submit"><i class="icon-copy ion-paper-airplane"></i>
-                                </button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
