@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::middleware('checkLogin')->group(function (){
 
     Route::get('tasks/{id}',[TaskController::class,'index'])->name('task_detail');
     Route::post('tasksupdate/{id}',[TaskController::class,'postUpdate'])->name('task_update');
+
+    Route::post('comment',[CommentController::class,'store']);
 
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
