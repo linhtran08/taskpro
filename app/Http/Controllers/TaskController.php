@@ -126,8 +126,7 @@ class TaskController extends Controller
                    'task_state_id' => $task_state_id,
                 ]);
         }else{
-            $this->getStartDate($phase_id, $id);
-            $this->getFinishDate($phase_id, $id);
+            $this->handlePhaseState($phase_id, $id);
         }
 
         DB::table('task')
@@ -205,7 +204,7 @@ class TaskController extends Controller
         return back();
     }
 
-    public function getStartDate($phase_id, $task_id){
+    public function handlePhaseState($phase_id, $task_id){
         if ($phase_id != 1 & $phase_id != 6){
             $start_date = DB::table('task')
                 ->where('task_id', $task_id)
@@ -229,7 +228,7 @@ class TaskController extends Controller
                     ]);
             }
         }
-        else if($phase_id == 1){
+        if($phase_id == 1){
             DB::table('task')
                 ->where('task_id', $task_id)
                 ->update([
@@ -237,19 +236,16 @@ class TaskController extends Controller
                     'phase' => 1
                 ]);
         }
-    }
-
-    public function getFinishDate($phase_id, $task_id){
-        if ($phase_id == 6){
+        if($phase_id == 6){
             $finished_date = date(now());
-
             DB::table('task')
                 ->where('task_id', $task_id)
                 ->update([
                     'finish_date' => $finished_date,
                     'task_state_id' => 5
                 ]);
-
         }
+
     }
+
 }

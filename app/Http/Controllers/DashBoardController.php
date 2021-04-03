@@ -106,7 +106,7 @@ class DashBoardController extends Controller
                 limit 20', [$emp_id, $emp_id]
             );
         }
-        //($finished_tasks);
+        //dd($finished_tasks);
         $user = DB::table('account_info')
             ->join('psn_infor', function ($join) {
                 $join->on('account_info.emp_id', '=', 'psn_infor.emp_id')
