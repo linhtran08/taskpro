@@ -137,7 +137,6 @@ $('document').ready(function(){
 			} );
 		}
 	});
-
 	$('#min, #max').on('change', function () {
 		table.draw();
 	});
