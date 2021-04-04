@@ -11,7 +11,6 @@
 @section('main-container')
     <div class="main-container">
         <div class="pd-ltr-20">
-<<<<<<< HEAD
             <!-- Select-2 Start -->
             <div class="pd-5 mb-30">
                 <form>
