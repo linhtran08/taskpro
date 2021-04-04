@@ -16,6 +16,7 @@
         "laravel/framework": "^7.29",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
+        "laravolt/avatar": "^4.1",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

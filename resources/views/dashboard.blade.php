@@ -68,7 +68,7 @@
                     <div class="row justify-content-between pl-2 pr-2">
                         <div class="col-xl-4 mb-4 mb-md-0">
                             <div class="card-box overflow-auto pl-0 pr-0">
-                                <h2 class="h4 pl-10 pt-10 pb-10 bg-info m-0">TO DO</h2>
+                                <h2 class="h4 pl-10 pt-10 pb-10 bg-blue-200 m-0">TO DO</h2>
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($open_tasks as $op)
                                         <div class="card-box p-2 m-2 h-task-item">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-xl-4 mb-4 mb-md-0">
                             <div class="card-box overflow-auto pl-0 pr-0">
-                                <h2 class="h4 pl-10 pt-10 pb-10 bg-info m-0">PROCESS</h2>
+                                <h2 class="h4 pl-10 pt-10 pb-10 bg-red-300 m-0">PROCESS</h2>
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($processing_tasks as $pt)
                                         <div class="card-box p-2 m-2 h-task-item">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-xl-4 mb-5 mb-md-0">
                             <div class="card-box overflow-auto pl-0 pr-0">
-                                <h2 class="h4 pl-10 pt-10 pb-10 bg-info m-0">DONE</h2>
+                                <h2 class="h4 pl-10 pt-10 pb-10 bg-green-300 m-0">DONE</h2>
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($finished_tasks as $ft)
                                         <div class="card-box p-2 m-2 h-task-item">

@@ -30,7 +30,11 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
+<<<<<<< HEAD
     'reference' => '6ea33f335c5fef376ec48d4936e75896fc6f1756',
+=======
+    'reference' => '708c7721b0c3ecb7757255941c2ac9fdb12646b7',
+>>>>>>> f20f24c1b4bed59feb18126b08ff2027291e07e0
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -441,6 +445,15 @@ private static $installed = array (
         0 => 'v7.30.4',
       ),
     ),
+    'intervention/image' => 
+    array (
+      'pretty_version' => '2.5.1',
+      'version' => '2.5.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'abbf18d5ab8367f96b3205ca3c89fb2fa598c69e',
+    ),
     'kodova/hamcrest-php' => 
     array (
       'replaced' => 
@@ -464,7 +477,11 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
+<<<<<<< HEAD
       'reference' => '6ea33f335c5fef376ec48d4936e75896fc6f1756',
+=======
+      'reference' => '708c7721b0c3ecb7757255941c2ac9fdb12646b7',
+>>>>>>> f20f24c1b4bed59feb18126b08ff2027291e07e0
     ),
     'laravel/tinker' => 
     array (
@@ -492,6 +509,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'ae15b9c4bf918ec3a78f092b8555551dd693fde3',
+    ),
+    'laravolt/avatar' => 
+    array (
+      'pretty_version' => '4.1.3',
+      'version' => '4.1.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3ab66e32c1f7c84e7095adfa1de3cb20964e6a1e',
     ),
     'league/commonmark' => 
     array (

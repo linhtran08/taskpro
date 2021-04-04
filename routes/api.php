@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('message/{id}',function (Request $request,$id){
+    $message = \Illuminate\Support\Facades\DB::table('task')
+                ->where('assignee_id','=',$id)
+                ->get();
+    return response()->json($message);
+});
