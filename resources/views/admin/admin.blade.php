@@ -46,8 +46,8 @@
                                         <i class="dw dw-more"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                        <a class="dropdown-item" href="{{ route('adminView',$item->emp_id) }}"><i class="dw dw-eye"></i> View</a>
-                                        <a class="dropdown-item" href="{{ route('adminUpdate',$item->emp_id) }}"><i class="dw dw-edit2"></i> Edit</a>
+{{--                                        <a class="dropdown-item" href="{{ route('adminView',$item->emp_id) }}"><i class="dw dw-eye"></i> View</a>--}}
+                                        <a class="dropdown-item" href="{{ route('adminUpdate',$item->emp_id) }}"><i class="dw dw-edit2"></i>View / Edit</a>
                                         @if($item->role != 1)
                                             <a class="dropdown-item" href="{{ route('changestatus',$item->emp_id) }}"><i class="dw dw-delete-3"></i>
                                                 @if($item->active === 1)
