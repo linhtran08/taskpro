@@ -28,6 +28,9 @@ Route::middleware('checkLogin')->group(function (){
     Route::get('dashboard','DashBoardController@index')->name('dashboard');
 
     Route::get('requirement','RequirementController@index');
+
+    Route::get('monitoring','MonitoringController@index');
+
     Route::get('requirement2','TaskController@index');
 
     Route::get('tasks/{id}',[TaskController::class,'index'])->name('task_detail');

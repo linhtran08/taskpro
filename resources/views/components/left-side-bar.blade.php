@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="index.html">
+        <a href="{{ route('dashboard') }}">
             <img src="{{ asset('images/deskapp-logo.svg') }}" alt="" class="dark-logo">
             <img src="{{ asset('images/deskapp-logo-white.svg') }}" alt="" class="light-logo">
         </a>
@@ -38,7 +38,7 @@
                         <li><a href="{{ url('requirement') }}"
                             class="@include('mixin.naviActive',['url'=>'requirement'])"
                             >Requirement</a></li>
-                        <li><a href="advanced-components.html">Advanced Components</a></li>
+                        <li><a href="{{ url('monitoring') }}" class="@include('mixin.naviActive',['url'=>'monitoring'])">Project Monitoring</a></li>
                         <li><a href="form-wizard.html">Form Wizard</a></li>
                         <li><a href="html5-editor.html">HTML5 Editor</a></li>
                         <li><a href="form-pickers.html">Form Pickers</a></li>
