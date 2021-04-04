@@ -265,4 +265,11 @@ class DashBoardController extends Controller
         }
         return $totalEffort;
     }
+
+    public function profile(){
+            $account = DB::table('account_info')
+                ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+                ->where('psn_infor.emp_id','=',session()->get('account.emp_id'))->first();
+            return view('profile',compact('account'));
+    }
 }
