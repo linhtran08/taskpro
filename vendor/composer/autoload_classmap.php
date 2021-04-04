@@ -21,10 +21,7 @@ return array(
     'App\\Http\\Controllers\\DashBoardController' => $baseDir . '/app/Http/Controllers/DashBoardController.php',
     'App\\Http\\Controllers\\HomeController' => $baseDir . '/app/Http/Controllers/HomeController.php',
     'App\\Http\\Controllers\\MonitoringController' => $baseDir . '/app/Http/Controllers/MonitoringController.php',
-<<<<<<< HEAD
     'App\\Http\\Controllers\\ProjectController' => $baseDir . '/app/Http/Controllers/ProjectController.php',
-=======
->>>>>>> f20f24c1b4bed59feb18126b08ff2027291e07e0
     'App\\Http\\Controllers\\RequirementController' => $baseDir . '/app/Http/Controllers/RequirementController.php',
     'App\\Http\\Controllers\\TaskController' => $baseDir . '/app/Http/Controllers/TaskController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

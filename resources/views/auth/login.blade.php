@@ -1,11 +1,10 @@
-<<<<<<< HEAD
+
 <!DOCTYPE html>
 <html>
 <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8">
     <title>Task Pro - Bootstrap Admin Dashboard HTML Template</title>
-=======
 @extends('layouts.app')
 @section('content')
 <div class="container">
@@ -31,8 +30,6 @@
                                 @enderror
                             </div>
                         </div>
->>>>>>> bc34688ba775edd1d37a10384fe1691f2d1865be
-
     <!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('js/vendors/images/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('js/vendors/images/favicon-32x32.png') }}">
