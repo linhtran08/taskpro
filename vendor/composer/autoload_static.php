@@ -644,10 +644,7 @@ class ComposerStaticInitfe6fcb7f779681c66fa492014349fee6
         'App\\Http\\Controllers\\DashBoardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashBoardController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MonitoringController' => __DIR__ . '/../..' . '/app/Http/Controllers/MonitoringController.php',
-<<<<<<< HEAD
         'App\\Http\\Controllers\\ProjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProjectController.php',
-=======
->>>>>>> f20f24c1b4bed59feb18126b08ff2027291e07e0
         'App\\Http\\Controllers\\RequirementController' => __DIR__ . '/../..' . '/app/Http/Controllers/RequirementController.php',
         'App\\Http\\Controllers\\TaskController' => __DIR__ . '/../..' . '/app/Http/Controllers/TaskController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
