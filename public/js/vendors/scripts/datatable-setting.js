@@ -32,11 +32,81 @@ $('document').ready(function(){
 	var table = $('.data-table').DataTable({
 		scrollCollapse: true,
 		autoWidth: false,
-		responsive: true,
+		responsive: {
+			details: {
+				type: 'column',
+				target: 'tr'
+			}
+		},
 		columnDefs: [{
 			targets: "datatable-nosort",
 			orderable: false,
-		}],
+		},
+		{
+			targets: 2,
+			createdCell: function (td, cellData, rowData, row, col) {
+				if(cellData == 'open') {
+					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-blue-400' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+				}
+				if(cellData == 'in processing') {
+					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-blue-600' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+				}
+				if(cellData == 'pending') {
+					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-yellow-500' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+				}
+				if(cellData == 'canceled') {
+					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-red-400' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+				}
+				if(cellData == 'finished') {
+					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-green-500' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+				}
+
+			}
+		},
+		{
+			targets: 4,
+			createdCell: function (td, cellData, rowData, row, col) {
+				if(cellData == 'register') {
+					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-blue-200 w-15' role='progressbar' " +
+						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
+						"</div>" +
+						"</div>");
+				}
+				if(cellData == 'confirmation') {
+					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-blue-500 w-30' role='progressbar' " +
+						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
+						"</div>" +
+						"</div>");				}
+				if(cellData == 'implementation') {
+					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-yellow-500 w-45' role='progressbar' " +
+						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
+						"</div>" +
+						"</div>");				}
+				if(cellData == 'test') {
+					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-orange w-60' role='progressbar' " +
+						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
+						"</div>" +
+						"</div>");				}
+				if(cellData == 'deploy production') {
+					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated bg-purple-500 w-75' role='progressbar' " +
+						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
+						"</div>" +
+						"</div>");				}
+				if(cellData == 'finish') {
+					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-green-400 w-100' role='progressbar' " +
+						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
+						"</div>" +
+						"</div>");				}
+
+			}
+		}
+		],
 		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 		"language": {
 			"info": "_START_-_END_ of _TOTAL_ entries",
