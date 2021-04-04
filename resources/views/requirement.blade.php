@@ -484,6 +484,7 @@
             replace(taskState,'.sl2','desc');
             replace(project,'.sl1','project_name');
             replace(assignee,'.sl5','full_name');
+
         });
     </script>
     <script type="text/javascript">
