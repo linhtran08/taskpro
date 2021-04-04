@@ -314,7 +314,7 @@
                         <table class="data-table display">
                             <thead>
                             <tr>
-                                <th class="datatable-nosort w-4">#</th>
+                                <th id="removeIcon" class="datatable-nosort w-4">#</th>
                                 <th>Project</th>
                                 <th>State</th>
                                 <th>Job type</th>
@@ -325,15 +325,14 @@
                                 <th>Due Date</th>
                                 <th>Effort</th>
                                 <th class="w-20">Title</th>
-                                <th class="datatable-nosort">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($tasks as $task)
-                                <tr>
-                                <td>{{ $task->task_id }}</td>
+                                <tr class="tv-task-row" data-task="{{$task->task_id}}">
+                                <td class="pl-1">{{ $task->task_id }}</td>
                                 <td>{{ $task->project_name }}</td>
-                                <td>{{ $task->task_state }}</td>
+                                <td >{{ $task->task_state }}</td>
                                 <td>{{ $task->task_job_type }}</td>
                                 <td>{{ $task->phase }}</td>
                                 <td>{{ $task->assignee_fname }}</td>
@@ -342,18 +341,6 @@
                                 <td>{{ $task->due_date }}</td>
                                 <td>{{ $task->effort }}</td>
                                 <td>{{ $task->task_title }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                            <a class="dropdown-item" href="{{ route('task_detail',$task->task_id) }}"><i class="dw dw-eye"></i> View</a>
-                                            <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>
-                                            <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -370,7 +357,6 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-                                <th class="datatable-nosort"></th>
                             </tr>
                             </tfoot>
                         </table>
@@ -407,6 +393,13 @@
             });
         }
         $(document).ready(function (){
+
+            $('#removeIcon').removeClass('sorting_asc');
+
+            $('.tv-task-row').on('click',function (event){
+               window.location.href = '/tasks/'+$(this).data('task');
+            });
+
             replace(taskType,'.sl3','desc');
             replace(taskState,'.sl2','desc');
             replace(project,'.sl1','project_name');

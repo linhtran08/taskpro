@@ -57,3 +57,7 @@ table.data-table{
   background-color: $primary;
   color: white;
 }
+
+table.dataTable.display tbody tr.odd, table.dataTable.display tbody tr:hover, table.dataTable.hover tbody tr:hover, table.dataTable.stripe tbody tr.odd{
+  background-color: #f5f5f5 !important;
+}
