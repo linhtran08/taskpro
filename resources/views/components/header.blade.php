@@ -11,7 +11,7 @@
         </div>
         <div class="user-notification">
             <div class="dropdown buzz">
-                <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
+                <a class="dropdown-toggle no-arrow" href="{{ url('profile') }}" role="button" data-toggle="dropdown">
                     <i class="icon-copy dw dw-notification"></i>
                     <span class="badge notification-active"></span>
                 </a>
@@ -26,9 +26,9 @@
         </div>
         <div class="user-info-dropdown">
             <div class="dropdown">
-                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                <a class="dropdown-toggle" href="{{ url('profile') }}" role="button" data-toggle="dropdown">
 						<span class="user-icon">
-							<img src="{{ asset('js/vendors/images/photo1.jpg') }}" alt="">
+							<img src="{{ Avatar::create(session()->get('account.name'))->toBase64() }}" />
 						</span>
                     <span class="user-name">{{ session()->get('account.name') }}</span>
                 </a>
