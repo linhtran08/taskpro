@@ -14,8 +14,8 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-30">
                     <div class="pd-20 card-box height-100-p">
-                        <div class="profile-photo">
-                            <img src="{{asset('images/photo1.jpg')}}" alt="" class="avatar-photo">
+                        <div class="profile-photo text-center">
+                            {!!  Avatar::create(session()->get('account.name'))->toSvg();!!}
                         </div>
                         <h5 class="text-center h5 mb-0">{{ $account->full_name }}</h5>
                         <div class="profile-info">
