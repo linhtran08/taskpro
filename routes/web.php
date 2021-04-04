@@ -38,6 +38,7 @@ Route::middleware('checkLogin')->group(function (){
 
     Route::post('comment',[CommentController::class,'store']);
 
+    Route::get('profile','DashBoardController@profile')->name('profile');
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
     Route::post('project',[\App\Http\Controllers\TaskController::class,'store']);
