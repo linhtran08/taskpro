@@ -1,26 +1,21 @@
 @extends('layouts.common')
 @section('title','Management')
 @section('style')
-    <x-style-common/>
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('js/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('js/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('js/plugins/datatables.net-datetime/dist/dataTables.dateTime.css') }}">
+    <x-style-common />
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/plugins/datatables.net-datetime/dist/dataTables.dateTime.css') }}">
 @endsection
 
 @section('pre-loader')
-    <x-pre-loader/>
+    <x-pre-loader />
 @endsection
 
 @section('main-container')
-    <a href="#" class="btn-block position-fixed rounded-circle p-2 tv-btn-create" data-toggle="modal"
-       data-target="#Medium-modal" type="button">
+    <a href="#" class="btn-block position-fixed rounded-circle p-2 tv-btn-create" data-toggle="modal" data-target="#Medium-modal" type="button">
         <i class="icon-copy fi-plus"></i>
     </a>
-    <div class="modal fade z-99999" id="Medium-modal" role="dialog" aria-labelledby="myLargeModalLabel"
-         aria-hidden="true">
+    <div class="modal fade z-99999" id="Medium-modal" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="pd-20 card-box">
@@ -28,13 +23,11 @@
                     <div class="tab pt-20">
                         <ul class="nav nav-tabs customtab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#home2" role="tab"
-                                   aria-selected="true">Create Task</a>
+                                <a class="nav-link active" data-toggle="tab" href="#home2" role="tab" aria-selected="true">Create Task</a>
                             </li>
                             @if(session('account.role') == 2)
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#profile2" role="tab"
-                                       aria-selected="false">Create Project</a>
+                                    <a class="nav-link" data-toggle="tab" href="#profile2" role="tab" aria-selected="false">Create Project</a>
                                 </li>
                             @endif
                         </ul>
@@ -45,7 +38,7 @@
                                     <div class="row">
                                         <div class="col-xl-2">
                                             <div class="form-group">
-                                                <label>Job Type</label>
+                                                <label >Job Type</label>
                                                 <select name="task_job_type_id" class="custom-select col-12">
                                                     <option selected="">Choose...</option>
                                                     @foreach($job_types ?? '' as $jb_tp)
@@ -90,8 +83,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label>Due Date</label>
-                                                <input class="form-control date-picker" placeholder="Select Date"
-                                                       type="text" name="due_date" autocomplete="off">
+                                                <input class="form-control date-picker" placeholder="Select Date" type="text" name="due_date" autocomplete="off">
                                                 @error('due_date')
                                                 <div class="text-danger">
                                                     {{ $message }}
@@ -102,8 +94,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group">
                                                 <label for="">Effort</label>
-                                                <input class="form-control" name="effort" type="text"
-                                                       placeholder="Ex: 200">
+                                                <input class="form-control" name="effort" type="text" placeholder="Ex: 200">
                                                 @error('effort')
                                                 <div class="text-danger">
                                                     {{ $message }}
@@ -116,8 +107,7 @@
                                         <div class="html-editor pd-20 w-100">
                                             <div class="form-group">
                                                 <label for="">Title</label>
-                                                <input class="form-control" name="task_title" type="text"
-                                                       placeholder="Task title">
+                                                <input class="form-control" name="task_title" type="text" placeholder="Task title">
                                                 @error('task_title')
                                                 <div class="text-danger">
                                                     {{ $message }}
@@ -126,9 +116,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="">Description</label>
-                                                <textarea name="task_detail"
-                                                          class="textarea_editor form-control border-radius-0"
-                                                          placeholder="Enter task description ..."></textarea>
+                                                <textarea name="task_detail" class="textarea_editor form-control border-radius-0" placeholder="Enter task description ..."></textarea>
                                                 @error('task_detail')
                                                 <div class="text-danger">
                                                     {{ $message }}
@@ -138,8 +126,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer border-0">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                        </button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-info">Create</button>
                                     </div>
                                 </form>
@@ -148,60 +135,31 @@
                                 <div class="tab-pane fade h-100" id="profile2" role="tabpanel">
                                     <form action="{{url('project')}}" method="post">
                                         @csrf
-                                        <div class="html-editor pd-20 w-100">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div class="form-group">
-                                                        <label for="">Project name</label>
-                                                        <input class="form-control" name="project_title" type="text"
-                                                               placeholder="project title">
-                                                        @error('project_title')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                        @enderror
+                                        <div class="row">
+                                            <div class="html-editor pd-20 w-100">
+                                                <div class="form-group">
+                                                    <label for="">Title</label>
+                                                    <input class="form-control" name="project_title" type="text" placeholder="project title">
+                                                    @error('task_title')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
                                                     </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>Start Date</label>
-                                                        <input class="form-control date-picker" placeholder="Select Date"
-                                                               type="date" name="prj_start_date" autocomplete="off">
-                                                        @error('prj_start_date')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group">
-                                                        <label>End Date</label>
-                                                        <input class="form-control date-picker" placeholder="Select Date"
-                                                               type="date" name="prj_due_date" autocomplete="off">
-                                                        @error('prj_due_date')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
-                                                        @enderror
-                                                    </div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer border-0">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
-                                            </button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-info">Create</button>
                                         </div>
                                     </form>
                                 </div>
-                            </div>
-                        @endif
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="main-container">
         <div class="pd-ltr-20">
@@ -347,11 +305,10 @@
                     <div class="pd-10">
                         <div class="row pd-20">
                             <div class="form-group mr-3">
-                                <input type="text" class="form-control" id="min" name="min"
-                                       placeholder="Registered Date">
+                                <input type="text" class="form-control"  id="min" name="min" placeholder="Registered Date">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="max" name="max" placeholder="To">
+                                <input type="text" class="form-control"   id="max" name="max" placeholder="To">
                             </div>
                         </div>
                         <table class="data-table display">
@@ -372,10 +329,10 @@
                             </thead>
                             <tbody>
                             @foreach($tasks as $task)
-                                <tr>
-                                    <td>{{ $task->task_id }}</td>
+                                <tr class="tv-task-row" data-task="{{$task->task_id}}">
+                                    <td class="pl-1">{{ $task->task_id }}</td>
                                     <td>{{ $task->project_name }}</td>
-                                    <td>{{ $task->task_state }}</td>
+                                    <td >{{ $task->task_state }}</td>
                                     <td>{{ $task->task_job_type }}</td>
                                     <td>{{ $task->phase }}</td>
                                     <td>{{ $task->assignee_fname }}</td>
@@ -384,35 +341,7 @@
                                     <td>{{ $task->due_date }}</td>
                                     <td>{{ $task->effort }}</td>
                                     <td>{{ $task->task_title }}</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                               href="#" role="button" data-toggle="dropdown">
-                                                <i class="dw dw-more"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                <a class="dropdown-item"
-                                                   href="{{ route('task_detail',$task->task_id) }}"><i
-                                                            class="dw dw-eye"></i> View</a>
-                                                {{--                                            <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i> Edit</a>--}}
-                                                {{--                                            <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i> Delete</a>--}}
-                                            </div>
-                                        </div>
-                                    </td>
                                 </tr>
-                                <tr class="tv-task-row" data-task="{{$task->task_id}}">
-                                <td class="pl-1">{{ $task->task_id }}</td>
-                                <td>{{ $task->project_name }}</td>
-                                <td >{{ $task->task_state }}</td>
-                                <td>{{ $task->task_job_type }}</td>
-                                <td>{{ $task->phase }}</td>
-                                <td>{{ $task->assignee_fname }}</td>
-                                <td>{{ $task->created_by_fname }}</td>
-                                <td>{{ substr($task->created_at,0,10) }}</td>
-                                <td>{{ $task->due_date }}</td>
-                                <td>{{ $task->effort }}</td>
-                                <td>{{ $task->task_title }}</td>
-                            </tr>
                             @endforeach
                             </tbody>
                             <tfoot class="border-top">
@@ -435,13 +364,13 @@
                 </div>
             </div>
             {{-- End Table data --}}
-            <x-footer/>
+            <x-footer />
         </div>
     </div>
 @endsection
 
 @section('script')
-    <x-script-common/>
+    <x-script-common />
     <script src="{{ asset('js/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('js/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
@@ -454,30 +383,21 @@
         let taskState = {!! json_encode($task_state->toArray()) !!};
         let project = {!! json_encode($projects->toArray()) !!};
         let assignee = {!! json_encode($assignees->toArray()) !!};
-
-        function replace(array, Class, atr) {
+        function replace(array,Class,atr){
             $(Class).children().remove();
             $(Class).append('<option value="">Show All</option>');
-            array.map((item) => {
-                if (item[atr] !== '') {
-                    $(Class).append('<option value="' + item[atr] + '">' + item[atr] + '</option>')
+            array.map((item)=>{
+                if(item[atr] !== ''){
+                    $(Class).append('<option value="'+item[atr]+'">'+item[atr]+'</option>')
                 }
             });
         }
-
-
-        $(document).ready(function () {
-            replace(taskType, '.sl3', 'desc');
-            replace(taskState, '.sl2', 'desc');
-            replace(project, '.sl1', 'project_name');
-            replace(assignee, '.sl5', 'full_name');
-
         $(document).ready(function (){
 
             $('#removeIcon').removeClass('sorting_asc');
 
             $('.tv-task-row').on('click',function (event){
-               window.location.href = '/tasks/'+$(this).data('task');
+                window.location.href = '/tasks/'+$(this).data('task');
             });
 
             replace(taskType,'.sl3','desc');
