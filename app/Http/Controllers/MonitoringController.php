@@ -22,6 +22,10 @@ class MonitoringController extends Controller
         //dd($users);
 
         //dd($this->getTotalTickets(8));
+
+        //Sample tasks detail on the right, using emp_id = 8;
+        $tasks = $this->getRelatedTasks(session()->get('account.emp_id'));
+
         $user_data = array();
         $n = 0;
         foreach ($users as $user) {
@@ -61,6 +65,7 @@ class MonitoringController extends Controller
 
         return view('monitoring')->with([
             'user_data' => $user_data,
+            'tasks' => $tasks,
         ]);
     }
 
@@ -118,10 +123,11 @@ class MonitoringController extends Controller
            task_id,
            tjt.`desc` as task_job_type,
            task_title,
+           tp.`desc`                                                as phase,
            start_date,
            due_date,
            effort,
-           coalesce(datediff(curdate(), start_date), "not started") as `duration(days)`
+           coalesce(datediff(curdate(), start_date), "not started") as `duration`
         from task
                  join project p on task.project_id = p.project_id
                  join task_state ts on task.task_state_id = ts.task_state_id
@@ -137,7 +143,9 @@ class MonitoringController extends Controller
             from task_phase_history
                      join task on task_phase_history.task_id = task.task_id
             where (task_phase_history.assignee_id = ? or task_phase_history.changed_by_id = ?)
-        )',
+        )
+        order by task_id desc
+        ',
             [$emp_id, $emp_id]
         );
     }
