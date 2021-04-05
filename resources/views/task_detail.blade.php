@@ -137,7 +137,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Due Date</label>
-                                    <input class="form-control date-picker"
+                                    <input {{ session()->get('account.role') != 2 ? 'disabled':'' }}  class="form-control date-picker"
                                            value="{{ $tasks[0]->due_date }}"
                                            type="date" name="due_date">
                                     <input hidden
