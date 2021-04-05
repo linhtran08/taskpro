@@ -74,7 +74,7 @@
                             <!-- Setting Tab start -->
                             <div>
                                     <div class="profile-setting pt-4">
-                                        <form action="{{ route('updatePost',$account->emp_id) }}" method="post">
+                                        <form action="{{ route('profile_update',$account->emp_id) }}" method="post">
                                             @csrf
                                             <h4 class="text-info h2 ml-2 pd-10">Edit Account</h4>
                                             <ul class="profile-edit-list row p-0">

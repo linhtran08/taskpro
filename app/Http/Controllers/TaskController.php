@@ -84,22 +84,14 @@ class TaskController extends Controller
     {
         //Do not allow to update ProjectId or Job Type
         $this->validate($request, [
-//            'task_job_type_id' => 'required',
-//            'project_id' => 'required',
             'task_state_id' => 'required',
             'priority_id' => 'required',
             'task_phase_id' => 'required',
-            'due_date' => 'required', //need more validation
+            'due_date' => 'required',
             'task_title' => 'required',
             'task_detail' => 'required',
             'effort' => 'required|integer'
         ]);
-
-//        $project_id = $request->input('project_id');
-//        $task_job_type_id = $request->input('task_job_type_id');
-//        $created_at = date(now());
-//        $due_date_src = $request->input('due_date');
-//        $due_date = DateTime::createFromFormat('d M Y', $due_date_src)->format("Y-m-d");
 
         $task_state_id = $request->input('task_state_id');
         $prev_state_id = $request->input('prev_state_id');
@@ -111,20 +103,9 @@ class TaskController extends Controller
         $assignee_id = $request->input('assignee_id');
         $due_date = $request->input('due_date');
         $prev_due_date = $request->input('prev_due_date');
-        //dd($due_date, $prev_due_date);
         $effort = $request->input('effort');
         $score = $request->input('score');
 
-
-
-
-//        if($phase_id == 1){
-//            DB::table('task')
-//                ->where('task_id', $id)
-//                ->update([
-//                    'task_state_id' => 1,
-//                ]);
-//        }
         if($prev_state_id != $task_state_id){
             DB::table('task')
                 ->where('task_id', $id)
@@ -147,6 +128,8 @@ class TaskController extends Controller
                 'satisfaction' => $score
             ]);
 
+
+        //Only check validation for due date if due date is changed
         if($due_date != $prev_due_date){
             $this->validate($request,[
                 'due_date' => 'after_or_equal:today',
@@ -157,8 +140,6 @@ class TaskController extends Controller
             ->where('task_id', $id)
             ->update([
                 'due_date' => $due_date,
-//                'effort' => $effort,
-//                'satisfaction' => $score
             ]);
         $created_by_id = session()->get('account.emp_id');
 
@@ -265,7 +246,5 @@ class TaskController extends Controller
                     'task_state_id' => 5
                 ]);
         }
-
     }
-
 }
