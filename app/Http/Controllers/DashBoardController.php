@@ -29,13 +29,13 @@ class DashBoardController extends Controller
 
         //Chart of new ticket count per month for the last 12 months
         $ticketChart = (new LarapexChart)->lineChart()
-            ->addData('Physical sales', $openTicketCountPerMonth)
+            ->addData('New tickets', $openTicketCountPerMonth)
             ->setXAxis($twelveRecentMonths)
             ->setHeight(300);
 
         //Chart of total effort per each month for the last 12 months
         $effortChart = (new LarapexChart)->lineChart()
-            ->addData('Physical sales', $totalEffortPerMonth)
+            ->addData('Effort', $totalEffortPerMonth)
             ->setXAxis($twelveRecentMonths)
             ->setHeight(300);
 

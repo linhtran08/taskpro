@@ -47,6 +47,8 @@ class RequirementController extends Controller
         $task_state = DB::table('task_state')->get();
         $assignees = DB::table('account_info')
             ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+            ->where('account_info.role','!=',1)
+            ->where('account_info.active',1)
             ->select('account_info.emp_id','psn_infor.full_name','account_info.role')
             ->distinct()
             ->get();

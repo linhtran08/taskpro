@@ -170,6 +170,15 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label for="">Description</label>
+                                            <textarea name="project_detail" class="textarea_editor form-control border-radius-0" placeholder="Enter project description ..."></textarea>
+                                            @error('project_detail')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
                                         <div class="modal-footer border-0">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-info">Create</button>
