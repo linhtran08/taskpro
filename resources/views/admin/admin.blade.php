@@ -27,11 +27,13 @@
                         <th>Address</th>
                         <th>Email</th>
                         <th>Phone</th>
+                        <th>Status</th>
                         <th class="datatable-nosort">Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($account as $item)
+{{--                        <tr class="tv-task-row" data-emp_id="{{$item->emp_id}}">--}}
                         <tr>
                             <td>{{ $item->emp_id }}</td>
                             <td>{{ $item->full_name }}</td>
@@ -40,6 +42,7 @@
                             <td>{{ $item->address }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
+                            <td>{{ $item->active == 1 ? 'Active':'Disabled' }}</td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -60,6 +63,18 @@
                                     </div>
                                 </div>
                             </td>
+
+{{--                            <td>--}}
+{{--                                @if($item->role != 1)--}}
+{{--                                    <a class="dropdown-item" href="{{ route('changestatus',$item->emp_id) }}"><i class="dw dw-delete-3"></i>--}}
+{{--                                        @if($item->active === 1)--}}
+{{--                                            Deactivate--}}
+{{--                                        @else--}}
+{{--                                            Activate--}}
+{{--                                        @endif--}}
+{{--                                    </a>--}}
+{{--                                @endif--}}
+{{--                            </td>--}}
                         </tr>
                     @endforeach
                     </tbody>
@@ -98,6 +113,10 @@
                         previous: '<i class="ion-chevron-left"></i>'
                     }
                 },
+            });
+
+            $('.tv-task-row').on('click',function (event){
+                window.location.href = 'admin/update/'+$(this).data('emp_id');
             });
         });
     </script>

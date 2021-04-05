@@ -110,6 +110,7 @@ class TaskController extends Controller
         $assignee_id = $request->input('assignee_id');
         $due_date = $request->input('due_date');
         $effort = $request->input('effort');
+        $score = $request->input('score');
 
 
 //        if($phase_id == 1){
@@ -137,7 +138,8 @@ class TaskController extends Controller
                 'task_detail' => $task_detail,
                 'assignee_id' => $assignee_id,
                 'due_date' => $due_date,
-                'effort' => $effort
+                'effort' => $effort,
+                'satisfaction' => $score
             ]);
 
         $created_by_id = session()->get('account.emp_id');
@@ -161,7 +163,7 @@ class TaskController extends Controller
             'priority_id' => 'required',
             'due_date' => 'required|after:today',
             'task_title' => 'required',
-            'task_detail' => 'required'
+            'task_detail' => 'required',
         ]);
 
         $project_id = $request->input('project_id');
@@ -190,8 +192,8 @@ class TaskController extends Controller
             'assignee_id' => $assignee_id,
             'created_by_id' => $created_by_id,
             'due_date' => $due_date,
-            'effort' => $effort
-        ]);
+            'effort' => $effort,
+            ]);
 
         $task_id = DB::table('task')->max('task_id');
 
