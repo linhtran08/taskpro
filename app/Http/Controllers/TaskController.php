@@ -11,7 +11,6 @@ class TaskController extends Controller
 
     public function index($id)
     {
-
         $tasks = DB::select('        
             select task_id,
                    p.project_name as project_name,
@@ -62,6 +61,8 @@ class TaskController extends Controller
         $phases = DB::table('task_phase')->get();
         $assignees = DB::table('account_info')
             ->join('psn_infor', 'account_info.emp_id', '=', 'psn_infor.emp_id')
+            ->where('account_info.role','!=',1)
+            ->where('account_info.active',1)
             ->select('account_info.emp_id', 'psn_infor.full_name', 'account_info.role')
             ->distinct()
             ->get();

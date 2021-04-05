@@ -17,86 +17,32 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                                <th scope="col">Tag</th>
+                                <th scope="col">#ID</th>
+                                <th scope="col">Full name</th>
+                                <th scope="col">OP</th>
+                                <th scope="col">PG</th>
+                                <th scope="col">FN</th>
+                                <th scope="col">OT</th>
+                                <th scope="col">BD</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><span class="badge badge-primary">Primary</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td><span class="badge badge-secondary">Secondary</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td><span class="badge badge-secondary">Secondary</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td><span class="badge badge-success">Success</span></td>
-                            </tr>
+{{--                            {{ dd($user_data) }}--}}
+                            @foreach($user_data as $u)
+                                <tr>
+                                    <td> {{ $u['emp_id'] }}</td>
+                                    <td>{{ $u['full_name'] }}</td>
+                                    <td>{{ $u['open_tickets'] }}</td>
+                                    <td>{{ $u['processing_tickets'] }}</td>
+                                    <td>{{ $u['finished_tickets'] }}</td>
+                                    {{--                                <td>Otto</td>--}}
+                                    {{--                                <td>@mdo</td>--}}
+                                    {{--                                <td><span class="badge badge-primary">Primary</span></td>--}}
+                                    <td>{{ $u['on_time'] }}</td>
+                                    <td>{{ $u['breached_dl'] }}</td>
+                                </tr>
+                            @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -105,7 +51,7 @@
                     <div class="row mb-30">
                         <div class="col-md-2">
                             <div class="profile-photo bg-white">
-                                <img src="{{ asset('images/photo1.jpg') }}" alt="" class="avatar-photo">
+                                <img src="{{ Avatar::create(session()->get('account.name'))->toBase64() }}" />
                             </div>
                         </div>
                         <div class="col-md-10">
