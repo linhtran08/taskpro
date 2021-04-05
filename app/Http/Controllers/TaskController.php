@@ -110,8 +110,12 @@ class TaskController extends Controller
         $task_detail = $request->input('task_detail');
         $assignee_id = $request->input('assignee_id');
         $due_date = $request->input('due_date');
+        $prev_due_date = $request->input('prev_due_date');
+        //dd($due_date, $prev_due_date);
         $effort = $request->input('effort');
         $score = $request->input('score');
+
+
 
 
 //        if($phase_id == 1){
@@ -138,11 +142,24 @@ class TaskController extends Controller
                 'task_title' => $task_title,
                 'task_detail' => $task_detail,
                 'assignee_id' => $assignee_id,
-                'due_date' => $due_date,
+//                'due_date' => $due_date,
                 'effort' => $effort,
                 'satisfaction' => $score
             ]);
 
+        if($due_date != $prev_due_date){
+            $this->validate($request,[
+                'due_date' => 'after_or_equal:today',
+            ]);
+        }
+
+        DB::table('task')
+            ->where('task_id', $id)
+            ->update([
+                'due_date' => $due_date,
+//                'effort' => $effort,
+//                'satisfaction' => $score
+            ]);
         $created_by_id = session()->get('account.emp_id');
 
         DB::table('task_phase_history')->insert([
