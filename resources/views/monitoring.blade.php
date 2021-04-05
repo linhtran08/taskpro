@@ -27,7 +27,6 @@
                             </tr>
                             </thead>
                             <tbody>
-{{--                            {{ dd($user_data) }}--}}
                             @foreach($user_data as $u)
                                 <tr>
                                     <td> {{ $u['emp_id'] }}</td>
@@ -35,9 +34,6 @@
                                     <td>{{ $u['open_tickets'] }}</td>
                                     <td>{{ $u['processing_tickets'] }}</td>
                                     <td>{{ $u['finished_tickets'] }}</td>
-                                    {{--                                <td>Otto</td>--}}
-                                    {{--                                <td>@mdo</td>--}}
-                                    {{--                                <td><span class="badge badge-primary">Primary</span></td>--}}
                                     <td>{{ $u['on_time'] }}</td>
                                     <td>{{ $u['breached_dl'] }}</td>
                                 </tr>

@@ -140,6 +140,9 @@
                                     <input class="form-control date-picker"
                                            value="{{ $tasks[0]->due_date }}"
                                            type="date" name="due_date">
+                                    <input hidden
+                                           value="{{ $tasks[0]->due_date }}"
+                                           type="date" name="prev_due_date">
                                     @error('due_date')
                                     <div class="text-danger">
                                         {{ $message }}
