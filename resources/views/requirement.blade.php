@@ -427,9 +427,9 @@
 
             $('#removeIcon').removeClass('sorting_asc');
 
-            $('.tv-task-row').on('click',function (event){
+            $('.data-table tbody').on('click','tr',function (){
                 window.location.href = '/tasks/'+$(this).data('task');
-            });
+            })
 
             replace(taskType,'.sl3','desc');
             replace(taskState,'.sl2','desc');
