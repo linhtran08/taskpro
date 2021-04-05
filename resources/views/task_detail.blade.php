@@ -117,7 +117,6 @@
                                 </div>
                             </div>
                             <div class="col-md-2">
-                                {{--                                {{ dd($tasks[0]) }}--}}
                                 <div class="form-group">
                                     <label for="">Assignee</label>
                                     <select id="assginee_id" name="assignee_id" class="custom-select col-12">
@@ -148,7 +147,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 <div class="form-group">
                                     <label for="">Effort</label>
                                     <input class="form-control" name="effort" type="text"
@@ -158,6 +157,23 @@
                                         {{ $message }}
                                     </div>
                                     @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <div class="form-group">
+                                    <label for="">Score</label>
+                                    <select {{ session()->get('account.role') != 2 ? 'disabled':'' }}  name="score" class="custom-select col-12">
+                                        @if(empty($tasks[0]->satisfaction))
+                                            <option readonly selected="selected" value="">--</option>
+                                        @else
+                                            <option value="">--</option>
+                                        @endif
+                                            <option {{ $tasks[0]->satisfaction == 1 ? 'selected=selected' : '' }} value="1" >1</option>
+                                            <option {{ $tasks[0]->satisfaction == 2 ? 'selected=selected' : '' }} value="2" >2</option>
+                                            <option {{ $tasks[0]->satisfaction == 3 ? 'selected=selected' : '' }} value="3" >3</option>
+                                            <option {{ $tasks[0]->satisfaction == 4 ? 'selected=selected' : '' }} value="4" >4</option>
+                                            <option {{ $tasks[0]->satisfaction == 5 ? 'selected=selected' : '' }} value="5" >5</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -186,7 +202,7 @@
                             </div>
                         </div>
                         <div class="modal-footer border-0">
-                            <a href="{{ route('dashboard') }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
                             <button type="submit" class="btn btn-info">Save</button>
                         </div>
                     </fieldset>
@@ -197,12 +213,13 @@
                     <div class="chat-profile-header clearfix">
                         <div class="left">
                             <div class="clearfix">
-                                <div class="chat-profile-photo">
-                                    <img src="vendors/images/profile-photo.jpg" alt="">
-                                </div>
+{{--                                <div class="chat-profile-photo">--}}
+{{--                                    <img src="{{ Avatar::create(session()->get('account.name'))->toBase64() }}" />--}}
+{{--                                </div>--}}
                                 <div class="chat-profile-name">
-                                    <h3>{{ session()->get('account.name') }}</h3>
-                                    <span>Assigned</span>
+{{--                                    <h3>{{ session()->get('account.name') }}</h3>--}}
+                                    <h2>Discussion</h2>
+{{--                                    <span>Assigned</span>--}}
                                 </div>
                             </div>
                         </div>

@@ -128,7 +128,7 @@
                                                 <li class="weight-500 col-md-6">
                                                     <div class="form-group">
                                                         <label for="role">Role</label>
-                                                        <select id="role" class="custom-select" name="role">
+                                                        <select disabled id="role" class="custom-select" name="role">
                                                             <option {{ $account->role == 1 ? 'selected=selected' : '' }} value="1">Admin</option>
                                                             <option {{ $account->role == 2 ? 'selected=selected' : '' }} value="2">Manager</option>
                                                             <option {{ $account->role == 3 ? 'selected=selected' : '' }} value="3">staff</option>
@@ -136,7 +136,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="password">Password</label>
-                                                        <input id="password" name="password" class="form-control form-control-lg" type="text" value="{{$account->password}}">
+                                                        <input id="password" name="password" class="form-control form-control-lg" type="password" value="{{$account->password}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <button type="submit" class="btn btn-info">Save</button>
