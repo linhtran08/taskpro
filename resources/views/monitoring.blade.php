@@ -67,48 +67,33 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                    <th scope="col">Tag</th>
+{{--                                    <th scope="col">Job</th>--}}
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Progress</th>
+                                    <th scope="col">Start Date</th>
+                                    <th scope="col">End Date</th>
+{{--                                    <th scope="col">Effort</th>--}}
+                                    <th scope="col">Days</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td><span class="badge badge-primary">Primary</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td><span class="badge badge-secondary">Secondary</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                    <td><span class="badge badge-success">Success</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td><span class="badge badge-secondary">Secondary</span></td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                    <td><span class="badge badge-success">Success</span></td>
-                                </tr>
+                                @foreach($tasks as $t)
+                                    <tr>
+                                        <td>{{ $t->task_id }}</td>
+{{--                                        <td>{{ $t->task_job_type }}</td>--}}
+                                        <td>{{
+                                            strlen($t->task_title) > 30 ?
+                                    substr($t->task_title, 0, 30) . " ..." : $t->task_title
+                                             }}
+                                        </td>
+                                        <td>{{ $t->phase }}</td>
+                                        <td>{{ $t->start_date }}</td>
+                                        <td>{{ $t->due_date }}</td>
+{{--                                        <td>{{ $t->effort }}</td>--}}
+                                        <td>{{ $t->duration }}</td>
+{{--                                        <td><span class="badge badge-primary">Primary</span></td>--}}
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
