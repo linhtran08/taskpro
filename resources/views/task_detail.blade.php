@@ -231,15 +231,27 @@
                         <div class="chat-desc customscroll">
                             <ul>
                                 @foreach($comments as $cm)
-                                    <li class="clearfix admin_chat">
-                                        <div class="text-right mb-2">
-                                            <span class="badge-info p-1">{{ $cm->full_name }}</span>
-                                        </div>
-                                        <div class="chat-body clearfix mr-0">
-                                            <p>{{ $cm->body }}</p>
-                                            <div class="chat_time">{{ $cm->created_at }}</div>
-                                        </div>
-                                    </li>
+                                    @if(session()->get('account.emp_id') == $cm->created_by_id)
+                                        <li class="clearfix admin_chat">
+                                            <div class="text-right mb-2">
+                                                <span class="badge-info p-1">{{ $cm->full_name }}</span>
+                                            </div>
+                                            <div class="chat-body clearfix mr-0">
+                                                <p>{{ $cm->body }}</p>
+                                                <div class="chat_time">{{ $cm->created_at }}</div>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li class="clearfix">
+                                            <div class="text-left mb-2">
+                                                <span class="badge-info p-1">{{ $cm->full_name }}</span>
+                                            </div>
+                                            <div class="chat-body clearfix ml-0">
+                                                <p>{{ $cm->body }}</p>
+                                                <div class="chat_time">{{ $cm->created_at }}</div>
+                                            </div>
+                                        </li>
+                                    @endif
                                 @endforeach
                             </ul>
                         </div>
