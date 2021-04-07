@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class ProjectController extends Controller
 {
+
+    public function index(){
+        $projects = DB::table('project')->get();
+    }
+
     public function store(Request $request){
         $this->validate($request,[
             'project_title' => 'required',
@@ -34,5 +39,9 @@ class ProjectController extends Controller
                 'prj_detail' => $project_detail,
             ]);
         return back();
+    }
+
+    public function updateProject(Request $request){
+        
     }
 }

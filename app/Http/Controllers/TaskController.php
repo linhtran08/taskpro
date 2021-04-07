@@ -45,7 +45,7 @@ class TaskController extends Controller
             where task_id =? ', [$id]
         );
         $comments = DB::select('
-            select pi.full_name, body, created_at
+            select pi.full_name, body, created_at, created_by_id
             from comment t1
             inner join account_info ai on t1.created_by_id = ai.emp_id
             inner join psn_infor pi on ai.emp_id = pi.emp_id
