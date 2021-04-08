@@ -24,3 +24,5 @@ Route::get('message/{id}',function (Request $request,$id){
                 ->get();
     return response()->json($message);
 });
+
+Route::get('last/{id}',[\App\Http\Controllers\MonitoringController::class,'getJsonRelatedTask']);
