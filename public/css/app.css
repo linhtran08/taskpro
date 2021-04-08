@@ -728,3 +728,7 @@ table.dataTable.stripe tbody tr.odd {
   }
 }
 
+.left-side-bar {
+  left: -281px;
+}
+

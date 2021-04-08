@@ -33,7 +33,7 @@
                         </ul>
                         <div class="tab-content modal-body mt-15">
                             <div class="tab-pane fade show active" id="home2" role="tabpanel">
-                                <form action="{{ url('tasks') }}" method="post">
+                                <form action="{{ url('tasks') }}" method="post" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-xl-2">
@@ -123,6 +123,17 @@
                                                 </div>
                                                 @enderror
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label for="">File</label>
+                                            <input class="form-control" name="fileTest" type="file">
+                                            @error('fileTest')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="modal-footer border-0">
@@ -342,7 +353,7 @@
                                 <input type="text" class="form-control"   id="max" name="max" placeholder="To">
                             </div>
                         </div>
-                        <table class="data-table display">
+                        <table class="data-table display w-100">
                             <thead>
                             <tr>
                                 <th id="removeIcon" class="datatable-nosort w-4">#</th>
