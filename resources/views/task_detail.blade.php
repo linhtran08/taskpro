@@ -204,6 +204,11 @@
                                 </div>
                             </div>
                         </div>
+{{--                        <a href={{ link_to_asset('public/resources/images/upload/life_cycle.png') }}>File </a>--}}
+{{--                        <a href={{ \Illuminate\Support\Facades\Storage::url('public/resources/images/upload/life_cycle.png') }}>File </a>--}}
+{{--                        <a href="{{ route('download','/download/public/resources/images/upload/life_cycle.png' ) }}"--}}
+                        <a href="{{ route('getfile',$tasks[0]->task_detail ) }}"
+                        >{{ $tasks[0]->task_detail }}</a>
                         <div class="modal-footer border-0">
                             <a href="{{ url()->previous() }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
                             <button type="submit" class="btn btn-info">Save</button>

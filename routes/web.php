@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DownloadFileController;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,9 @@ Route::middleware('checkLogin')->group(function (){
     Route::get('logout',[\App\Http\Controllers\Auth\Login\AccountController::class,'logout']);
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
     Route::post('project',[\App\Http\Controllers\ProjectController::class,'store']);
+
+    Route::get('get/{filename}', [DownloadFileController::class, 'getFile'])->name('getfile');
+
 });
 
 Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
