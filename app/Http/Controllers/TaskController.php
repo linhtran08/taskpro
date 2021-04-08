@@ -165,6 +165,13 @@ class TaskController extends Controller
             'task_detail' => 'required',
         ]);
 
+        //dd($request->input('fileTest'));
+
+        if($request->hasFile('fileTest')){
+            $file = $request->file('fileTest');
+            $file->move('resources/images/upload',$file->getClientOriginalName());
+        }
+
         $project_id = $request->input('project_id');
         $task_state_id = 1;
         $task_job_type_id = $request->input('task_job_type_id');
