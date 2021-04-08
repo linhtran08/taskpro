@@ -29,7 +29,7 @@
         gtag('config', 'UA-119386393-1');
     </script>
 </head>
-<body class="header-dark">
+<body>
 @yield('pre-loader')
 
 <x-header />

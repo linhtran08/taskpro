@@ -17,6 +17,7 @@ class MonitoringController extends Controller
             join psn_infor on a.emp_id = psn_infor.emp_id
             where role != 1
             and active != 0
+            order by a.emp_id;
         ');
 
         //dd($users);
@@ -113,6 +114,12 @@ class MonitoringController extends Controller
         ',
             [$emp_id, $emp_id]
         );
+    }
+
+    public function getJsonRelatedTask($emp_id): \Illuminate\Http\JsonResponse
+    {
+        $tasks = $this->getRelatedTasks($emp_id);
+        return response()->json($tasks);
     }
 
     public function getRelatedTasks($emp_id): array

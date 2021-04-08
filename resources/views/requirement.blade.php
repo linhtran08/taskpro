@@ -353,7 +353,7 @@
                                 <input type="text" class="form-control"   id="max" name="max" placeholder="To">
                             </div>
                         </div>
-                        <table class="data-table display">
+                        <table class="data-table display w-100">
                             <thead>
                             <tr>
                                 <th id="removeIcon" class="datatable-nosort w-4">#</th>
