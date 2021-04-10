@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>4e9e2aa7-40d1-4ea5-a898-d6bc1d46d2af.SCHEMA:demo</OriginalElement>
+  <nodes>
+    <node x="0.0" y="0.0">4e9e2aa7-40d1-4ea5-a898-d6bc1d46d2af.TABLE:demo.book-categories</node>
+    <node x="4.0" y="141.0">4e9e2aa7-40d1-4ea5-a898-d6bc1d46d2af.TABLE:demo.book</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="4e9e2aa7-40d1-4ea5-a898-d6bc1d46d2af.TABLE:demo.book" target="4e9e2aa7-40d1-4ea5-a898-d6bc1d46d2af.TABLE:demo.book-categories">
+      <point x="0.0" y="-71.5" />
+      <point x="0.0" y="45.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="96.0" y="142.0" />
+  <SelectedNodes>
+    <node>4e9e2aa7-40d1-4ea5-a898-d6bc1d46d2af.TABLE:demo.book</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Virtual foreign keys</Category>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

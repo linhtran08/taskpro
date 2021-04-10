@@ -9,7 +9,7 @@ class DownloadFileController extends Controller
 {
     function getFile($filename): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
-        $filePath = public_path()."/resources/images/file/JAVA2.pdf";
+        $filePath = storage_path()."/files/".$filename;
         return response()->download($filePath);
     }
 }

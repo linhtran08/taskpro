@@ -128,7 +128,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="">File</label>
-                                            <input class="form-control" name="fileTest" type="file">
+                                            <input class="form-control" name="attachments[]" type="file" multiple>
                                             @error('fileTest')
                                             <div class="text-danger">
                                                 {{ $message }}

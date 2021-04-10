@@ -68,6 +68,13 @@ class TaskController extends Controller
             ->get();
 
         //dd($tasks);
+        $attachments = DB::table('file_task')
+                    ->where([
+                        ['task_id', $id],
+                        ['in_use',1]
+                    ])
+                    ->get();
+
         return view('task_detail', [
             'task_state' => $task_state,
             'tasks' => $tasks,
@@ -76,7 +83,8 @@ class TaskController extends Controller
             'assignees' => $assignees,
             'projects' => $projects,
             'comments' => $comments,
-            'phases' => $phases
+            'phases' => $phases,
+            'attachments' => $attachments
         ]);
     }
 
@@ -149,7 +157,8 @@ class TaskController extends Controller
             'assignee_id' => $assignee_id,
             'changed_by_id' => $created_by_id
         ]);
-
+        $created_at = date(now());
+        $this->saveAttachment($request, $id,$created_at);
         return back();
     }
 
@@ -164,13 +173,6 @@ class TaskController extends Controller
             'task_title' => 'required',
             'task_detail' => 'required',
         ]);
-
-        //dd($request->input('fileTest'));
-
-        if($request->hasFile('fileTest')){
-            $file = $request->file('fileTest');
-            $file->move('resources/images/upload',$file->getClientOriginalName());
-        }
 
         $project_id = $request->input('project_id');
         $task_state_id = 1;
@@ -203,12 +205,9 @@ class TaskController extends Controller
 
         $task_id = DB::table('task')->max('task_id');
 
-        DB::table('task_phase_history')->insert([
-            'task_id' => $task_id,
-            'task_phase_id' => $phase_id,
-            'assignee_id' => $assignee_id,
-            'changed_by_id' => $created_by_id
-        ]);
+        $this->saveAttachment($request, $task_id,$created_at);
+        $this->saveHistory($task_id, $phase_id, $assignee_id, $created_by_id);
+
         return back();
     }
 
@@ -252,6 +251,44 @@ class TaskController extends Controller
                     'finish_date' => $finished_date,
                     'task_state_id' => 5
                 ]);
+        }
+    }
+
+    public function saveHistory($task_id, $phase_id, $assignee_id, $created_by_id){
+        DB::table('task_phase_history')->insert([
+            'task_id' => $task_id,
+            'task_phase_id' => $phase_id,
+            'assignee_id' => $assignee_id,
+            'changed_by_id' => $created_by_id
+        ]);
+    }
+
+    public function saveAttachment(Request $request, $task_id, $created_at){
+        if($request->hasFile('attachments')){
+            $data = array();
+            $attachments = $request->file('attachments');
+            $count = 0;
+            foreach ($attachments as $attachment){
+                $count++;
+//                $name = time().'.'.$attachment->extension();
+                $file_name = time().'.'.$attachment->getClientOriginalName();
+                $attachment->move(storage_path().'/files/', $file_name);
+                $data[$count]['task_id'] = $task_id;
+                $data[$count]['file_name'] = $file_name;
+                $data[$count]['file_path'] = 'storage/files/';
+                $data[$count]['saved_at'] = $created_at;
+                $data[$count]['in_use'] = 1;
+            }
+//            dd($data);
+            foreach ($data as $d){
+                DB::table('file_task')->insert([
+                    'task_id' => $d['task_id'],
+                    'file_name' => $d['file_name'],
+                    'file_path' => $d['file_path'],
+                    'saved_at' => $d['saved_at'],
+                    'in_use' => $d['in_use']
+                ]);
+            }
         }
     }
 }
