@@ -13,7 +13,7 @@
         <div class="pd-ltr-20">
             <div class="card-box pd-20 mb-20">
 {{--            <form action="{{ url("tasksupdate/{$tasks[0]->task_id}") }}" method="post">--}}
-                <form action="{{ route('task_update', $tasks[0]->task_id) }}" method="post">
+                <form action="{{ route('task_update', $tasks[0]->task_id) }}" method="post" enctype="multipart/form-data">
                     <fieldset {{$tasks[0]->task_state_id == 5 | $tasks[0]->task_state_id == 4 ? 'disabled="disabled"' : ''}}>
                         @csrf
                         <div class="row">
@@ -204,11 +204,25 @@
                                 </div>
                             </div>
                         </div>
-{{--                        <a href={{ link_to_asset('public/resources/images/upload/life_cycle.png') }}>File </a>--}}
-{{--                        <a href={{ \Illuminate\Support\Facades\Storage::url('public/resources/images/upload/life_cycle.png') }}>File </a>--}}
-{{--                        <a href="{{ route('download','/download/public/resources/images/upload/life_cycle.png' ) }}"--}}
-                        <a href="{{ route('getfile',$tasks[0]->task_detail ) }}"
-                        >{{ $tasks[0]->task_detail }}</a>
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="">Attach more files</label>
+                                <input class="form-control" name="attachments[]" type="file" multiple>
+                                @error('fileTest')
+                                <div class="text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div>
+                            <h4>Attachments</h4>
+                            @foreach($attachments as $attachment)
+                                <a href="{{ route('download_file',$attachment->file_name ) }}"
+                                >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
+                                <br>
+                            @endforeach
+                        </div>
                         <div class="modal-footer border-0">
                             <a href="{{ url()->previous() }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
                             <button type="submit" class="btn btn-info">Save</button>

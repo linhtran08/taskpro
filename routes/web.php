@@ -45,7 +45,7 @@ Route::middleware('checkLogin')->group(function (){
     Route::post('tasks',[\App\Http\Controllers\TaskController::class,'store']);
     Route::post('project',[\App\Http\Controllers\ProjectController::class,'store']);
 
-    Route::get('get/{filename}', [DownloadFileController::class, 'getFile'])->name('getfile');
+    Route::get('get/{filename}', [DownloadFileController::class, 'getFile'])->name('download_file');
 
 });
 
