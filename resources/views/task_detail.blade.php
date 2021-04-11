@@ -204,30 +204,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="form-group">
+{{--                        <div class="row">--}}
+
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <h4>Attachments</h4>--}}
+{{--                            @foreach($attachments as $attachment)--}}
+{{--                                <a href="{{ route('download_file',$attachment->file_name ) }}"--}}
+{{--                                >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>--}}
+{{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
+{{--                                <label for="">Delete</label>--}}
+{{--                                <br>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+                        <div class="modal-footer border-0">
+                            <div class="form-group mr-auto">
                                 <label for="">Attach more files</label>
                                 <input class="form-control" name="attachments[]" type="file" multiple>
-                                @error('fileTest')
+                                @error('attachments[]')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                                 @enderror
                             </div>
-                        </div>
-                        <div>
-                            <h4>Attachments</h4>
-                            @foreach($attachments as $attachment)
-                                <a href="{{ route('download_file',$attachment->file_name ) }}"
-                                >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
-                                <br>
-                            @endforeach
-                        </div>
-                        <div class="modal-footer border-0">
                             <a href="{{ url()->previous() }}" class="btn btn-secondary" data-dismiss="modal">Back</a>
                             <button type="submit" class="btn btn-info">Save</button>
                         </div>
                     </fieldset>
+                </form>
+                <form action="{{ route('delete_file') }}" method="post">
+                    @csrf
+                    <div>
+                        <h4>Attachments</h4>
+                        @foreach($attachments as $attachment)
+                            <input type="checkbox" name="deleted_files[]" value="{{$attachment->id}}">
+                            <a href="{{ route('download_file',$attachment->file_name ) }}"
+                            >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
+                            {{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
+                            <br>
+                        @endforeach
+                    </div>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
             <div class="card-box mb-20">
