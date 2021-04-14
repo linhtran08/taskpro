@@ -14,15 +14,17 @@ class DownloadFileController extends Controller
         return response()->download($filePath);
     }
 
-    public function delete(Request $request): \Illuminate\Http\RedirectResponse
+    public function delete(Request $request): \Illuminate\Http\JsonResponse
     {
-        $deleted_files = $request->input('deleted_files');
+        //$deleted_files = $request->input('deleted_files');
+        $deleted_files = $request->deleted_files;
         DB::table('file_task')
             ->whereIn('id', $deleted_files)
-            ->update([
-                'in_use' => 0,
-            ]);
-        return back();
+            ->delete();
+//            ->update([
+//                'in_use' => 0,
+//            ]);
+        return response()->json(['success'=>"Products Deleted successfully."]);
     }
 
 }
