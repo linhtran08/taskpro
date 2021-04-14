@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DownloadFileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,5 @@ Route::get('message/{id}',function (Request $request,$id){
 });
 
 Route::get('last/{id}',[\App\Http\Controllers\MonitoringController::class,'getJsonRelatedTask']);
+
+

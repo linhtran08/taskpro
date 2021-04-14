@@ -232,20 +232,23 @@
                         </div>
                     </fieldset>
                 </form>
-                <form action="{{ route('delete_file') }}" method="post">
-                    @csrf
-                    <div>
-                        <h4>Attachments</h4>
-                        @foreach($attachments as $attachment)
-                            <input type="checkbox" name="deleted_files[]" value="{{$attachment->id}}">
-                            <a href="{{ route('download_file',$attachment->file_name ) }}"
-                            >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
-                            {{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
-                            <br>
-                        @endforeach
-                    </div>
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
+                <div id="delete_form">
+{{--                    <form action="{{ route('delete_file') }}" method="post">--}}
+                    <form>
+                        @csrf
+                        <div>
+                            <h4>Attachments</h4>
+                            @foreach($attachments as $attachment)
+                                <input class="checkBoxClass" type="checkbox" name="deleted_files" value="{{$attachment->id}}">
+                                <a href="{{ route('download_file',$attachment->file_name ) }}"
+                                >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
+                                {{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
+                                <br>
+                            @endforeach
+                        </div>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
             </div>
             <div class="card-box mb-20">
                 <div class="chat-detail">
@@ -317,5 +320,40 @@
     <x-script-common/>
     <script>
         {{--$('#assginee_id').val(<?php echo session()->get('account.emp_id'); ?>).trigger("change");--}}
+        $("form").on( "submit", function(e) {
+            var deleted_arr= [];
+
+            $.each($("input[class='checkBoxClass']:checked"), function(){
+                deleted_arr.push($(this).val());
+            });
+            //alert(deleted_arr);
+            // var myJsonString = JSON.stringify(deleted_arr);
+            // var json_del = { "deleted_files": myJsonString};
+            var join_selected_values = deleted_arr.join(",");
+            // data: 'deleted_files='+join_selected_values
+            //alert('deleted_files='+join_selected_values);
+            $.ajax({
+                type: "DELETE",
+                url: "{{ route('delete_file') }}",
+                data: { deleted_files:deleted_arr},
+                success: function () {
+                    $("#delete_form").html("<div id='message'></div>");
+                    $("#message")
+                        .html("<h2>Contact Form Submitted!</h2>")
+                        .append("<p>We will be in touch soon.</p>")
+                        .hide()
+                        .fadeIn(1500, function () {
+                            $("#message").append(
+                                "<img id='checkmark' src='images/check.png' />"
+                            );
+                        });
+                },
+                error: function (data) {
+                    alert(data.responseText);
+                }
+            });
+
+            e.preventDefault();
+        });
     </script>
 @endsection
