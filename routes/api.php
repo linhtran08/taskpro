@@ -28,4 +28,6 @@ Route::get('message/{id}',function (Request $request,$id){
 
 Route::get('last/{id}',[\App\Http\Controllers\MonitoringController::class,'getJsonRelatedTask']);
 
+Route::post('attachment',[DownloadFileController::class,'delete']);
+Route::get('attachment/list/{id}',[\App\Http\Controllers\TaskController::class,'attachmentList']);
 

@@ -34,7 +34,7 @@
             }else {
                 $('#message_render').html('<li>No Message</li>');
             }
-        },5000)
+        },50000)
 
         $('.buzz').on('click',function (){
            $(this).removeClass('shake');
