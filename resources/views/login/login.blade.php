@@ -72,7 +72,8 @@
 {{--                            </div>--}}
 
                             <div class="input-group custom">
-                                <input type="text" name="emp_id" class="form-control form-control-lg" placeholder="Username">
+                                <input type="text" name="emp_id" class="form-control form-control-lg" placeholder="Email"
+                                value="{{ old('emp_id') }}">
                                 <div class="input-group-append custom">
                                     <span class="input-group-text"><i class="icon-copy dw dw-user1"></i></span>
                                 </div>
@@ -145,25 +146,26 @@
                 <div class="col-lg-6 content order-lg-1 order-2">
                     <h2 class="title">Few Words About Us</h2>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        TaskPro delivers digital workflows that create great experiences and unlock productivity. This is the future of work.
+                        Behind every great experience is a great workflow.
                     </p>
 
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
                         <div class="icon"><i class="fa fa-shopping-bag"></i></div>
-                        <h4 class="title"><a href="">Eiusmod Tempor</a></h4>
-                        <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                        <h4 class="title"><a href="">Deliver ITSM on a single platform</a></h4>
+                        <p class="description">Use built-in best practices to rapidly consolidate disparate tools to a single system of action in the cloud. Harness your shared data and analytics with the most trusted IT service workflows.</p>
                     </div>
 
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                         <div class="icon"><i class="fa fa-photo"></i></div>
-                        <h4 class="title"><a href="">Magni Dolores</a></h4>
-                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h4 class="title"><a href="">Improve IT productivity</a></h4>
+                        <p class="description">Boost agent efficiency with AI-assisted recommendations and automatically assign incidents to the correct resolution team.</p>
                     </div>
 
                     <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
                         <div class="icon"><i class="fa fa-bar-chart"></i></div>
-                        <h4 class="title"><a href="">Dolor Sitema</a></h4>
-                        <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                        <h4 class="title"><a href="">Create resilient service experiences</a></h4>
+                        <p class="description">Shape service experiences for employees anywhere, with always-on IT services. Automate support for common requests with virtual agents that understand simple, human language.</p>
                     </div>
 
                 </div>
@@ -178,31 +180,32 @@
     <section id="call-to-action">
         <div class="container">
             <div class="row" data-aos="zoom-in">
-                <div class="col-lg-9 text-center text-lg-left">
-                    <h3 class="cta-title">Call To Action</h3>
-                    <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                </div>
-                <div class="col-lg-3 cta-btn-container text-center">
-                    <a class="cta-btn align-middle" href="#">Call To Action</a>
-                </div>
+{{--                <div class="col-lg-9 text-center text-lg-left">--}}
+{{--                    <h3 class="cta-title">Call To Action</h3>--}}
+{{--                    <p class="cta-text"> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>--}}
+{{--                </div>--}}
+{{--                <div class="col-lg-3 cta-btn-container text-center">--}}
+{{--                    <a class="cta-btn align-middle" href="#">Call To Action</a>--}}
+{{--                </div>--}}
             </div>
 
         </div>
-    </section><!-- End Call To Action Section -->
+    </section>
+    <!-- End Call To Action Section -->
 
     <!-- ======= Team Section ======= -->
     <section id="team">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
                 <h3 class="section-title">Team</h3>
-                <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+                <p class="section-description">4 young members from all walks of life have gathered here for this project</p>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="100">
-                        <div class="pic"><img src="{{ asset('images/login/team-1.jpg') }}" alt=""></div>
-                        <h4>Linh Tran</h4>
-                        <span>FontEnd Develoment</span>
+                        <div class="pic"><img src="{{ asset('images/login/trung_ava.jpg') }}" alt=""></div>
+                        <h4>Trung Nguyen</h4>
+                        <span>Team leader</span>
                         <div class="social">
                             <a href=""><i class="fa fa-twitter"></i></a>
                             <a href=""><i class="fa fa-facebook"></i></a>
@@ -215,8 +218,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="200">
                         <div class="pic"><img src="{{ asset('images/login/team-2.jpg') }}" alt=""></div>
-                        <h4>Sarah Jhinson</h4>
-                        <span>Product Manager</span>
+                        <h4>Linh Tran</h4>
+                        <span>Team member</span>
                         <div class="social">
                             <a href=""><i class="fa fa-twitter"></i></a>
                             <a href=""><i class="fa fa-facebook"></i></a>
@@ -229,8 +232,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="300">
                         <div class="pic"><img src=" {{ asset('images/login/team-3.jpg') }}" alt=""></div>
-                        <h4>William Anderson</h4>
-                        <span>CTO</span>
+                        <h4>Nhung Phan</h4>
+                        <span>Team member</span>
                         <div class="social">
                             <a href=""><i class="fa fa-twitter"></i></a>
                             <a href=""><i class="fa fa-facebook"></i></a>
@@ -243,8 +246,8 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="member" data-aos="fade-up" data-aos-delay="400">
                         <div class="pic"><img src=" {{ asset('images/login/team-4.jpg') }}" alt=""></div>
-                        <h4>Amanda Jepson</h4>
-                        <span>Accountant</span>
+                        <h4>Nam Nguyen</h4>
+                        <span>Team member</span>
                         <div class="social">
                             <a href=""><i class="fa fa-twitter"></i></a>
                             <a href=""><i class="fa fa-facebook"></i></a>
@@ -263,7 +266,7 @@
         <div class="container">
             <div class="section-header">
                 <h3 class="section-title">Contact</h3>
-                <p class="section-description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque</p>
+                <p class="section-description">Please contact us under below form</p>
             </div>
         </div>
 
@@ -302,7 +305,8 @@
 
                 <div class="col-lg-5 col-md-8">
                     <div class="form">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+{{--                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">--}}
+                        <form action="{{ route('login') }}" role="form" class="php-email-form">
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                                 <div class="validate"></div>
