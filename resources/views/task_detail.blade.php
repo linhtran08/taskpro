@@ -16,6 +16,13 @@
                 <form action="{{ route('task_update', $tasks[0]->task_id) }}" method="post" enctype="multipart/form-data">
                     <fieldset {{$tasks[0]->task_state_id == 5 | $tasks[0]->task_state_id == 4 ? 'disabled="disabled"' : ''}}>
                         @csrf
+                        @if($is_breached == "Y")
+                            <div class="row">
+                                <div class="text text-danger text-center">
+                                    <h2 class="text-danger text-center">WARNING: THIS TASK IS BEHIND DEADLINE</h2>
+                                </div>
+                            </div>
+                        @endif
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -137,6 +144,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Due Date</label>
+{{--                                    {{ dd($tasks[0]->due_date) }}--}}
                                     <input {{ session()->get('account.role') != 2 ? 'disabled':'' }}  class="form-control date-picker"
                                            value="{{ $tasks[0]->due_date }}"
                                            type="date" name="due_date">
@@ -233,20 +241,21 @@
                     </fieldset>
                 </form>
                 <div id="delete_form">
-{{--                    <form action="{{ route('delete_file') }}" method="post">--}}
-                    <form>
-                        @csrf
-                        <div>
-                            <h4>Attachments</h4>
-                            @foreach($attachments as $attachment)
-                                <input class="checkBoxClass" type="checkbox" name="deleted_files" value="{{$attachment->id}}">
-                                <a href="{{ route('download_file',$attachment->file_name ) }}"
-                                >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
-                                {{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
-                                <br>
-                            @endforeach
-                        </div>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                    <form action="{{ route('delete_file') }}" method="post">
+                        <fieldset {{$tasks[0]->task_state_id == 5 | $tasks[0]->task_state_id == 4 ? 'disabled="disabled"' : ''}}>
+                            @csrf
+                            <div>
+                                <h4>Attachments</h4>
+                                @foreach($attachments as $attachment)
+                                    <input class="checkBoxClass" type="checkbox" name="deleted_files[]" value="{{$attachment->id}}">
+                                    <a href="{{ route('download_file',$attachment->file_name ) }}"
+                                    >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
+                                    {{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
+                                    <br>
+                                @endforeach
+                            </div>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </fieldset>
                     </form>
                 </div>
             </div>
@@ -319,41 +328,40 @@
 @section('script')
     <x-script-common/>
     <script>
-        {{--$('#assginee_id').val(<?php echo session()->get('account.emp_id'); ?>).trigger("change");--}}
-        $("form").on( "submit", function(e) {
-            var deleted_arr= [];
+        {{--$("form").on( "submit", function(e) {--}}
+        {{--    var deleted_arr= [];--}}
 
-            $.each($("input[class='checkBoxClass']:checked"), function(){
-                deleted_arr.push($(this).val());
-            });
-            //alert(deleted_arr);
-            // var myJsonString = JSON.stringify(deleted_arr);
-            // var json_del = { "deleted_files": myJsonString};
-            var join_selected_values = deleted_arr.join(",");
-            // data: 'deleted_files='+join_selected_values
-            //alert('deleted_files='+join_selected_values);
-            $.ajax({
-                type: "DELETE",
-                url: "{{ route('delete_file') }}",
-                data: { deleted_files:deleted_arr},
-                success: function () {
-                    $("#delete_form").html("<div id='message'></div>");
-                    $("#message")
-                        .html("<h2>Contact Form Submitted!</h2>")
-                        .append("<p>We will be in touch soon.</p>")
-                        .hide()
-                        .fadeIn(1500, function () {
-                            $("#message").append(
-                                "<img id='checkmark' src='images/check.png' />"
-                            );
-                        });
-                },
-                error: function (data) {
-                    alert(data.responseText);
-                }
-            });
+        {{--    $.each($("input[class='checkBoxClass']:checked"), function(){--}}
+        {{--        deleted_arr.push($(this).val());--}}
+        {{--    });--}}
+        {{--    //alert(deleted_arr);--}}
+        {{--    // var myJsonString = JSON.stringify(deleted_arr);--}}
+        {{--    // var json_del = { "deleted_files": myJsonString};--}}
+        {{--    var join_selected_values = deleted_arr.join(",");--}}
+        {{--    // data: 'deleted_files='+join_selected_values--}}
+        {{--    //alert('deleted_files='+join_selected_values);--}}
+        {{--    $.ajax({--}}
+        {{--        type: "DELETE",--}}
+        {{--        url: "{{ route('delete_file') }}",--}}
+        {{--        data: { deleted_files:deleted_arr},--}}
+        {{--        success: function () {--}}
+        {{--            $("#delete_form").html("<div id='message'></div>");--}}
+        {{--            $("#message")--}}
+        {{--                .html("<h2>Contact Form Submitted!</h2>")--}}
+        {{--                .append("<p>We will be in touch soon.</p>")--}}
+        {{--                .hide()--}}
+        {{--                .fadeIn(1500, function () {--}}
+        {{--                    $("#message").append(--}}
+        {{--                        "<img id='checkmark' src='images/check.png' />"--}}
+        {{--                    );--}}
+        {{--                });--}}
+        {{--        },--}}
+        {{--        error: function (data) {--}}
+        {{--            alert(data.responseText);--}}
+        {{--        }--}}
+        {{--    });--}}
 
-            e.preventDefault();
-        });
+        {{--    e.preventDefault();--}}
+        {{--});--}}
     </script>
 @endsection

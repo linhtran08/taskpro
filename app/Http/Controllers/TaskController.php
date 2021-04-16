@@ -21,6 +21,7 @@ class TaskController extends Controller
                    tjt.`desc` as task_job_type,
                    p2.`desc` as priority,
                    tp.`desc` as phase,
+                   task.phase as task_phase_id,
                    task_title,
                    task.created_at,
                    task_detail,
@@ -58,7 +59,15 @@ class TaskController extends Controller
         $job_types = DB::table('task_job_type')->get();
         $priorities = DB::table('priority')->get();
         $task_state = DB::table('task_state')->get();
-        $phases = DB::table('task_phase')->get();
+        if (session()->get('account.role') == 3){
+            $phases = DB::table('task_phase')
+                ->where('task_phase_id','>=',$tasks[0]->task_phase_id)
+                ->get();
+        }else{
+            $phases = DB::table('task_phase')->get();
+        }
+
+        $is_breached =  $this->isBreached($tasks[0]->due_date, $tasks[0]->task_state_id);
         $assignees = DB::table('account_info')
             ->join('psn_infor', 'account_info.emp_id', '=', 'psn_infor.emp_id')
             ->where('account_info.role','!=',1)
@@ -84,7 +93,8 @@ class TaskController extends Controller
             'projects' => $projects,
             'comments' => $comments,
             'phases' => $phases,
-            'attachments' => $attachments
+            'attachments' => $attachments,
+            'is_breached' => $is_breached
         ]);
     }
 
@@ -95,7 +105,7 @@ class TaskController extends Controller
             'task_state_id' => 'required',
             'priority_id' => 'required',
             'task_phase_id' => 'required',
-            'due_date' => 'required',
+//            'due_date' => 'required',
             'task_title' => 'required',
             'task_detail' => 'required',
             'effort' => 'required|integer'
@@ -138,17 +148,17 @@ class TaskController extends Controller
 
 
         //Only check validation for due date if due date is changed
-        if($due_date != $prev_due_date){
+        if($due_date != $prev_due_date & $due_date != null){
             $this->validate($request,[
                 'due_date' => 'after_or_equal:today',
             ]);
+            DB::table('task')
+                ->where('task_id', $id)
+                ->update([
+                    'due_date' => $due_date,
+                ]);
         }
 
-        DB::table('task')
-            ->where('task_id', $id)
-            ->update([
-                'due_date' => $due_date,
-            ]);
         $created_by_id = session()->get('account.emp_id');
 
         DB::table('task_phase_history')->insert([
@@ -290,5 +300,15 @@ class TaskController extends Controller
                 ]);
             }
         }
+    }
+
+    public function isBreached($due_date, $task_state){
+        $date_now = date("Y-m-d");
+        $date2 = DateTime::createFromFormat("Y-m-d",$due_date)->format("Y-m-d");
+        //dd($date_now, $date2);
+        if($date2 < $date_now  & $task_state!= 5 & $task_state!= 4 & $task_state!= 3){
+            return "Y";
+        }
+        return "N";
     }
 }
