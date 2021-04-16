@@ -73,7 +73,7 @@
                                             <div class="form-group">
                                                 <label for="">Assignee</label>
                                                 <select name="assignee_id" class="custom-select">
-                                                    <option selected="">Choose...</option>
+                                                    <option selected="" value="">Choose...</option>
                                                     @foreach($assignees as $as)
                                                         <option value="{{ $as->emp_id }}">{{ $as->full_name }}</option>
                                                     @endforeach

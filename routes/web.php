@@ -46,7 +46,7 @@ Route::middleware('checkLogin')->group(function (){
     Route::post('project',[\App\Http\Controllers\ProjectController::class,'store']);
 
     Route::get('get/{filename}', [DownloadFileController::class, 'getFile'])->name('download_file');
-    Route::delete('delete_file', [DownloadFileController::class, 'delete'])->name('delete_file');
+    Route::post('delete_file', [DownloadFileController::class, 'delete'])->name('delete_file');
 });
 
 Route::middleware(['checkLogin','checkAdminLogin'])->group(function (){
