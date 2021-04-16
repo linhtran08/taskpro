@@ -244,15 +244,8 @@
                     <form action="{{ route('delete_file') }}" method="post">
                         <fieldset {{$tasks[0]->task_state_id == 5 | $tasks[0]->task_state_id == 4 ? 'disabled="disabled"' : ''}}>
                             @csrf
-                            <div>
-                                <h4>Attachments</h4>
-                                @foreach($attachments as $attachment)
-                                    <input class="checkBoxClass" type="checkbox" name="deleted_files[]" value="{{$attachment->id}}">
-                                    <a href="{{ route('download_file',$attachment->file_name ) }}"
-                                    >{{ substr(strstr($attachment->file_name, "."), 1)}}</a>
-                                    {{--                                <a href="{{ route('delete_file', $attachment->id) }}"><span class="text-danger">Delete</span></a>--}}
-                                    <br>
-                                @endforeach
+                            <h4>Attachments</h4>
+                            <div id="attachments_list" data-taskid="{{ $tasks[0]->task_id }}">
                             </div>
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </fieldset>
@@ -328,6 +321,48 @@
 @section('script')
     <x-script-common/>
     <script>
+        $(document).ready(function (){
+
+            const taskId = $('#attachments_list').data('taskid');
+            function getAttachmentList(taskId){
+                axios.get('/api/attachment/list/'+taskId)
+                .then((response)=>{
+                    let data = response.data;
+                    if(data.length > 0){
+                        data.forEach(item => $('#attachments_list').append(
+                            "<input class='checkBoxClass' type='checkbox' name='deleted_files[]' value='"+item.id+"'>" +
+                            "<a href='/get/"+item.file_name+"'> "+item.file_name.substring(item.file_name.indexOf('.') + 1)+"</a>" +
+                            "<br>"
+                        ));
+                    }else {
+                        $('#attachments_list').html('');
+                    }
+                })
+                .catch((error)=>{
+                    console.log(error);
+                });
+            }
+            getAttachmentList(taskId);
+
+            let deleteArr = [];
+            $('#delete_form form').submit(function (event){
+                event.preventDefault();
+                $("input[name='deleted_files[]']:checked").each(function (){
+                    deleteArr.push(parseInt($(this).val()));
+                })
+                if(deleteArr.length>0){
+                    axios({
+                        method: 'post',
+                        data: deleteArr,
+                        url: '/api/attachment',
+                    }).then((response)=>{
+                        getAttachmentList(taskId);
+                    }).catch(function (error){
+                        console.log(error);
+                    });
+                }
+            })
+        })
         {{--$("form").on( "submit", function(e) {--}}
         {{--    var deleted_arr= [];--}}
 
