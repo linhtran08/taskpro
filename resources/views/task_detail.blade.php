@@ -14,15 +14,15 @@
             <div class="card-box pd-20 mb-20">
 {{--            <form action="{{ url("tasksupdate/{$tasks[0]->task_id}") }}" method="post">--}}
                 <form action="{{ route('task_update', $tasks[0]->task_id) }}" method="post" enctype="multipart/form-data">
+                    @if($is_breached == "Y")
+                        <div>
+                            <div class="text text-danger text-center">
+                                <h2 class="text text-danger text-center">WARNING: THIS TASK IS BEHIND DEADLINE</h2>
+                            </div>
+                        </div>
+                    @endif
                     <fieldset {{$tasks[0]->task_state_id == 5 | $tasks[0]->task_state_id == 4 ? 'disabled="disabled"' : ''}}>
                         @csrf
-                        @if($is_breached == "Y")
-                            <div class="row">
-                                <div class="text text-danger text-center">
-                                    <h2 class="text-danger text-center">WARNING: THIS TASK IS BEHIND DEADLINE</h2>
-                                </div>
-                            </div>
-                        @endif
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
