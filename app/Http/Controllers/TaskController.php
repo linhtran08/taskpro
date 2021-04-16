@@ -311,4 +311,15 @@ class TaskController extends Controller
         }
         return "N";
     }
+
+    public function attachmentList($id): \Illuminate\Http\JsonResponse
+    {
+        $attachments = DB::table('file_task')
+            ->where([
+                ['task_id', $id],
+                ['in_use',1]
+            ])
+            ->get();
+        return response()->json($attachments);
+    }
 }
