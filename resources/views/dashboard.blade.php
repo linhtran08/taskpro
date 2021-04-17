@@ -12,11 +12,11 @@
     <div class="main-container">
         <div class="pd-ltr-20">
             @if($breached_tasks != null)
-                <div class="row">
+                <div class="row mb-30">
                     <div class="col-xl-12 mb-15">
                         <div class="row justify-content-between pl-2 pr-2">
                             <div class="col-xl-12 mb-4 mb-md-0">
-                                <div class="card-box overflow-auto pl-0 pr-0">
+                                <div class="card-box overflow-auto pl-0 pr-0" style="max-height: 300px">
                                     <h2 class="h4 pl-10 pt-10 pb-10 bg-red-400 m-0 text-white text-center">BREACHED DEADLINE TASKS</h2>
                                     <div class="overflow-auto tv-task-col pt-2 pb-3">
                                         @foreach($breached_tasks as $bt)
@@ -26,7 +26,7 @@
                                                         <div class="d-flex justify-content-start">
                                                             <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $bt->task_id }}</span>
                                                             <span class="bg-info ml-3 pt-1 pb-1 pl-3 pr-3 text-white rounded">{{ $bt->project_name }}</span>
-                                                            <h4 class="h5 pl-3">{{ $bt->task_title }}</h4>
+                                                            <h4 class="h5 pl-3 mb-0 d-flex align-items-center">{{ $bt->task_title }}</h4>
                                                         </div>
                                                         <div>
                                                             <span class="bg-success pt-1 pb-1 pl-3 pr-3 rounded text-white">{{ $bt->full_name }}</span>
@@ -39,14 +39,15 @@
                                     </div>
                                 </div>
                             </div>
+                         </div>
                     </div>
                 </div>
-                @endif
+            @endif
             <div class="row">
                 <div class="col-xl-4 mb-30">
                     <div class="row">
-                        <div class="col-xl-6 mb-30">
-                            <div class="card-box height-100-p widget-style1">
+                        <div class="col-11 mb-30 ml-auto mr-auto d-flex justify-content-between pd-0">
+                            <div class="card-box col-xl-5 height-100-p widget-style1">
                                 <div class="d-flex flex-wrap align-items-center">
                                     <div class="progress-data">
 
@@ -59,9 +60,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6 mb-30">
-                            <div class="card-box height-100-p widget-style1">
+                            <div class="card-box col-xl-5 height-100-p widget-style1">
                                 <div class="d-flex flex-wrap align-items-center">
                                     <div class="progress-data">
                                         <div id="chart2">
