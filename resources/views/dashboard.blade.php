@@ -12,7 +12,32 @@
     <div class="main-container">
         <div class="pd-ltr-20">
             <div class="row">
-
+                <div class="col-xl-12 mb-15">
+                    <div class="row justify-content-between pl-2 pr-2">
+                        <div class="col-xl-12 mb-4 mb-md-0">
+                            <div class="card-box overflow-auto pl-0 pr-0">
+                                <h2 class="h4 pl-10 pt-10 pb-10 bg-red-400 m-0 text-white text-center">BREACHED DEADLINE TASKS</h2>
+                                <div class="overflow-auto tv-task-col pt-2 pb-3">
+                                    @foreach($breached_tasks as $bt)
+                                        <div class="card-box p-2 m-2 h-task-item">
+                                            <a href="{{ route('task_detail', $bt->task_id) }}" target="_blank">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div class="d-flex justify-content-start">
+                                                        <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $bt->task_id }}</span>
+                                                        <h4 class="h5 pl-3">{{ $bt->task_title }}</h4>
+                                                    </div>
+                                                    <div>
+                                                        <span class="bg-success pt-1 pb-1 pl-3 pr-3 rounded text-white">{{ $bt->full_name }}</span>
+                                                        <span class="text-dark pl-3"> <i class="icon-copy dw dw-calendar-6"></i>{{ $bt->due_date }}</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xl-4 mb-30">
