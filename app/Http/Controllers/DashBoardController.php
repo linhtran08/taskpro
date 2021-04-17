@@ -117,13 +117,27 @@ class DashBoardController extends Controller
             ->get();
         //dd($user);
 
+        $breached_tasks = DB::select('
+            select task_id,
+               task_title,
+               assignee_id,
+               coalesce(pi.full_name, "<Empty>") as `full_name`,
+               due_date
+            from task
+                 left outer join account_info ai on task.assignee_id = ai.emp_id
+                 left outer join psn_infor pi on ai.emp_id = pi.emp_id
+            where task_state_id != 5
+              and task_state_id not in (4, 3)
+              and due_date < date(now());
+        ');
         return view('dashboard', compact('ticketChart', 'effortChart'))->with([
             'open_tasks' => $open_tasks, // Panel 1: open tasks
             'processing_tasks' => $processing_tasks, //Panel 1: processing tasks
             'finished_tasks' => $finished_tasks, //Panel 3: finished tasks
             'user' => $user, //user information, use on the top right
             'avgScore' => $avgScore,
-            'totalEffort' => $totalEffort
+            'totalEffort' => $totalEffort,
+            'breached_tasks' => $breached_tasks,
         ]);
     }
 
