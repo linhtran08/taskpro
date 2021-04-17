@@ -487,6 +487,10 @@
   }
 }
 
+.w-10 {
+  width: 10% !important;
+}
+
 .w-15 {
   width: 15% !important;
 }
@@ -513,6 +517,10 @@
 
 .w-90 {
   width: 90% !important;
+}
+
+.h-10 {
+  height: 10% !important;
 }
 
 .h-15 {

@@ -46,19 +46,19 @@ $('document').ready(function(){
 			targets: 2,
 			createdCell: function (td, cellData, rowData, row, col) {
 				if(cellData == 'open') {
-					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-blue-400' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+					$(td).html("<span class='d-block h-15 w-10 p-2 rounded-circle bg-blue-400' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
 				}
 				if(cellData == 'in processing') {
-					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-blue-600' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+					$(td).html("<span class='d-block h-15 w-10 p-2 rounded-circle bg-blue-600' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
 				}
 				if(cellData == 'pending') {
-					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-yellow-500' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+					$(td).html("<span class='d-block h-15 w-10 p-2 rounded-circle bg-yellow-500' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
 				}
 				if(cellData == 'canceled') {
-					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-red-400' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+					$(td).html("<span class='d-block h-15 w-10 p-2 rounded-circle bg-red-400' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
 				}
 				if(cellData == 'finished') {
-					$(td).html("<span class='d-block h-15 w-15 p-2 rounded-circle bg-green-500' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
+					$(td).html("<span class='d-block h-15 w-10 p-2 rounded-circle bg-green-500' data-toggle='tooltip' data-placement='right' title='"+cellData+"'></span>");
 				}
 
 			}
@@ -68,14 +68,14 @@ $('document').ready(function(){
 			createdCell: function (td, cellData, rowData, row, col) {
 				if(cellData == 'register') {
 					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
-						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-blue-200 w-15' role='progressbar' " +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-blue-400 w-15' role='progressbar' " +
 						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
 						"</div>" +
 						"</div>");
 				}
 				if(cellData == 'confirmation') {
 					$(td).html("<div class='progress mx-2' data-toggle='tooltip' data-placement='left' title='"+cellData+"'>" +
-						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-blue-500 w-30' role='progressbar' " +
+						"<div class='progress-bar progress-bar-striped progress-bar-animated  bg-blue-700 w-30' role='progressbar' " +
 						" aria-valuenow='0' aria-valuemin='0' aria-valuemax='100'>" +
 						"</div>" +
 						"</div>");				}
