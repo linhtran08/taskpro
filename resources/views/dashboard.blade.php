@@ -25,6 +25,7 @@
                                                     <div class="d-flex justify-content-between align-items-center">
                                                         <div class="d-flex justify-content-start">
                                                             <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $bt->task_id }}</span>
+                                                            <span class="bg-info ml-3 pt-1 pb-1 pl-3 pr-3 text-white rounded">{{ $bt->project_name }}</span>
                                                             <h4 class="h5 pl-3">{{ $bt->task_title }}</h4>
                                                         </div>
                                                         <div>

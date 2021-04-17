@@ -122,9 +122,11 @@ class DashBoardController extends Controller
             select task_id,
                task_title,
                assignee_id,
+               p.project_name as project_name,
                coalesce(pi.full_name, "<Empty>") as `full_name`,
                due_date
             from task
+                 join project p on task.project_id = p.project_id
                  left outer join account_info ai on task.assignee_id = ai.emp_id
                  left outer join psn_infor pi on ai.emp_id = pi.emp_id
             where task_state_id != 5
@@ -137,9 +139,11 @@ class DashBoardController extends Controller
             select task_id,
                task_title,
                assignee_id,
+               p.project_name as project_name,
                coalesce(pi.full_name, "<Empty>") as `full_name`,
                due_date
             from task
+                 join project p on task.project_id = p.project_id
                  left outer join account_info ai on task.assignee_id = ai.emp_id
                  left outer join psn_infor pi on ai.emp_id = pi.emp_id
             where task_state_id != 5
