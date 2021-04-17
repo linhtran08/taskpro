@@ -161,7 +161,7 @@
                                             <div class="html-editor pd-20 w-100 col-md-3">
                                                 <div class="form-group">
                                                     <label>Start Date</label>
-                                                    <input class="form-control date-picker" placeholder="Select Date" type="date" name="prj_start_date" autocomplete="off">
+                                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="prj_start_date" autocomplete="off">
                                                     @error('prj_start_date')
                                                     <div class="text-danger">
                                                         {{ $message }}
@@ -172,7 +172,7 @@
                                             <div class="html-editor pd-20 w-100 col-md-3">
                                                 <div class="form-group">
                                                     <label>End Date</label>
-                                                    <input class="form-control date-picker" placeholder="Select Date" type="date" name="prj_due_date" autocomplete="off">
+                                                    <input class="form-control date-picker" placeholder="Select Date" type="text" name="prj_due_date" autocomplete="off">
                                                     @error('prj_due_date')
                                                     <div class="text-danger">
                                                         {{ $message }}
