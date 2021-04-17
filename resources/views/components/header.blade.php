@@ -1,6 +1,12 @@
 <div class="header">
     <div class="header-left">
         <div class="menu-icon dw dw-menu"></div>
+        <div class="brand-logo">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ asset('images/deskapp-logo.svg') }}" alt="" class="dark-logo">
+                <img src="{{ asset('images/deskapp-logo-white.svg') }}" alt="" class="light-logo">
+            </a>
+        </div>
     </div>
     <div class="header-right">
         <div class="dashboard-setting user-notification">
