@@ -67,8 +67,9 @@
                             {!!  Avatar::create(session()->get('account.name'))->toSvg();!!}
                             <p id="uname" class="font-weight-bold mt-15">{{ session()->get('account.name') }}</p>
                         </div>
-                        <div class="col-md-10">
-                            CHART
+                        <div class="col-md-10 d-flex">
+                            <div class="card-box">abc</div>
+                            <div class="card-box">abc</div>
                         </div>
                     </div>
                     <div class="card-box w-100">
