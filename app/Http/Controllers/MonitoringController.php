@@ -118,8 +118,16 @@ class MonitoringController extends Controller
 
     public function getJsonRelatedTask($emp_id): \Illuminate\Http\JsonResponse
     {
+        $user = DB::table('account_info')
+            ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+            ->where('account_info.emp_id','=',$emp_id)
+            ->first();
         $tasks = $this->getRelatedTasks($emp_id);
-        return response()->json($tasks);
+        $res = [
+            "user" => $user,
+            "tasks" => $tasks
+        ];
+        return response()->json($res);
     }
 
     public function getRelatedTasks($emp_id): array

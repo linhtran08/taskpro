@@ -356,6 +356,7 @@
                         data: deleteArr,
                         url: '/api/attachment',
                     }).then((response)=>{
+                        $('#attachments_list').html('');
                         getAttachmentList(taskId);
                     }).catch(function (error){
                         console.log(error);

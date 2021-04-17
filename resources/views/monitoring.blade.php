@@ -62,9 +62,10 @@
                 </div>
                 <div class="col-md-7 mb-30 ">
                     <div class="card-box mb-30 w-100 d-flex align-items-center">
-                        <div class="col-md-2 text-center pt-10">
+                        <div id="user_avt" class="col-md-2 text-center pt-10">
+
                             {!!  Avatar::create(session()->get('account.name'))->toSvg();!!}
-                            <p class="font-weight-bold mt-15">{{ session()->get('account.name') }}</p>
+                            <p id="uname" class="font-weight-bold mt-15">{{ session()->get('account.name') }}</p>
                         </div>
                         <div class="col-md-10">
                             CHART
@@ -155,14 +156,20 @@
                 }).then(function (res) {
                     $('#tbody').html('');
                     let data = res.data;
-                    data.forEach(item => $('#tbody').append("<tr>" +
+                    data.tasks.forEach(item => $('#tbody').append("<tr>" +
                         "<td>" + item.task_id + "</td>" +
                         "<td>" + item.task_title + "</td>" +
                         "<td>" + item.phase + "</td>" +
                         "<td>" + item.start_date + "</td>" +
                         "<td>" + item.due_date + "</td>" +
                         "<td>" + item.duration + "</td>" +
-                        "</tr>"))
+                        "</tr>"));
+                    let str = (data.user.full_name.toLocaleUpperCase()).match(/\b(\w)/g);
+                    let avt = str.join('');
+                    let randomColor = Math.floor(Math.random()*16777215).toString(16);
+                    $('svg text').html(avt);
+                    $('svg circle').attr('fill','#'+randomColor).attr('stroke','#'+randomColor);
+                    $('#uname').html(data.user.full_name);
                 }).catch(function (error) {
                     console.log(error);
                 });
