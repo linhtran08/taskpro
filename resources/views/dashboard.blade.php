@@ -13,11 +13,13 @@
         <div class="pd-ltr-20">
             @if($breached_tasks != null)
                 <div class="row mb-30">
+                    <div class="col-xl-12">
+                        <h2 class="h4 pl-10 pt-10 pb-10 bg-red-700 m-0 text-white text-center rounded">BREACHED DEADLINE TASKS</h2>
+                    </div>
                     <div class="col-xl-12 mb-15">
                         <div class="row justify-content-between pl-2 pr-2">
                             <div class="col-xl-12 mb-4 mb-md-0">
                                 <div class="card-box overflow-auto pl-0 pr-0" style="max-height: 300px">
-                                    <h2 class="h4 pl-10 pt-10 pb-10 bg-red-400 m-0 text-white text-center">BREACHED DEADLINE TASKS</h2>
                                     <div class="overflow-auto tv-task-col pt-2 pb-3">
                                         @foreach($breached_tasks as $bt)
                                             <div class="card-box p-2 m-2 h-task-item">
