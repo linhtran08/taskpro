@@ -117,7 +117,8 @@ class DashBoardController extends Controller
             ->get();
         //dd($user);
 
-        $breached_tasks = DB::select('
+        if(session()->get('account.role') == 2) {
+            $breached_tasks = DB::select('
             select task_id,
                task_title,
                assignee_id,
@@ -128,8 +129,31 @@ class DashBoardController extends Controller
                  left outer join psn_infor pi on ai.emp_id = pi.emp_id
             where task_state_id != 5
               and task_state_id not in (4, 3)
-              and due_date < date(now());
-        ');
+              and due_date < date(now())
+            order by due_date
+            ');
+        }else {
+            $breached_tasks = DB::select('
+            select task_id,
+               task_title,
+               assignee_id,
+               coalesce(pi.full_name, "<Empty>") as `full_name`,
+               due_date
+            from task
+                 left outer join account_info ai on task.assignee_id = ai.emp_id
+                 left outer join psn_infor pi on ai.emp_id = pi.emp_id
+            where task_state_id != 5
+              and task_state_id not in (4, 3)
+              and due_date < date(now())
+              and task_id in (
+                    select distinct(task_phase_history.task_id)
+                    from task_phase_history
+                             join task on task_phase_history.task_id = task.task_id
+                    where (task_phase_history.assignee_id = ? or task_phase_history.changed_by_id = ?))                
+            order by due_date
+            ', [$emp_id, $emp_id]);
+        }
+
         return view('dashboard', compact('ticketChart', 'effortChart'))->with([
             'open_tasks' => $open_tasks, // Panel 1: open tasks
             'processing_tasks' => $processing_tasks, //Panel 1: processing tasks
