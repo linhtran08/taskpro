@@ -71,13 +71,14 @@
                             <h4 class="text-light-orange">Your statistics</h4>
                             <div class="d-flex flex-row">
                                 <div class="font-weight-bold mt-15 w-20">Most recent task:</div>
-                                <span class="mt-15">Task id: {{$my_stats['latest_task']['id']}}</span>
-                                <span class="mt-15 pl-3">Title: {{$my_stats['latest_task']['title']}}</span>
-
                                 @if($my_stats['latest_task']['id'] != "Not available")
+                                    <span class="mt-15">Task id: {{$my_stats['latest_task']['id']}}</span>
+                                    <span class="mt-15 pl-3">Title: {{$my_stats['latest_task']['title']}}</span>
                                     <a class="mt-10 pl-3" href="{{ route('task_detail', $my_stats['latest_task']['id']) }}" target="_blank">
                                         <button class="btn btn-success btn-sm">Go to</button>
                                     </a>
+                                @else
+                                    <span class="mt-15">No information available</span>
                                 @endif
                             </div>
                             <div class="d-flex flex-row">
