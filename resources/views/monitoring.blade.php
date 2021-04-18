@@ -67,32 +67,37 @@
                             {!!  Avatar::create(session()->get('account.name'))->toSvg();!!}
                             <p id="uname" class="font-weight-bold mt-16">{{ session()->get('account.name') }}</p>
                         </div>
-                        <div class="col-md-10 d-flex flex-column">
-                            <h4 class="text-light-orange">Your statistics</h4>
-                            <div class="d-flex flex-row">
-                                <div class="font-weight-bold mt-15 w-20">Most recent task:</div>
-                                @if($my_stats['latest_task']['id'] != "Not available")
-                                    <span class="mt-15">Task id: {{$my_stats['latest_task']['id']}}</span>
-                                    <span class="mt-15 pl-3">Title: {{$my_stats['latest_task']['title']}}</span>
-                                    <a class="mt-10 pl-3" href="{{ route('task_detail', $my_stats['latest_task']['id']) }}" target="_blank">
-                                        <button class="btn btn-success btn-sm">Go to</button>
-                                    </a>
-                                @else
-                                    <span class="mt-15">No information available</span>
-                                @endif
-                            </div>
-                            <div class="d-flex flex-row">
-                                <div class="font-weight-bold mt-15 w-20">Total tasks: </div>
-                                <span class="mt-15">{{ $my_stats['total_tasks'] }}</span>
-                            </div>
-                            <div class="d-flex flex-row">
-                                <div class="font-weight-bold mt-15 w-20">On time rate:</div>
-                                <span class="mt-15">{{$my_stats['on_time_rate']}}</span>
-                            </div>
-                            <div class="d-flex flex-row">
-                                <div class="font-weight-bold mt-15 w-20">Breach rate:</div>
-                                <span class="mt-15">{{$my_stats['breached_rate']}}</span>
-                            </div>
+                        <div class="col-md-10">
+                            <h2 class="text-light-orange">Your Statistics</h2>
+                            <table class="table mt-30">
+                                <tbody>
+                                    <tr>
+                                        <th class="w-25" scope="row">Most recent task:</th>
+                                        <td id="latest_title">
+                                            @if($my_stats['latest_task']['id'] != "Not available")
+                                            Task ID [{{$my_stats['latest_task']['id']}}] - {{$my_stats['latest_task']['title']}}
+                                                <a href="{{ route('task_detail', $my_stats['latest_task']['id']) }}"
+                                                   class="btn btn-success ml-3"
+                                                    target="_blank">Go to</a>
+                                            @else
+                                                No information available
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="w-25" scope="row">Total tasks:</th>
+                                        <td id="total_tasks">{{$my_stats['total_tasks']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="w-25" scope="row">On time rate:</th>
+                                        <td id="on_time">{{$my_stats['on_time_rate']}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="w-25" scope="row">Breach rate:</th>
+                                        <td id="breached">{{$my_stats['breached_rate']}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <div class="card-box w-100">
@@ -158,6 +163,7 @@
                 ],
                 responsive: true,
                 ordering: false,
+                pageLength : 12,
                 bLengthChange: false,
                 language: {
                     paginate: {
@@ -189,9 +195,19 @@
                     let str = (data.user.full_name.toLocaleUpperCase()).match(/\b(\w)/g);
                     let avt = str.join('');
                     let randomColor = Math.floor(Math.random()*16777215).toString(16);
-                    $('svg text').html(avt);
-                    $('svg circle').attr('fill','#'+randomColor).attr('stroke','#'+randomColor);
+                    $('#user_avt svg text').html(avt);
+                    $('#user_avt svg circle').attr('fill','#'+randomColor).attr('stroke','#'+randomColor);
                     $('#uname').html(data.user.full_name);
+                    let my_stats = data.my_stats;
+                    if(my_stats.latest_task.id !== 'Not available'){
+                        $('#latest_title').html("Task["+my_stats.latest_task.id+"] - "+my_stats.latest_task.title+"" +
+                        "<a href='/tasks/"+my_stats.latest_task.id+"' class='btn btn-success ml-3' target='_blank'>Go to</a>")
+                    }else {
+                        $('#latest_title').html('No information available');
+                    }
+                    $('#total_tasks').html(my_stats.total_tasks);
+                    $('#on_time').html(my_stats.on_time_rate);
+                    $('#breached').html(my_stats.breached_rate);
                 }).catch(function (error) {
                     console.log(error);
                 });
