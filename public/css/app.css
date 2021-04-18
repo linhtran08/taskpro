@@ -22,6 +22,7 @@
 
 .tv-task-row {
   cursor: pointer;
+  height: 50px;
 }
 
 .table-striped tbody tr:nth-of-type(2n+1) .tv-progress {
