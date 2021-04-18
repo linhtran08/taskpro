@@ -128,9 +128,11 @@ class MonitoringController extends Controller
             ->where('account_info.emp_id','=',$emp_id)
             ->first();
         $tasks = $this->getRelatedTasks($emp_id);
+        $my_stats = $this->getMyStatistics($emp_id);
         $res = [
             "user" => $user,
-            "tasks" => $tasks
+            "tasks" => $tasks,
+            "my_stats" => $my_stats
         ];
         return response()->json($res);
     }
