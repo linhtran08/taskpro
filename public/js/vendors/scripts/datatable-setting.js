@@ -32,13 +32,13 @@ $('document').ready(function(){
 	var table = $('.data-table').DataTable({
 		scrollCollapse: true,
 		autoWidth: false,
+		order : [],
 		responsive: {
 			details: {
 				type: 'column',
 				target: 'tr'
 			}
 		},
-		order: [],
 		columnDefs: [{
 			targets: "datatable-nosort",
 			orderable: false,
@@ -121,7 +121,7 @@ $('document').ready(function(){
 		initComplete: function () {
 			this.api().columns([1,2,3,5,6]).every( function () {
 				var column = this;
-				var select = $('<select class="sl sl'+column.index()+' custom-select small"><option value="">Show All</option></select>')
+				var select = $('<select class="sl'+column.index()+' custom-select small"><option value="">Show All</option></select>')
 					.appendTo( $(column.footer()).empty() )
 					.on( 'change', function () {
 						var val = $.fn.dataTable.util.escapeRegex(
