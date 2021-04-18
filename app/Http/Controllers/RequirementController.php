@@ -43,7 +43,35 @@ class RequirementController extends Controller
             order by task_id desc'
         );
 
-        $my_tasks = DB::select('
+        $projects = DB::table('project')->get();
+        $job_types = DB::table('task_job_type')->get();
+        $priorities = DB::table('priority')->get();
+        $task_state = DB::table('task_state')->get();
+        $assignees = DB::table('account_info')
+            ->join('psn_infor','account_info.emp_id','=','psn_infor.emp_id')
+            ->where('account_info.role','!=',1)
+            ->where('account_info.active',1)
+            ->select('account_info.emp_id','psn_infor.full_name','account_info.role')
+            ->distinct()
+            ->get();
+
+        $flag_my_requirements = "N";
+        return view('requirement',[
+            'task_state'=> $task_state,
+            'tasks' => $tasks,
+            'job_types'=> $job_types,
+            'priorities' => $priorities,
+            'assignees' => $assignees,
+            'projects' => $projects,
+            'flag_my_requirements' => $flag_my_requirements
+        ]);
+    }
+
+    public function index2()
+    {
+        $emp_id = session()->get('account.emp_id');
+
+        $tasks = DB::select('
                     select task_id,
                    p.project_name as project_name,
                    ts.`desc` as task_state,
@@ -76,7 +104,7 @@ class RequirementController extends Controller
                              join task on task_phase_history.task_id = task.task_id
                     where (task_phase_history.assignee_id = ? or task_phase_history.changed_by_id = ?))
             order by task_id desc',
-                   [$emp_id, $emp_id]
+            [$emp_id, $emp_id]
         );
 
         $projects = DB::table('project')->get();
@@ -91,6 +119,7 @@ class RequirementController extends Controller
             ->distinct()
             ->get();
 
+        $flag_my_requirements = "Y";
         return view('requirement',[
             'task_state'=> $task_state,
             'tasks' => $tasks,
@@ -98,7 +127,7 @@ class RequirementController extends Controller
             'priorities' => $priorities,
             'assignees' => $assignees,
             'projects' => $projects,
-            'my_tasks' => $my_tasks,
+            'flag_my_requirements' => $flag_my_requirements,
         ]);
     }
 }
