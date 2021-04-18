@@ -73,9 +73,11 @@
                                 <tbody>
                                     <tr>
                                         <th class="w-25" scope="row">Most recent task:</th>
-                                        <td id="latest_title">
+                                        <td id="latest_title" class="d-flex align-items-center">
                                             @if($my_stats['latest_task']['id'] != "Not available")
-                                            Task ID [{{$my_stats['latest_task']['id']}}] - {{$my_stats['latest_task']['title']}}
+                                                <div>
+                                                    Task ID [{{$my_stats['latest_task']['id']}}] - {{$my_stats['latest_task']['title']}}
+                                                </div>
                                                 <a href="{{ route('task_detail', $my_stats['latest_task']['id']) }}"
                                                    class="btn btn-success ml-3"
                                                     target="_blank">Go to</a>
