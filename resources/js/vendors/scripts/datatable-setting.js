@@ -32,6 +32,7 @@ $('document').ready(function(){
 	var table = $('.data-table').DataTable({
 		scrollCollapse: true,
 		autoWidth: false,
+		order : [],
 		responsive: {
 			details: {
 				type: 'column',
@@ -139,5 +140,12 @@ $('document').ready(function(){
 	});
 	$('#min, #max').on('change', function () {
 		table.draw();
+	});
+
+	$('#reset-filter').click(function (){
+		$('#min,#max').val('');
+		table.search( '' )
+			.columns().search( '' )
+			.draw();
 	});
 });
