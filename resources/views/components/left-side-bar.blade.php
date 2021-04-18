@@ -31,15 +31,26 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Project Mgmt</span>
+                    <a href="{{ url('requirement') }}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'requirement'])">
+                        <span class="micon dw dw-file"></span><span class="mtext">Requirement</span>
                     </a>
-                    <ul class="submenu">
-                        <li><a href="{{ url('requirement') }}"
-                            class="@include('mixin.naviActive',['url'=>'requirement'])"
-                            >Requirement</a></li>
-                        <li><a href="{{ url('monitoring') }}" class="@include('mixin.naviActive',['url'=>'monitoring'])">Project Monitoring</a></li>
-                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="{{ url('create-task') }}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'create-task'])">
+                        <span class="micon dw dw-add-file-1"></span><span class="mtext">Create Task</span>
+                    </a>
+                </li>
+                @if(session()->get('account.role') == 2)
+                <li class="dropdown">
+                    <a href="{{ url('create-project') }}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'create-project'])">
+                        <span class="micon dw dw-folder-2"></span><span class="mtext">Create project</span>
+                    </a>
+                </li>
+                @endif
+                <li class="dropdown">
+                    <a href="{{url('monitoring')}}" class="dropdown-toggle no-arrow @include('mixin.naviActive',['url'=>'monitoring'])">
+                        <span class="micon dw  dw-monitor-1"></span><span class="mtext">Project Monitoring</span>
+                    </a>
                 </li>
             </ul>
             @endif
