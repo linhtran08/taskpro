@@ -410,7 +410,11 @@
                         <div class="pd-10">
                             <div class="row pd-20 ">
                                 <div class="col-md-4">
-                                    <h2 class="text-light-orange">The Requirements</h2>
+                                    @if($flag_my_requirements == "Y")
+                                        <h2 class="text-info">My Requirements</h2>
+                                    @else
+                                        <h2 class="text-info">All Requirements</h2>
+                                    @endif
                                 </div>
                                 <div class="col-md-8 d-flex justify-content-end">
                                     <div class="form-group mr-3">
@@ -424,11 +428,11 @@
                                     </div>
                                     @if($flag_my_requirements == "Y")
                                         <div class="from-group ml-4">
-                                            <a href="{{ url('requirement') }}" class="btn form-control btn-warning text-white">Show All Requirements</a>
+                                            <a href="{{ url('requirement') }}" class="btn form-control btn-info text-white">Show All Requirements</a>
                                         </div>
                                     @else
                                         <div class="from-group ml-4">
-                                            <a href="{{ url('requirement2') }}" class="btn form-control btn-success text-white">Show My Requirements</a>
+                                            <a href="{{ url('requirement2') }}" class="btn form-control btn-info text-white">Show My Requirements</a>
                                         </div>
                                     @endif
                                 </div>
