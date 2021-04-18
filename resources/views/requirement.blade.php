@@ -342,15 +342,26 @@
             </div> -->
             <!-- Select-2 end -->
             {{-- Table data --}}
-            <div class="pd-5">
+            <div class="pd-5 requirement-input">
                 <div class="card-box mb-30">
                     <div class="pd-10">
-                        <div class="row pd-20">
-                            <div class="form-group mr-3">
-                                <input type="text" class="form-control"  id="min" name="min" placeholder="Registered Date">
+                        <div class="row pd-20 ">
+                            <div class="col-md-4">
+                                <h2>The Requirements</h2>
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control"   id="max" name="max" placeholder="To">
+                            <div class="col-md-8 d-flex justify-content-end">
+                                <div class="form-group mr-3">
+                                    <input type="text" class="form-control"  id="min" name="min" placeholder="Registered Date">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"   id="max" name="max" placeholder="To">
+                                </div>
+                                <div class="from-group ml-4">
+                                    <button id="reset-filter" class="btn form-control btn-light">Reset</button>
+                                </div>
+                                <div class="from-group ml-4">
+                                    <a href="" class="btn form-control btn-info text-white">My Requirement</a>
+                                </div>
                             </div>
                         </div>
                         <table class="data-table display w-100">
@@ -446,6 +457,8 @@
             replace(taskState,'.sl2','desc');
             replace(project,'.sl1','project_name');
             replace(assignee,'.sl5','full_name');
+
+
 
         });
     </script>
