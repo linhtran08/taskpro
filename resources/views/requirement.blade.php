@@ -420,11 +420,17 @@
                                         <input type="text" class="form-control"   id="max" name="max" placeholder="To">
                                     </div>
                                     <div class="from-group ml-4">
-                                        <button id="reset-filter" class="btn form-control btn-light">Reset</button>
+                                      <button id="reset-filter" class="btn form-control btn-light">Reset</button>
                                     </div>
-                                    <div class="from-group ml-4">
-                                        <a href="" class="btn form-control btn-info text-white">My Requirement</a>
-                                    </div>
+                                    @if($flag_my_requirements == "Y")
+                                        <div class="from-group ml-4">
+                                            <a href="{{ url('requirement') }}" class="btn form-control btn-warning text-white">Show All Requirements</a>
+                                        </div>
+                                    @else
+                                        <div class="from-group ml-4">
+                                            <a href="{{ url('requirement2') }}" class="btn form-control btn-success text-white">Show My Requirements</a>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <table class="data-table display w-100">
