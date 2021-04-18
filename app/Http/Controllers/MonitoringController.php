@@ -11,6 +11,8 @@ class MonitoringController extends Controller
 
     public function index()
     {
+        $emp_id = session()->get('account.emp_id');
+
         $users = DB::select('
             select * from
             account_info a
@@ -64,9 +66,12 @@ class MonitoringController extends Controller
 
         //dd($user_data);
 
+        $my_stats = $this->getMyStatistics($emp_id);
+
         return view('monitoring')->with([
             'user_data' => $user_data,
             'tasks' => $tasks,
+            'my_stats' => $my_stats
         ]);
     }
 
@@ -163,5 +168,48 @@ class MonitoringController extends Controller
         ',
             [$emp_id, $emp_id]
         );
+    }
+
+    public function getMyStatistics($emp_id){
+        $stats = array();
+
+        $stats['latest_task']['id'] = "Not available";
+        $stats['latest_task']['title'] = "Not available";
+        $stats['total_tasks'] = "Not available";
+        $stats['on_time_rate'] = "Not available";
+        $stats['breached_rate'] = "Not available";
+
+        $latest_task = DB::select('
+            select task_phase_history.*, t.task_title from task_phase_history
+            join task t on task_phase_history.task_id = t.task_id
+            where task_phase_history.assignee_id = ? or changed_by_id = ?
+            order by task_phase_history_id desc
+            limit 1
+        ', [$emp_id, $emp_id]
+        );
+
+        $total_tasks = DB::select('
+        select count(distinct(task_phase_history.task_id)) as `total_count`
+        from task_phase_history
+                 join task on task_phase_history.task_id = task.task_id
+        where (task_phase_history.assignee_id = ? or task_phase_history.changed_by_id = ?)
+        ', [$emp_id, $emp_id]);
+
+        $breached_dl_count = $this->getBreachedDeadLineTickets($emp_id)[0]->total;
+
+//        dd($total_tasks, $breached_dl_count);
+        if ($total_tasks[0]->total_count != 0){
+            $breached_rate = round($breached_dl_count/$total_tasks[0]->total_count, 2)*100;
+            $on_time_rate = 100 - $breached_rate;
+            $stats['total_tasks'] = $total_tasks[0]->total_count;
+            $stats['on_time_rate'] = $on_time_rate . ' percent(s)';
+            $stats['breached_rate'] = $breached_rate . ' percent(s)';
+        }
+
+        if ($latest_task != null){
+            $stats['latest_task']['id'] = $latest_task[0]->task_id;
+            $stats['latest_task']['title'] = $latest_task[0]->task_title;
+        }
+        return $stats;
     }
 }

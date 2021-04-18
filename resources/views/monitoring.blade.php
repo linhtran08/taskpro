@@ -37,11 +37,11 @@
                             <tr>
                                 <th scope="col">#ID</th>
                                 <th scope="col">Full name</th>
-                                <th scope="col">OP</th>
-                                <th scope="col">PG</th>
-                                <th scope="col">FN</th>
-                                <th scope="col">OT</th>
-                                <th scope="col">BD</th>
+                                <th scope="col" data-toggle="tooltip" data-placement="top" title="OPEN">OP</th>
+                                <th scope="col" data-toggle="tooltip" data-placement="top" title="PROCESSING">PG</th>
+                                <th scope="col" data-toggle="tooltip" data-placement="top" title="FINISH">FN</th>
+                                <th scope="col" data-toggle="tooltip" data-placement="top" title="ON TIME">OT</th>
+                                <th scope="col" data-toggle="tooltip" data-placement="top" title="ON PROCESSING">BD</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,15 +61,37 @@
                     </div>
                 </div>
                 <div class="col-md-7 mb-30 ">
-                    <div class="card-box mb-30 w-100 d-flex align-items-center">
+                    <div class="card-box mb-30 w-100 d-flex align-items-center p-3">
                         <div id="user_avt" class="col-md-2 text-center pt-10">
 
                             {!!  Avatar::create(session()->get('account.name'))->toSvg();!!}
-                            <p id="uname" class="font-weight-bold mt-15">{{ session()->get('account.name') }}</p>
+                            <p id="uname" class="font-weight-bold mt-16">{{ session()->get('account.name') }}</p>
                         </div>
-                        <div class="col-md-10 d-flex">
-                            <div class="card-box">abc</div>
-                            <div class="card-box">abc</div>
+                        <div class="col-md-10 d-flex flex-column">
+                            <h4 class="text-light-orange">Your statistics</h4>
+                            <div class="d-flex flex-row">
+                                <div class="font-weight-bold mt-15 w-20">Most recent task:</div>
+                                <span class="mt-15">Task id: {{$my_stats['latest_task']['id']}}</span>
+                                <span class="mt-15 pl-3">Title: {{$my_stats['latest_task']['title']}}</span>
+
+                                @if($my_stats['latest_task']['id'] != "Not available")
+                                    <a class="mt-10 pl-3" href="{{ route('task_detail', $my_stats['latest_task']['id']) }}" target="_blank">
+                                        <button class="btn btn-success btn-sm">Go to</button>
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="font-weight-bold mt-15 w-20">Total tasks: </div>
+                                <span class="mt-15">{{ $my_stats['total_tasks'] }}</span>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="font-weight-bold mt-15 w-20">On time rate:</div>
+                                <span class="mt-15">{{$my_stats['on_time_rate']}}</span>
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="font-weight-bold mt-15 w-20">Breach rate:</div>
+                                <span class="mt-15">{{$my_stats['breached_rate']}}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="card-box w-100">
@@ -79,12 +101,10 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    {{--                                    <th scope="col">Job</th>--}}
-                                    <th scope="col" class="w-25">Title</th>
+                                    <th scope="col" class="w-30">Title</th>
                                     <th scope="col">Progress</th>
                                     <th scope="col">Start Date</th>
                                     <th scope="col">End Date</th>
-                                    {{--                                    <th scope="col">Effort</th>--}}
                                     <th scope="col">Days</th>
                                 </tr>
                                 </thead>
