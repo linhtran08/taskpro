@@ -194,72 +194,72 @@
     <!-- End Call To Action Section -->
 
     <!-- ======= Team Section ======= -->
-    <section id="team">
-        <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h3 class="section-title">Team</h3>
-                <p class="section-description">4 young members from all walks of life have gathered here for this project</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="member" data-aos="fade-up" data-aos-delay="100">
-                        <div class="pic"><img src="{{ asset('images/login/trung_ava.jpg') }}" alt=""></div>
-                        <h4>Trung Nguyen</h4>
-                        <span>Team leader</span>
-                        <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-google-plus"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
+{{--    <section id="team">--}}
+{{--        <div class="container" data-aos="fade-up">--}}
+{{--            <div class="section-header">--}}
+{{--                <h3 class="section-title">Team</h3>--}}
+{{--                <p class="section-description">4 young members from all walks of life have gathered here for this project</p>--}}
+{{--            </div>--}}
+{{--            <div class="row">--}}
+{{--                <div class="col-lg-3 col-md-6">--}}
+{{--                    <div class="member" data-aos="fade-up" data-aos-delay="100">--}}
+{{--                        <div class="pic"><img src="{{ asset('images/login/trung_ava.jpg') }}" alt=""></div>--}}
+{{--                        <h4>Trung Nguyen</h4>--}}
+{{--                        <span>Team leader</span>--}}
+{{--                        <div class="social">--}}
+{{--                            <a href=""><i class="fa fa-twitter"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-facebook"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-google-plus"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-linkedin"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="member" data-aos="fade-up" data-aos-delay="200">
-                        <div class="pic"><img src="{{ asset('images/login/team-2.jpg') }}" alt=""></div>
-                        <h4>Linh Tran</h4>
-                        <span>Team member</span>
-                        <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-google-plus"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-lg-3 col-md-6">--}}
+{{--                    <div class="member" data-aos="fade-up" data-aos-delay="200">--}}
+{{--                        <div class="pic"><img src="{{ asset('images/login/team-2.jpg') }}" alt=""></div>--}}
+{{--                        <h4>Linh Tran</h4>--}}
+{{--                        <span>Team member</span>--}}
+{{--                        <div class="social">--}}
+{{--                            <a href=""><i class="fa fa-twitter"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-facebook"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-google-plus"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-linkedin"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="member" data-aos="fade-up" data-aos-delay="300">
-                        <div class="pic"><img src=" {{ asset('images/login/team-3.jpg') }}" alt=""></div>
-                        <h4>Nhung Phan</h4>
-                        <span>Team member</span>
-                        <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-google-plus"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
+{{--                <div class="col-lg-3 col-md-6">--}}
+{{--                    <div class="member" data-aos="fade-up" data-aos-delay="300">--}}
+{{--                        <div class="pic"><img src=" {{ asset('images/login/team-3.jpg') }}" alt=""></div>--}}
+{{--                        <h4>Nhung Phan</h4>--}}
+{{--                        <span>Team member</span>--}}
+{{--                        <div class="social">--}}
+{{--                            <a href=""><i class="fa fa-twitter"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-facebook"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-google-plus"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-linkedin"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
-                <div class="col-lg-3 col-md-6">
-                    <div class="member" data-aos="fade-up" data-aos-delay="400">
-                        <div class="pic"><img src=" {{ asset('images/login/team-4.jpg') }}" alt=""></div>
-                        <h4>Nam Nguyen</h4>
-                        <span>Team member</span>
-                        <div class="social">
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-google-plus"></i></a>
-                            <a href=""><i class="fa fa-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--                <div class="col-lg-3 col-md-6">--}}
+{{--                    <div class="member" data-aos="fade-up" data-aos-delay="400">--}}
+{{--                        <div class="pic"><img src=" {{ asset('images/login/team-4.jpg') }}" alt=""></div>--}}
+{{--                        <h4>Nam Nguyen</h4>--}}
+{{--                        <span>Team member</span>--}}
+{{--                        <div class="social">--}}
+{{--                            <a href=""><i class="fa fa-twitter"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-facebook"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-google-plus"></i></a>--}}
+{{--                            <a href=""><i class="fa fa-linkedin"></i></a>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-        </div>
-    </section><!-- End Team Section -->
+{{--        </div>--}}
+{{--    </section><!-- End Team Section -->--}}
 
     <!-- ======= Contact Section ======= -->
     <section id="contact">
