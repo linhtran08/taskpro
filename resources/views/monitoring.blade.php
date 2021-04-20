@@ -41,7 +41,7 @@
                                 <th scope="col" data-toggle="tooltip" data-placement="top" title="PROCESSING">PG</th>
                                 <th scope="col" data-toggle="tooltip" data-placement="top" title="FINISH">FN</th>
                                 <th scope="col" data-toggle="tooltip" data-placement="top" title="ON TIME">OT</th>
-                                <th scope="col" data-toggle="tooltip" data-placement="top" title="ON PROCESSING">BD</th>
+                                <th scope="col" data-toggle="tooltip" data-placement="top" title="BREACHED DEADLINE">BD</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,7 +68,7 @@
                             <p id="uname" class="font-weight-bold mt-16">{{ session()->get('account.name') }}</p>
                         </div>
                         <div class="col-md-10">
-                            <h2 class="text-light-orange">Your Statistics</h2>
+                            <h2 class="text-light-orange">Statistics</h2>
                             <table class="table mt-30">
                                 <tbody>
                                     <tr>
