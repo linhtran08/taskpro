@@ -46,7 +46,9 @@ class DashBoardController extends Controller
                     ->where('task.task_state_id', '=', 1);
             })
             ->groupBy('task.task_id')
-            ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date')
+            ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date,
+            datediff(due_date, curdate()) as `remainders`
+            ')
             ->orderBy('his_id', 'desc')
             ->limit(20)
             ->get();
@@ -60,13 +62,15 @@ class DashBoardController extends Controller
                         ->where('task.task_state_id', '=', 2);
                 })
                 ->groupBy('task.task_id')
-                ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date')
+                ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date
+                , datediff(due_date, curdate()) as `remainders`
+                ')
                 ->orderBy('his_id', 'desc')
                 ->limit(20)
                 ->get();
         } else {
             $processing_tasks = DB::select('
-                select max(t1.task_phase_history_id), t1.task_id, t2.due_date, t2.task_title
+                select max(t1.task_phase_history_id), t1.task_id, t2.due_date, t2.task_title, datediff(due_date, curdate()) as `remainders`
                 from task_phase_history t1
                          join task t2
                               on t1.task_id = t2.task_id

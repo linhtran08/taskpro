@@ -92,11 +92,19 @@
                                 <h2 class="h4 pl-10 pt-10 pb-10 bg-blue-200 m-0">TO DO</h2>
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($open_tasks as $op)
-                                        <div class="card-box p-2 m-2 h-task-item">
+                                        <div class="card-box p-2 m-2 h-task-item ">
                                             <a href="{{ route('task_detail', $op->task_id) }}" target="_blank">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $op->task_id }}</span>
-                                                    <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i> {{ $op->due_date }}</span>
+                                                    <span @if($op->remainders < 10 & $op->remainders > 0)
+                                                          class="text-white bg-red-400 pt-1 pb-1 pl-3 pr-3 rounded"
+                                                          data-toggle="tooltip" data-placement="top" title="{{ $op->remainders }} day(s) to deadline"
+                                                            @else
+                                                          class="text-dark pt-1 pb-1 pl-3 pr-3 rounded"
+                                                          @endif
+                                                    >
+                                                        <i class="icon-copy dw dw-calendar-6"></i> {{ $op->due_date }}
+                                                    </span>
                                                 </div>
                                                 <h4 class="h5">{{ $op->task_title }}</h4>
                                             </a>
@@ -107,14 +115,20 @@
                         </div>
                         <div class="col-xl-4 mb-4 mb-md-0">
                             <div class="card-box overflow-auto pl-0 pr-0">
-                                <h2 class="h4 pl-10 pt-10 pb-10 bg-red-300 m-0">PROCESS</h2>
+                                <h2 class="h4 pl-10 pt-10 pb-10 bg-red-300 m-0">PROCESSING</h2>
                                 <div class="overflow-auto tv-task-col pt-2 pb-3">
                                     @foreach($processing_tasks as $pt)
                                         <div class="card-box p-2 m-2 h-task-item">
                                             <a href="{{ route('task_detail', $pt->task_id) }}" target="_blank">
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $pt->task_id }}</span>
-                                                    <span class="text-dark"> <i class="icon-copy dw dw-calendar-6"></i>{{ $pt->due_date }}</span>
+                                                    <span @if($pt->remainders < 10 & $pt->remainders > 0)
+                                                          class="text-white bg-red-400 pt-1 pb-1 pl-3 pr-3 rounded"
+                                                          data-toggle="tooltip" data-placement="top" title="{{ $op->remainders }} day(s) to deadline"
+                                                          @else
+                                                          class="text-dark pt-1 pb-1 pl-3 pr-3 rounded"
+                                                          @endif
+                                                    ><i class="icon-copy dw dw-calendar-6"></i>{{ $pt->due_date }}</span>
                                                 </div>
                                                 <h4 class="h5">{{ $pt->task_title }}</h4>
                                             </a>
