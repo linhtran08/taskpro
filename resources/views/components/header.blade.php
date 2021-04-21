@@ -46,7 +46,14 @@
             </div>
         </div>
         <div class="github-link">
-            <span><img src="{{ (session()->get('account.role') == 1) ? asset('images/admin.svg') : asset('images/github.svg')  }}" alt=""></span>
+            @if((session()->get('account.role') == 1))
+                <span><img src="{{ asset('images/admin.svg') }}" alt="blah"></span>
+            @elseif((session()->get('account.role') == 2))
+                <span><img src="{{ asset('images/pm.svg') }}" alt="blah2"></span>
+            @else
+                <span><img src="{{ asset('images/github.svg') }}" alt="blah3"></span>
+            @endif
+{{--            <span><img src="{{ (session()->get('account.role') == 1) ? asset('images/admin.svg') : asset('images/github.svg')  }}" alt=""></span>--}}
         </div>
     </div>
 </div>

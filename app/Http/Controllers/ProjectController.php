@@ -16,8 +16,15 @@ class ProjectController extends Controller
         $this->validate($request,[
             'project_title' => 'required',
             'prj_start_date' => 'required',
-            'prj_due_date' => 'required',
+            'prj_due_date' => 'required|after:prj_start_date',
             'project_detail' => 'required',
+        ],
+        [
+            'prj_start_date.required' => 'Please enter start date for project',
+            'prj_due_date.after' => 'Due should be later than start date',
+            'prj_due_date.required' => 'Please enter due date for project ',
+            'project_detail.required' => 'Please enter project description',
+            'project_title.required' => 'Please enter project name',
         ]);
 
         $created_by_id = session()->get('account.emp_id');
@@ -28,6 +35,7 @@ class ProjectController extends Controller
         $project_detail = $request->input('project_detail');
         $project_state_id = 1; //default state for project is open
 
+        //dd($start_date, $end_date);
         DB::table('project')
             ->insert([
                 'project_name' => $project_name,
