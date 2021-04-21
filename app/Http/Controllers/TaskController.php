@@ -218,7 +218,7 @@ class TaskController extends Controller
         $this->saveAttachment($request, $task_id,$created_at);
         $this->saveHistory($task_id, $phase_id, $assignee_id, $created_by_id);
 
-        return back();
+        return redirect()->route('requirement');
     }
 
     public function handlePhaseState($phase_id, $task_id){
