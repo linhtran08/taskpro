@@ -124,7 +124,7 @@
                                                     <span class="bg-warning pt-1 pb-1 pl-3 pr-3 rounded">Task id: {{ $pt->task_id }}</span>
                                                     <span @if($pt->remainders < 10 & $pt->remainders > 0)
                                                           class="text-white bg-red-400 pt-1 pb-1 pl-3 pr-3 rounded"
-                                                          data-toggle="tooltip" data-placement="top" title="{{ $op->remainders }} day(s) to deadline"
+                                                          data-toggle="tooltip" data-placement="top" title="{{ $pt->remainders }} day(s) to deadline"
                                                           @else
                                                           class="text-dark pt-1 pb-1 pl-3 pr-3 rounded"
                                                           @endif

@@ -63,7 +63,7 @@ class DashBoardController extends Controller
                 })
                 ->groupBy('task.task_id')
                 ->selectRaw('max(task_phase_history.task_phase_history_id) as his_id, task.task_id, task.task_title, task.due_date
-                , datediff(due_date, curdate()) as `remainders`
+                , datediff(task.due_date, curdate()) as `remainders`
                 ')
                 ->orderBy('his_id', 'desc')
                 ->limit(20)
